@@ -13,6 +13,8 @@ Make sure you've added an antenna (a simple wire antenna soldered to the marked 
 install with:
 
 ```bash
+git clone https://github.com/shpi/zero_avr_firmware_culfw.git
+cd zero_avr_firmware_culfw/
 
 gpio -g mode 11 out
 sleep 1
@@ -20,6 +22,13 @@ gpio -g mode 11 in
 sudo dfu-programmer atmega32u4 erase
 sudo dfu-programmer atmega32u4 flash Devices/CUL/CUL_V3.hex
 sudo dfu-programmer atmega32u4 start
+
+minicom -b 9600 -D /dev/ttyACM0
+
+-> "V" enter -> V1.67 CUL868
+- > "X67" enter -> no output
+-> "C35" enter -> 0D / 13
+
 ```
 
 
