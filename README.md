@@ -1,7 +1,7 @@
 # zero_avr_firmware_culfw
 CULFW V1.67 modified for SHPI
 
-##WARNING:
+## WARNING
 
 please add adhesive under CC1101 radio module, to avoid shorts or interference
 
