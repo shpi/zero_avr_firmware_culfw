@@ -5,6 +5,8 @@ CULFW V1.67 modified for SHPI
 
 please add adhesive under CC1101 radio module, to avoid shorts or interference
 
+
+## 	Dependencies
 You need an CC1101 radio module connected to SHPI. 
 Make sure you've added an antenna (a simple wire antenna soldered to the marked orange circle is sufficient)
  and check the solder joints for shorts. 
