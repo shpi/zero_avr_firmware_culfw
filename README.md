@@ -1,9 +1,10 @@
 # zero_avr_firmware_culfw
 CULFW V1.67 modified for SHPI
 
-U need an CC1101 radio module connected to SHPI. Make sure u added an 
-antenna (simple wire antenna soldered to marked circle  is enough) and checked soldering joints
-for shorts!
+You need an CC1101 radio module connected to SHPI. 
+Make sure you've added an antenna (a simple wire antenna soldered to the marked orange circle is sufficient)
+ and check the solder joints for shorts. 
+
 
 
 ![Installed CC1101 one SHPI.zero prototype](radiomodule.jpg)
