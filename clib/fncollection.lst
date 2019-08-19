@@ -1,0 +1,523 @@
+   1               		.file	"fncollection.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.ewb,"ax",@progbits
+   8               	.global	ewb
+  10               	ewb:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 0E94 0000 		call eeprom_write_byte
+  16               	.L2:
+  17 0004 F999      		sbic 0x1f,1
+  18 0006 00C0      		rjmp .L2
+  19               	/* epilogue start */
+  20 0008 0895      		ret
+  22               		.section	.text.erb,"ax",@progbits
+  23               	.global	erb
+  25               	erb:
+  26               	/* prologue: function */
+  27               	/* frame size = 0 */
+  28               	/* stack size = 0 */
+  29               	.L__stack_usage = 0
+  30 0000 0E94 0000 		call eeprom_read_byte
+  31 0004 0895      		ret
+  33               		.section	.text.display_ee_bytes,"ax",@progbits
+  35               	display_ee_bytes:
+  36 0000 0F93      		push r16
+  37 0002 1F93      		push r17
+  38 0004 CF93      		push r28
+  39               	/* prologue: function */
+  40               	/* frame size = 0 */
+  41               	/* stack size = 3 */
+  42               	.L__stack_usage = 3
+  43 0006 CFEF      		ldi r28,lo8(-1)
+  44 0008 C60F      		add r28,r22
+  45               	.L7:
+  46 000a CF3F      		cpi r28,lo8(-1)
+  47 000c 01F0      		breq .L13
+  48 000e 8C01      		movw r16,r24
+  49 0010 0F5F      		subi r16,-1
+  50 0012 1F4F      		sbci r17,-1
+  51 0014 0E94 0000 		call erb
+  52 0018 0E94 0000 		call display_hex2
+  53 001c CC23      		tst r28
+  54 001e 01F0      		breq .L8
+  55 0020 8AE3      		ldi r24,lo8(58)
+  56 0022 0E94 0000 		call display_char
+  57               	.L8:
+  58 0026 C150      		subi r28,lo8(-(-1))
+  59 0028 C801      		movw r24,r16
+  60 002a 00C0      		rjmp .L7
+  61               	.L13:
+  62               	/* epilogue start */
+  63 002c CF91      		pop r28
+  64 002e 1F91      		pop r17
+  65 0030 0F91      		pop r16
+  66 0032 0895      		ret
+  68               		.section	.text.read_eeprom,"ax",@progbits
+  69               	.global	read_eeprom
+  71               	read_eeprom:
+  72 0000 A2E0      		ldi r26,lo8(2)
+  73 0002 B0E0      		ldi r27,0
+  74 0004 E0E0      		ldi r30,lo8(gs(1f))
+  75 0006 F0E0      		ldi r31,hi8(gs(1f))
+  76 0008 0C94 0000 		jmp __prologue_saves__+((18 - 5) * 2)
+  77               	1:
+  78               	/* prologue: function */
+  79               	/* frame size = 2 */
+  80               	/* stack size = 7 */
+  81               	.L__stack_usage = 7
+  82 000c FC01      		movw r30,r24
+  83 000e 2181      		ldd r18,Z+1
+  84 0010 2D34      		cpi r18,lo8(77)
+  85 0012 01F4      		brne .L15
+  86 0014 66E0      		ldi r22,lo8(6)
+  87 0016 8AEF      		ldi r24,lo8(-6)
+  88 0018 93E0      		ldi r25,lo8(3)
+  89 001a 00C0      		rjmp .L20
+  90               	.L15:
+  91 001c 2035      		cpi r18,lo8(80)
+  92 001e 01F4      		brne .L17
+  93 0020 60E1      		ldi r22,lo8(16)
+  94 0022 8AED      		ldi r24,lo8(-38)
+  95 0024 93E0      		ldi r25,lo8(3)
+  96               	.L20:
+  97 0026 0E94 0000 		call display_ee_bytes
+  98 002a 00C0      		rjmp .L16
+  99               	.L17:
+ 100 002c 1A82      		std Y+2,__zero_reg__
+ 101 002e 1982      		std Y+1,__zero_reg__
+ 102 0030 42E0      		ldi r20,lo8(2)
+ 103 0032 BE01      		movw r22,r28
+ 104 0034 6F5F      		subi r22,-1
+ 105 0036 7F4F      		sbci r23,-1
+ 106 0038 0196      		adiw r24,1
+ 107 003a 0E94 0000 		call fromhex
+ 108 003e 8230      		cpi r24,lo8(2)
+ 109 0040 01F4      		brne .L18
+ 110 0042 0981      		ldd r16,Y+1
+ 111 0044 1A81      		ldd r17,Y+2
+ 112 0046 1027      		eor r17,r16
+ 113 0048 0127      		eor r16,r17
+ 114 004a 1027      		eor r17,r16
+ 115 004c 00C0      		rjmp .L19
+ 116               	.L18:
+ 117 004e 0981      		ldd r16,Y+1
+ 118 0050 10E0      		ldi r17,0
+ 119               	.L19:
+ 120 0052 C801      		movw r24,r16
+ 121 0054 0E94 0000 		call erb
+ 122 0058 F82E      		mov r15,r24
+ 123 005a 82E5      		ldi r24,lo8(82)
+ 124 005c 0E94 0000 		call display_char
+ 125 0060 40E3      		ldi r20,lo8(48)
+ 126 0062 64E0      		ldi r22,lo8(4)
+ 127 0064 C801      		movw r24,r16
+ 128 0066 0E94 0000 		call display_hex
+ 129 006a 80E0      		ldi r24,lo8(__c.2743)
+ 130 006c 90E0      		ldi r25,hi8(__c.2743)
+ 131 006e 0E94 0000 		call display_string_P
+ 132 0072 8F2D      		mov r24,r15
+ 133 0074 0E94 0000 		call display_hex2
+ 134 0078 80E0      		ldi r24,lo8(__c.2745)
+ 135 007a 90E0      		ldi r25,hi8(__c.2745)
+ 136 007c 0E94 0000 		call display_string_P
+ 137 0080 40E2      		ldi r20,lo8(32)
+ 138 0082 62E0      		ldi r22,lo8(2)
+ 139 0084 8F2D      		mov r24,r15
+ 140 0086 90E0      		ldi r25,0
+ 141 0088 0E94 0000 		call display_udec
+ 142               	.L16:
+ 143 008c 0E94 0000 		call display_nl
+ 144               	/* epilogue start */
+ 145 0090 2296      		adiw r28,2
+ 146 0092 E5E0      		ldi r30, lo8(5)
+ 147 0094 0C94 0000 		jmp __epilogue_restores__ + ((18 - 5) * 2)
+ 149               		.section	.text.write_eeprom,"ax",@progbits
+ 150               	.global	write_eeprom
+ 152               	write_eeprom:
+ 153 0000 A6E0      		ldi r26,lo8(6)
+ 154 0002 B0E0      		ldi r27,0
+ 155 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 156 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 157 0008 0C94 0000 		jmp __prologue_saves__+((18 - 8) * 2)
+ 158               	1:
+ 159               	/* prologue: function */
+ 160               	/* frame size = 6 */
+ 161               	/* stack size = 14 */
+ 162               	.L__stack_usage = 14
+ 163 000c 8C01      		movw r16,r24
+ 164 000e 43E0      		ldi r20,lo8(3)
+ 165 0010 BE01      		movw r22,r28
+ 166 0012 6F5F      		subi r22,-1
+ 167 0014 7F4F      		sbci r23,-1
+ 168 0016 0196      		adiw r24,1
+ 169 0018 0E94 0000 		call fromhex
+ 170 001c 8230      		cpi r24,lo8(2)
+ 171 001e 00F0      		brlo .L21
+ 172 0020 8230      		cpi r24,lo8(2)
+ 173 0022 01F4      		brne .L23
+ 174 0024 C980      		ldd r12,Y+1
+ 175 0026 D12C      		mov r13,__zero_reg__
+ 176 0028 00C0      		rjmp .L24
+ 177               	.L23:
+ 178 002a C980      		ldd r12,Y+1
+ 179 002c DA80      		ldd r13,Y+2
+ 180 002e DC24      		eor r13,r12
+ 181 0030 CD24      		eor r12,r13
+ 182 0032 DC24      		eor r13,r12
+ 183               	.L24:
+ 184 0034 7C01      		movw r14,r24
+ 185 0036 FF24      		clr r15
+ 186 0038 FE01      		movw r30,r28
+ 187 003a EE0D      		add r30,r14
+ 188 003c FF1D      		adc r31,r15
+ 189 003e 6081      		ld r22,Z
+ 190 0040 C601      		movw r24,r12
+ 191 0042 0E94 0000 		call ewb
+ 192 0046 EE0C      		lsl r14
+ 193 0048 FF1C      		rol r15
+ 194 004a 8FEF      		ldi r24,-1
+ 195 004c E81A      		sub r14,r24
+ 196 004e F80A      		sbc r15,r24
+ 197 0050 0E0D      		add r16,r14
+ 198 0052 1F1D      		adc r17,r15
+ 199               	.L25:
+ 200 0054 F801      		movw r30,r16
+ 201 0056 8081      		ld r24,Z
+ 202 0058 8823      		tst r24
+ 203 005a 01F0      		breq .L21
+ 204 005c 41E0      		ldi r20,lo8(1)
+ 205 005e BE01      		movw r22,r28
+ 206 0060 6F5F      		subi r22,-1
+ 207 0062 7F4F      		sbci r23,-1
+ 208 0064 C801      		movw r24,r16
+ 209 0066 0E94 0000 		call fromhex
+ 210 006a 892B      		or r24,r25
+ 211 006c 01F0      		breq .L21
+ 212 006e EFEF      		ldi r30,-1
+ 213 0070 CE1A      		sub r12,r30
+ 214 0072 DE0A      		sbc r13,r30
+ 215 0074 6981      		ldd r22,Y+1
+ 216 0076 C601      		movw r24,r12
+ 217 0078 0E94 0000 		call ewb
+ 218 007c 0E5F      		subi r16,-2
+ 219 007e 1F4F      		sbci r17,-1
+ 220 0080 00C0      		rjmp .L25
+ 221               	.L21:
+ 222               	/* epilogue start */
+ 223 0082 2696      		adiw r28,6
+ 224 0084 E8E0      		ldi r30, lo8(8)
+ 225 0086 0C94 0000 		jmp __epilogue_restores__ + ((18 - 8) * 2)
+ 227               		.section	.text.ledfunc,"ax",@progbits
+ 228               	.global	ledfunc
+ 230               	ledfunc:
+ 231               	/* prologue: function */
+ 232               	/* frame size = 0 */
+ 233               	/* stack size = 0 */
+ 234               	.L__stack_usage = 0
+ 235 0000 41E0      		ldi r20,lo8(1)
+ 236 0002 60E0      		ldi r22,lo8(led_mode)
+ 237 0004 70E0      		ldi r23,hi8(led_mode)
+ 238 0006 0196      		adiw r24,1
+ 239 0008 0E94 0000 		call fromhex
+ 240 000c 6091 0000 		lds r22,led_mode
+ 241 0010 84E3      		ldi r24,lo8(52)
+ 242 0012 90E0      		ldi r25,0
+ 243 0014 0E94 0000 		call ewb
+ 244 0018 0895      		ret
+ 246               		.section	.text.prepare_boot,"ax",@progbits
+ 247               	.global	prepare_boot
+ 249               	prepare_boot:
+ 250 0000 A1E0      		ldi r26,lo8(1)
+ 251 0002 B0E0      		ldi r27,0
+ 252 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 253 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 254 0008 0C94 0000 		jmp __prologue_saves__+((18 - 2) * 2)
+ 255               	1:
+ 256               	/* prologue: function */
+ 257               	/* frame size = 1 */
+ 258               	/* stack size = 3 */
+ 259               	.L__stack_usage = 3
+ 260 000c 1982      		std Y+1,__zero_reg__
+ 261 000e 0097      		sbiw r24,0
+ 262 0010 01F0      		breq .L33
+ 263 0012 41E0      		ldi r20,lo8(1)
+ 264 0014 BE01      		movw r22,r28
+ 265 0016 6F5F      		subi r22,-1
+ 266 0018 7F4F      		sbci r23,-1
+ 267 001a 0196      		adiw r24,1
+ 268 001c 0E94 0000 		call fromhex
+ 269               	.L33:
+ 270 0020 8981      		ldd r24,Y+1
+ 271 0022 8F3F      		cpi r24,lo8(-1)
+ 272 0024 01F4      		brne .L34
+ 273               	.L35:
+ 274 0026 00C0      		rjmp .L35
+ 275               	.L34:
+ 276 0028 8823      		tst r24
+ 277 002a 01F0      		breq .L36
+ 278 002c 61E0      		ldi r22,lo8(1)
+ 279 002e 83E3      		ldi r24,lo8(51)
+ 280 0030 90E0      		ldi r25,0
+ 281 0032 0E94 0000 		call ewb
+ 282               	.L36:
+ 283 0036 0E94 0000 		call USB_ShutDown
+ 284 003a 1092 6E00 		sts 110,__zero_reg__
+ 285               	/* #APP */
+ 286               	 ;  296 "../../clib/fncollection.c" 1
+ 287 003e F894      		cli
+ 288               	 ;  0 "" 2
+ 289               	/* #NOAPP */
+ 290 0040 98E0      		ldi r25,lo8(8)
+ 291 0042 88E1      		ldi r24,lo8(24)
+ 292               	/* #APP */
+ 293               	 ;  473 "/usr/lib/avr/include/avr/wdt.h" 1
+ 294 0044 0FB6      		in __tmp_reg__,__SREG__
+ 295 0046 F894      		cli
+ 296 0048 A895      		wdr
+ 297 004a 8093 6000 		sts 96, r24
+ 298 004e 0FBE      		out __SREG__,__tmp_reg__
+ 299 0050 9093 6000 		sts 96, r25
+ 300               	 	
+ 301               	 ;  0 "" 2
+ 302               	/* #NOAPP */
+ 303               	.L37:
+ 304 0054 00C0      		rjmp .L37
+ 306               		.section	.text.eeprom_factory_reset,"ax",@progbits
+ 307               	.global	eeprom_factory_reset
+ 309               	eeprom_factory_reset:
+ 310 0000 CF93      		push r28
+ 311 0002 DF93      		push r29
+ 312               	/* prologue: function */
+ 313               	/* frame size = 0 */
+ 314               	/* stack size = 2 */
+ 315               	.L__stack_usage = 2
+ 316 0004 EC01      		movw r28,r24
+ 317 0006 61E0      		ldi r22,lo8(1)
+ 318 0008 80E0      		ldi r24,0
+ 319 000a 90E0      		ldi r25,0
+ 320 000c 0E94 0000 		call ewb
+ 321 0010 63E4      		ldi r22,lo8(67)
+ 322 0012 81E0      		ldi r24,lo8(1)
+ 323 0014 90E0      		ldi r25,0
+ 324 0016 0E94 0000 		call ewb
+ 325 001a 0E94 0000 		call cc_factory_reset
+ 326 001e 60E0      		ldi r22,0
+ 327 0020 80E6      		ldi r24,lo8(96)
+ 328 0022 90E0      		ldi r25,0
+ 329 0024 0E94 0000 		call ewb
+ 330 0028 60E0      		ldi r22,0
+ 331 002a 81E6      		ldi r24,lo8(97)
+ 332 002c 90E0      		ldi r25,0
+ 333 002e 0E94 0000 		call ewb
+ 334 0032 60E0      		ldi r22,0
+ 335 0034 83E3      		ldi r24,lo8(51)
+ 336 0036 90E0      		ldi r25,0
+ 337 0038 0E94 0000 		call ewb
+ 338 003c 62E0      		ldi r22,lo8(2)
+ 339 003e 84E3      		ldi r24,lo8(52)
+ 340 0040 90E0      		ldi r25,0
+ 341 0042 0E94 0000 		call ewb
+ 342 0046 8981      		ldd r24,Y+1
+ 343 0048 8837      		cpi r24,lo8(120)
+ 344 004a 01F0      		breq .L44
+ 345 004c 80E0      		ldi r24,0
+ 346 004e 90E0      		ldi r25,0
+ 347 0050 0E94 0000 		call prepare_boot
+ 348               	.L44:
+ 349               	/* epilogue start */
+ 350 0054 DF91      		pop r29
+ 351 0056 CF91      		pop r28
+ 352 0058 0895      		ret
+ 354               		.section	.text.eeprom_init,"ax",@progbits
+ 355               	.global	eeprom_init
+ 357               	eeprom_init:
+ 358               	/* prologue: function */
+ 359               	/* frame size = 0 */
+ 360               	/* stack size = 0 */
+ 361               	.L__stack_usage = 0
+ 362 0000 80E0      		ldi r24,0
+ 363 0002 90E0      		ldi r25,0
+ 364 0004 0E94 0000 		call erb
+ 365 0008 8130      		cpi r24,lo8(1)
+ 366 000a 01F4      		brne .L47
+ 367 000c 81E0      		ldi r24,lo8(1)
+ 368 000e 90E0      		ldi r25,0
+ 369 0010 0E94 0000 		call erb
+ 370 0014 8334      		cpi r24,lo8(67)
+ 371 0016 01F0      		breq .L46
+ 372               	.L47:
+ 373 0018 80E0      		ldi r24,0
+ 374 001a 90E0      		ldi r25,0
+ 375 001c 0E94 0000 		call eeprom_factory_reset
+ 376               	.L46:
+ 377 0020 0895      		ret
+ 379               		.section	.text.version,"ax",@progbits
+ 380               	.global	version
+ 382               	version:
+ 383               	/* prologue: function */
+ 384               	/* frame size = 0 */
+ 385               	/* stack size = 0 */
+ 386               	.L__stack_usage = 0
+ 387 0000 FC01      		movw r30,r24
+ 388 0002 8181      		ldd r24,Z+1
+ 389 0004 8834      		cpi r24,lo8(72)
+ 390 0006 01F4      		brne .L53
+ 391 0008 80E0      		ldi r24,lo8(__c.2774)
+ 392 000a 90E0      		ldi r25,hi8(__c.2774)
+ 393 000c 00C0      		rjmp .L55
+ 394               	.L53:
+ 395 000e 80E0      		ldi r24,lo8(__c.2776)
+ 396 0010 90E0      		ldi r25,hi8(__c.2776)
+ 397               	.L55:
+ 398 0012 0E94 0000 		call display_string_P
+ 399 0016 0E94 0000 		call display_nl
+ 400 001a 0895      		ret
+ 402               		.section	.text.dumpmem,"ax",@progbits
+ 403               	.global	dumpmem
+ 405               	dumpmem:
+ 406 0000 A0E0      		ldi r26,0
+ 407 0002 B0E0      		ldi r27,0
+ 408 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 409 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 410 0008 0C94 0000 		jmp __prologue_saves__+((18 - 13) * 2)
+ 411               	1:
+ 412               	/* prologue: function */
+ 413               	/* frame size = 0 */
+ 414               	/* stack size = 13 */
+ 415               	.L__stack_usage = 13
+ 416 000c EC01      		movw r28,r24
+ 417 000e 5B01      		movw r10,r22
+ 418 0010 00E0      		ldi r16,0
+ 419 0012 10E0      		ldi r17,0
+ 420 0014 762E      		mov r7,r22
+ 421               	.L57:
+ 422 0016 0A15      		cp r16,r10
+ 423 0018 1B05      		cpc r17,r11
+ 424 001a 00F4      		brsh .L71
+ 425 001c E72C      		mov r14,r7
+ 426 001e 80E1      		ldi r24,lo8(16)
+ 427 0020 8715      		cp r24,r7
+ 428 0022 00F4      		brsh .L58
+ 429 0024 80E1      		ldi r24,lo8(16)
+ 430 0026 E82E      		mov r14,r24
+ 431               	.L58:
+ 432 0028 40E3      		ldi r20,lo8(48)
+ 433 002a 64E0      		ldi r22,lo8(4)
+ 434 002c C801      		movw r24,r16
+ 435 002e 0E94 0000 		call display_hex
+ 436 0032 8AE3      		ldi r24,lo8(58)
+ 437 0034 0E94 0000 		call display_char
+ 438 0038 80E2      		ldi r24,lo8(32)
+ 439 003a 0E94 0000 		call display_char
+ 440 003e 6E01      		movw r12,r28
+ 441 0040 4E01      		movw r8,r28
+ 442 0042 F12C      		mov r15,__zero_reg__
+ 443               	.L59:
+ 444 0044 FE14      		cp r15,r14
+ 445 0046 01F0      		breq .L72
+ 446 0048 F401      		movw r30,r8
+ 447 004a 8191      		ld r24,Z+
+ 448 004c 4F01      		movw r8,r30
+ 449 004e 0E94 0000 		call display_hex2
+ 450 0052 F0FE      		sbrs r15,0
+ 451 0054 00C0      		rjmp .L60
+ 452 0056 80E2      		ldi r24,lo8(32)
+ 453 0058 0E94 0000 		call display_char
+ 454               	.L60:
+ 455 005c F394      		inc r15
+ 456 005e 00C0      		rjmp .L59
+ 457               	.L72:
+ 458 0060 80E2      		ldi r24,lo8(32)
+ 459               	.L70:
+ 460 0062 0E94 0000 		call display_char
+ 461 0066 8C2D      		mov r24,r12
+ 462 0068 8C1B      		sub r24,r28
+ 463 006a 8E15      		cp r24,r14
+ 464 006c 00F4      		brsh .L73
+ 465 006e F601      		movw r30,r12
+ 466 0070 8191      		ld r24,Z+
+ 467 0072 6F01      		movw r12,r30
+ 468 0074 90EE      		ldi r25,lo8(-32)
+ 469 0076 980F      		add r25,r24
+ 470 0078 9F35      		cpi r25,lo8(95)
+ 471 007a 00F0      		brlo .L70
+ 472 007c 8EE2      		ldi r24,lo8(46)
+ 473 007e 00C0      		rjmp .L70
+ 474               	.L73:
+ 475 0080 6096      		adiw r28,16
+ 476 0082 0E94 0000 		call display_nl
+ 477 0086 005F      		subi r16,-16
+ 478 0088 1F4F      		sbci r17,-1
+ 479 008a 00C0      		rjmp .L57
+ 480               	.L71:
+ 481 008c 0E94 0000 		call display_nl
+ 482               	/* epilogue start */
+ 483 0090 CDB7      		in r28,__SP_L__
+ 484 0092 DEB7      		in r29,__SP_H__
+ 485 0094 EDE0      		ldi r30, lo8(13)
+ 486 0096 0C94 0000 		jmp __epilogue_restores__ + ((18 - 13) * 2)
+ 488               		.section	.progmem.data,"a",@progbits
+ 491               	__c.2776:
+ 492 0000 5620 312E 		.string	"V 1.67 CUL868"
+ 492      3637 2043 
+ 492      554C 3836 
+ 492      3800 
+ 495               	__c.2774:
+ 496 000e 4355 4C5F 		.string	"CUL_V3"
+ 496      5633 00
+ 499               	__c.2745:
+ 500 0015 202F 2000 		.string	" / "
+ 503               	__c.2743:
+ 504 0019 203D 2000 		.string	" = "
+ 505               	.global	led_mode
+ 506               		.data
+ 509               	led_mode:
+ 510 0000 02        		.byte	2
+ 511               		.ident	"GCC: (GNU) 5.4.0"
+ 512               	.global __do_copy_data
+DEFINED SYMBOLS
+                            *ABS*:00000000 fncollection.c
+     /tmp/ccyZmb8q.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccyZmb8q.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccyZmb8q.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccyZmb8q.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccyZmb8q.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccyZmb8q.s:10     .text.ewb:00000000 ewb
+     /tmp/ccyZmb8q.s:25     .text.erb:00000000 erb
+     /tmp/ccyZmb8q.s:35     .text.display_ee_bytes:00000000 display_ee_bytes
+     /tmp/ccyZmb8q.s:71     .text.read_eeprom:00000000 read_eeprom
+     /tmp/ccyZmb8q.s:503    .progmem.data:00000019 __c.2743
+     /tmp/ccyZmb8q.s:499    .progmem.data:00000015 __c.2745
+     /tmp/ccyZmb8q.s:152    .text.write_eeprom:00000000 write_eeprom
+     /tmp/ccyZmb8q.s:230    .text.ledfunc:00000000 ledfunc
+     /tmp/ccyZmb8q.s:509    .data:00000000 led_mode
+     /tmp/ccyZmb8q.s:249    .text.prepare_boot:00000000 prepare_boot
+     /tmp/ccyZmb8q.s:309    .text.eeprom_factory_reset:00000000 eeprom_factory_reset
+     /tmp/ccyZmb8q.s:357    .text.eeprom_init:00000000 eeprom_init
+     /tmp/ccyZmb8q.s:382    .text.version:00000000 version
+     /tmp/ccyZmb8q.s:495    .progmem.data:0000000e __c.2774
+     /tmp/ccyZmb8q.s:491    .progmem.data:00000000 __c.2776
+     /tmp/ccyZmb8q.s:405    .text.dumpmem:00000000 dumpmem
+
+UNDEFINED SYMBOLS
+eeprom_write_byte
+eeprom_read_byte
+display_hex2
+display_char
+__prologue_saves__
+fromhex
+display_hex
+display_string_P
+display_udec
+display_nl
+__epilogue_restores__
+USB_ShutDown
+cc_factory_reset
+__do_copy_data

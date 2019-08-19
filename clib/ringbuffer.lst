@@ -1,0 +1,104 @@
+   1               		.file	"ringbuffer.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.rb_reset,"ax",@progbits
+   8               	.global	rb_reset
+  10               	rb_reset:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 FC01      		movw r30,r24
+  16 0002 1282      		std Z+2,__zero_reg__
+  17 0004 1082      		st Z,__zero_reg__
+  18 0006 1182      		std Z+1,__zero_reg__
+  19 0008 0895      		ret
+  21               		.section	.text.rb_put,"ax",@progbits
+  22               	.global	rb_put
+  24               	rb_put:
+  25               	/* prologue: function */
+  26               	/* frame size = 0 */
+  27               	/* stack size = 0 */
+  28               	.L__stack_usage = 0
+  29 0000 FC01      		movw r30,r24
+  30 0002 9FB7      		in r25,__SREG__
+  31               	/* #APP */
+  32               	 ;  21 "../../clib/ringbuffer.c" 1
+  33 0004 F894      		cli
+  34               	 ;  0 "" 2
+  35               	/* #NOAPP */
+  36 0006 8281      		ldd r24,Z+2
+  37 0008 87FD      		sbrc r24,7
+  38 000a 00C0      		rjmp .L5
+  39 000c 8F5F      		subi r24,lo8(-(1))
+  40 000e 8283      		std Z+2,r24
+  41 0010 2081      		ld r18,Z
+  42 0012 81E0      		ldi r24,lo8(1)
+  43 0014 820F      		add r24,r18
+  44 0016 8083      		st Z,r24
+  45 0018 DF01      		movw r26,r30
+  46 001a A20F      		add r26,r18
+  47 001c B11D      		adc r27,__zero_reg__
+  48 001e 1396      		adiw r26,3
+  49 0020 6C93      		st X,r22
+  50 0022 8038      		cpi r24,lo8(-128)
+  51 0024 01F4      		brne .L5
+  52 0026 1082      		st Z,__zero_reg__
+  53               	.L5:
+  54 0028 9FBF      		out __SREG__,r25
+  55 002a 0895      		ret
+  57               		.section	.text.rb_get,"ax",@progbits
+  58               	.global	rb_get
+  60               	rb_get:
+  61               	/* prologue: function */
+  62               	/* frame size = 0 */
+  63               	/* stack size = 0 */
+  64               	.L__stack_usage = 0
+  65 0000 FC01      		movw r30,r24
+  66 0002 2FB7      		in r18,__SREG__
+  67               	/* #APP */
+  68               	 ;  39 "../../clib/ringbuffer.c" 1
+  69 0004 F894      		cli
+  70               	 ;  0 "" 2
+  71               	/* #NOAPP */
+  72 0006 8281      		ldd r24,Z+2
+  73 0008 8111      		cpse r24,__zero_reg__
+  74 000a 00C0      		rjmp .L8
+  75 000c 2FBF      		out __SREG__,r18
+  76 000e 0895      		ret
+  77               	.L8:
+  78 0010 9FEF      		ldi r25,lo8(-1)
+  79 0012 980F      		add r25,r24
+  80 0014 9283      		std Z+2,r25
+  81 0016 9181      		ldd r25,Z+1
+  82 0018 81E0      		ldi r24,lo8(1)
+  83 001a 890F      		add r24,r25
+  84 001c 8183      		std Z+1,r24
+  85 001e DF01      		movw r26,r30
+  86 0020 A90F      		add r26,r25
+  87 0022 B11D      		adc r27,__zero_reg__
+  88 0024 1396      		adiw r26,3
+  89 0026 9C91      		ld r25,X
+  90 0028 8038      		cpi r24,lo8(-128)
+  91 002a 01F4      		brne .L10
+  92 002c 1182      		std Z+1,__zero_reg__
+  93               	.L10:
+  94 002e 2FBF      		out __SREG__,r18
+  95 0030 892F      		mov r24,r25
+  96 0032 0895      		ret
+  98               		.ident	"GCC: (GNU) 5.4.0"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ringbuffer.c
+     /tmp/ccIIwzNq.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccIIwzNq.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccIIwzNq.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccIIwzNq.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccIIwzNq.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccIIwzNq.s:10     .text.rb_reset:00000000 rb_reset
+     /tmp/ccIIwzNq.s:24     .text.rb_put:00000000 rb_put
+     /tmp/ccIIwzNq.s:60     .text.rb_get:00000000 rb_get
+
+NO UNDEFINED SYMBOLS

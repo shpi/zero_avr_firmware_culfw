@@ -1,0 +1,49 @@
+   1               		.file	"crc.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.crcCalc,"ax",@progbits
+   8               	.global	crcCalc
+  10               	crcCalc:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 28E0      		ldi r18,lo8(8)
+  16               	.L4:
+  17 0002 FC01      		movw r30,r24
+  18 0004 EE27      		clr r30
+  19 0006 F078      		andi r31,128
+  20 0008 EF2F      		mov r30,r31
+  21 000a FF27      		clr r31
+  22 000c 462F      		mov r20,r22
+  23 000e 4078      		andi r20,lo8(-128)
+  24 0010 50E0      		ldi r21,0
+  25 0012 880F      		lsl r24
+  26 0014 991F      		rol r25
+  27 0016 E417      		cp r30,r20
+  28 0018 F507      		cpc r31,r21
+  29 001a 01F0      		breq .L3
+  30 001c 35E6      		ldi r19,101
+  31 001e 8327      		eor r24,r19
+  32 0020 3DE3      		ldi r19,61
+  33 0022 9327      		eor r25,r19
+  34               	.L3:
+  35 0024 660F      		lsl r22
+  36 0026 2150      		subi r18,lo8(-(-1))
+  37 0028 01F4      		brne .L4
+  38               	/* epilogue start */
+  39 002a 0895      		ret
+  41               		.ident	"GCC: (GNU) 5.4.0"
+DEFINED SYMBOLS
+                            *ABS*:00000000 crc.c
+     /tmp/cc4DREge.s:2      *ABS*:0000003e __SP_H__
+     /tmp/cc4DREge.s:3      *ABS*:0000003d __SP_L__
+     /tmp/cc4DREge.s:4      *ABS*:0000003f __SREG__
+     /tmp/cc4DREge.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/cc4DREge.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/cc4DREge.s:10     .text.crcCalc:00000000 crcCalc
+
+NO UNDEFINED SYMBOLS

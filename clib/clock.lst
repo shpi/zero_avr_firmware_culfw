@@ -1,0 +1,199 @@
+   1               		.file	"clock.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.__vector_23,"ax",@progbits
+   8               	.global	__vector_23
+  10               	__vector_23:
+  11 0000 1F92      		push r1
+  12 0002 0F92      		push r0
+  13 0004 0FB6      		in r0,__SREG__
+  14 0006 0F92      		push r0
+  15 0008 1124      		clr __zero_reg__
+  16 000a 8F93      		push r24
+  17 000c 9F93      		push r25
+  18 000e AF93      		push r26
+  19 0010 BF93      		push r27
+  20               	/* prologue: Signal */
+  21               	/* frame size = 0 */
+  22               	/* stack size = 7 */
+  23               	.L__stack_usage = 7
+  24 0012 8091 0000 		lds r24,isrtimer
+  25 0016 9091 0000 		lds r25,isrtimer+1
+  26 001a 0196      		adiw r24,1
+  27 001c 9093 0000 		sts isrtimer+1,r25
+  28 0020 8093 0000 		sts isrtimer,r24
+  29 0024 8091 0000 		lds r24,ir_ticks
+  30 0028 8F5F      		subi r24,lo8(-(1))
+  31 002a 8A3F      		cpi r24,lo8(-6)
+  32 002c 00F4      		brsh .L2
+  33 002e 8093 0000 		sts ir_ticks,r24
+  34 0032 00C0      		rjmp .L1
+  35               	.L2:
+  36 0034 1092 0000 		sts ir_ticks,__zero_reg__
+  37 0038 8091 0000 		lds r24,ticks
+  38 003c 9091 0000 		lds r25,ticks+1
+  39 0040 A091 0000 		lds r26,ticks+2
+  40 0044 B091 0000 		lds r27,ticks+3
+  41 0048 0196      		adiw r24,1
+  42 004a A11D      		adc r26,__zero_reg__
+  43 004c B11D      		adc r27,__zero_reg__
+  44 004e 8093 0000 		sts ticks,r24
+  45 0052 9093 0000 		sts ticks+1,r25
+  46 0056 A093 0000 		sts ticks+2,r26
+  47 005a B093 0000 		sts ticks+3,r27
+  48 005e 8091 0000 		lds r24,clock_hsec
+  49 0062 8F5F      		subi r24,lo8(-(1))
+  50 0064 8093 0000 		sts clock_hsec,r24
+  51               	.L1:
+  52               	/* epilogue start */
+  53 0068 BF91      		pop r27
+  54 006a AF91      		pop r26
+  55 006c 9F91      		pop r25
+  56 006e 8F91      		pop r24
+  57 0070 0F90      		pop r0
+  58 0072 0FBE      		out __SREG__,r0
+  59 0074 0F90      		pop r0
+  60 0076 1F90      		pop r1
+  61 0078 1895      		reti
+  63               		.section	.text.get_timestamp,"ax",@progbits
+  64               	.global	get_timestamp
+  66               	get_timestamp:
+  67               	/* prologue: function */
+  68               	/* frame size = 0 */
+  69               	/* stack size = 0 */
+  70               	.L__stack_usage = 0
+  71 0000 FC01      		movw r30,r24
+  72 0002 9FB7      		in r25,__SREG__
+  73               	/* #APP */
+  74               	 ;  100 "../../clib/clock.c" 1
+  75 0004 F894      		cli
+  76               	 ;  0 "" 2
+  77               	/* #NOAPP */
+  78 0006 4091 0000 		lds r20,ticks
+  79 000a 5091 0000 		lds r21,ticks+1
+  80 000e 6091 0000 		lds r22,ticks+2
+  81 0012 7091 0000 		lds r23,ticks+3
+  82 0016 4083      		st Z,r20
+  83 0018 5183      		std Z+1,r21
+  84 001a 6283      		std Z+2,r22
+  85 001c 7383      		std Z+3,r23
+  86 001e 9FBF      		out __SREG__,r25
+  87 0020 0895      		ret
+  89               		.section	.text.gettime,"ax",@progbits
+  90               	.global	gettime
+  92               	gettime:
+  93 0000 A4E0      		ldi r26,lo8(4)
+  94 0002 B0E0      		ldi r27,0
+  95 0004 E0E0      		ldi r30,lo8(gs(1f))
+  96 0006 F0E0      		ldi r31,hi8(gs(1f))
+  97 0008 0C94 0000 		jmp __prologue_saves__+((18 - 2) * 2)
+  98               	1:
+  99               	/* prologue: function */
+ 100               	/* frame size = 4 */
+ 101               	/* stack size = 6 */
+ 102               	.L__stack_usage = 6
+ 103 000c CE01      		movw r24,r28
+ 104 000e 0196      		adiw r24,1
+ 105 0010 0E94 0000 		call get_timestamp
+ 106 0014 8C81      		ldd r24,Y+4
+ 107 0016 0E94 0000 		call display_hex2
+ 108 001a 8B81      		ldd r24,Y+3
+ 109 001c 0E94 0000 		call display_hex2
+ 110 0020 8A81      		ldd r24,Y+2
+ 111 0022 0E94 0000 		call display_hex2
+ 112 0026 8981      		ldd r24,Y+1
+ 113 0028 0E94 0000 		call display_hex2
+ 114 002c 0E94 0000 		call display_nl
+ 115               	/* epilogue start */
+ 116 0030 2496      		adiw r28,4
+ 117 0032 E2E0      		ldi r30, lo8(2)
+ 118 0034 0C94 0000 		jmp __epilogue_restores__ + ((18 - 2) * 2)
+ 120               		.section	.text.Minute_Task,"ax",@progbits
+ 121               	.global	Minute_Task
+ 123               	Minute_Task:
+ 124               	/* prologue: function */
+ 125               	/* frame size = 0 */
+ 126               	/* stack size = 0 */
+ 127               	.L__stack_usage = 0
+ 128 0000 8091 0000 		lds r24,ticks
+ 129 0004 9091 0000 		lds r25,ticks+1
+ 130 0008 A091 0000 		lds r26,ticks+2
+ 131 000c B091 0000 		lds r27,ticks+3
+ 132 0010 2091 0000 		lds r18,last_tick.2889
+ 133 0014 2817      		cp r18,r24
+ 134 0016 01F0      		breq .L7
+ 135 0018 8091 0000 		lds r24,ticks
+ 136 001c 9091 0000 		lds r25,ticks+1
+ 137 0020 A091 0000 		lds r26,ticks+2
+ 138 0024 B091 0000 		lds r27,ticks+3
+ 139 0028 8093 0000 		sts last_tick.2889,r24
+ 140               	/* #APP */
+ 141               	 ;  136 "../../clib/clock.c" 1
+ 142 002c A895      		wdr
+ 143               	 ;  0 "" 2
+ 144               	/* #NOAPP */
+ 145 002e 8091 0000 		lds r24,clock_hsec
+ 146 0032 8D37      		cpi r24,lo8(125)
+ 147 0034 00F0      		brlo .L7
+ 148 0036 1092 0000 		sts clock_hsec,__zero_reg__
+ 149 003a 8091 0000 		lds r24,credit_10ms
+ 150 003e 9091 0000 		lds r25,credit_10ms+1
+ 151 0042 8438      		cpi r24,-124
+ 152 0044 23E0      		ldi r18,3
+ 153 0046 9207      		cpc r25,r18
+ 154 0048 00F4      		brsh .L11
+ 155 004a 0196      		adiw r24,1
+ 156 004c 9093 0000 		sts credit_10ms+1,r25
+ 157 0050 8093 0000 		sts credit_10ms,r24
+ 158               	.L11:
+ 159 0054 8091 0000 		lds r24,clock_sec.2890
+ 160 0058 8F5F      		subi r24,lo8(-(1))
+ 161 005a 8C33      		cpi r24,lo8(60)
+ 162 005c 01F0      		breq .L12
+ 163 005e 8093 0000 		sts clock_sec.2890,r24
+ 164 0062 0895      		ret
+ 165               	.L12:
+ 166 0064 1092 0000 		sts clock_sec.2890,__zero_reg__
+ 167               	.L7:
+ 168 0068 0895      		ret
+ 170               		.local	clock_sec.2890
+ 171               		.comm	clock_sec.2890,1,1
+ 172               		.local	last_tick.2889
+ 173               		.comm	last_tick.2889,1,1
+ 174               		.comm	clock_hsec,1,1
+ 175               		.comm	isrtimer,2,1
+ 176               		.comm	ticks,4,1
+ 177               	.global	ir_ticks
+ 178               		.section .bss
+ 181               	ir_ticks:
+ 182 0000 00        		.zero	1
+ 183               		.ident	"GCC: (GNU) 5.4.0"
+ 184               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 clock.c
+     /tmp/ccAhfUii.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccAhfUii.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccAhfUii.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccAhfUii.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccAhfUii.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccAhfUii.s:10     .text.__vector_23:00000000 __vector_23
+                            *COM*:00000002 isrtimer
+     /tmp/ccAhfUii.s:181    .bss:00000000 ir_ticks
+                            *COM*:00000004 ticks
+                            *COM*:00000001 clock_hsec
+     /tmp/ccAhfUii.s:66     .text.get_timestamp:00000000 get_timestamp
+     /tmp/ccAhfUii.s:92     .text.gettime:00000000 gettime
+     /tmp/ccAhfUii.s:123    .text.Minute_Task:00000000 Minute_Task
+     /tmp/ccAhfUii.s:171    .bss:00000002 last_tick.2889
+                             .bss:00000001 clock_sec.2890
+
+UNDEFINED SYMBOLS
+__prologue_saves__
+display_hex2
+display_nl
+__epilogue_restores__
+credit_10ms
+__do_clear_bss

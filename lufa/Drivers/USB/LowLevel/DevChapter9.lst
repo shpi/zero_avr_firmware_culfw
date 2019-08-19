@@ -1,0 +1,324 @@
+   1               		.file	"DevChapter9.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.USB_Device_ProcessControlRequest,"ax",@progbits
+   8               	.global	USB_Device_ProcessControlRequest
+  10               	USB_Device_ProcessControlRequest:
+  11 0000 A2E0      		ldi r26,lo8(2)
+  12 0002 B0E0      		ldi r27,0
+  13 0004 E0E0      		ldi r30,lo8(gs(1f))
+  14 0006 F0E0      		ldi r31,hi8(gs(1f))
+  15 0008 0C94 0000 		jmp __prologue_saves__+((18 - 2) * 2)
+  16               	1:
+  17               	/* prologue: function */
+  18               	/* frame size = 2 */
+  19               	/* stack size = 4 */
+  20               	.L__stack_usage = 4
+  21 000c E0E0      		ldi r30,lo8(USB_ControlRequest)
+  22 000e F0E0      		ldi r31,hi8(USB_ControlRequest)
+  23 0010 80E0      		ldi r24,lo8(USB_ControlRequest+8)
+  24 0012 90E0      		ldi r25,hi8(USB_ControlRequest+8)
+  25               	.L2:
+  26 0014 2091 F100 		lds r18,241
+  27 0018 2193      		st Z+,r18
+  28 001a 8E17      		cp r24,r30
+  29 001c 9F07      		cpc r25,r31
+  30 001e 01F4      		brne .L2
+  31 0020 8091 0000 		lds r24,USB_ControlRequest
+  32 0024 9091 0000 		lds r25,USB_ControlRequest+1
+  33 0028 492F      		mov r20,r25
+  34 002a 50E0      		ldi r21,0
+  35 002c 4A30      		cpi r20,10
+  36 002e 5105      		cpc r21,__zero_reg__
+  37 0030 00F0      		brlo .+2
+  38 0032 00C0      		rjmp .L3
+  39 0034 FA01      		movw r30,r20
+  40 0036 E050      		subi r30,lo8(-(gs(.L5)))
+  41 0038 F040      		sbci r31,hi8(-(gs(.L5)))
+  42 003a 0C94 0000 		jmp __tablejump2__
+  43               		.section	.progmem.gcc_sw_table.USB_Device_ProcessControlRequest,"a",@progbits
+  44               		.p2align	1
+  45               	.L5:
+  46 0000 0000      		.word gs(.L4)
+  47 0002 0000      		.word gs(.L6)
+  48 0004 0000      		.word gs(.L3)
+  49 0006 0000      		.word gs(.L6)
+  50 0008 0000      		.word gs(.L3)
+  51 000a 0000      		.word gs(.L7)
+  52 000c 0000      		.word gs(.L8)
+  53 000e 0000      		.word gs(.L3)
+  54 0010 0000      		.word gs(.L9)
+  55 0012 0000      		.word gs(.L10)
+  56               		.section	.text.USB_Device_ProcessControlRequest
+  57               	.L4:
+  58 003e 8038      		cpi r24,lo8(-128)
+  59 0040 01F0      		breq .L11
+  60 0042 8238      		cpi r24,lo8(-126)
+  61 0044 01F0      		breq .+2
+  62 0046 00C0      		rjmp .L3
+  63 0048 8091 0000 		lds r24,USB_ControlRequest+4
+  64 004c 8093 E900 		sts 233,r24
+  65 0050 8091 EB00 		lds r24,235
+  66 0054 85FB      		bst r24,5
+  67 0056 8827      		clr r24
+  68 0058 80F9      		bld r24,0
+  69 005a 1092 E900 		sts 233,__zero_reg__
+  70 005e 00C0      		rjmp .L13
+  71               	.L11:
+  72 0060 8091 0000 		lds r24,USB_CurrentlySelfPowered
+  73 0064 9091 0000 		lds r25,USB_RemoteWakeupEnabled
+  74 0068 9111      		cpse r25,__zero_reg__
+  75 006a 8260      		ori r24,lo8(2)
+  76               	.L13:
+  77 006c 9091 E800 		lds r25,232
+  78 0070 977F      		andi r25,lo8(-9)
+  79 0072 9093 E800 		sts 232,r25
+  80 0076 8093 F100 		sts 241,r24
+  81 007a 1092 F100 		sts 241,__zero_reg__
+  82 007e 8091 E800 		lds r24,232
+  83 0082 982F      		mov r25,r24
+  84 0084 9E7F      		andi r25,lo8(-2)
+  85 0086 9093 E800 		sts 232,r25
+  86 008a 8F77      		andi r24,lo8(127)
+  87 008c 8093 E800 		sts 232,r24
+  88               	.L14:
+  89 0090 8091 E800 		lds r24,232
+  90 0094 82FD      		sbrc r24,2
+  91 0096 00C0      		rjmp .L67
+  92 0098 8091 0000 		lds r24,USB_DeviceState
+  93 009c 8111      		cpse r24,__zero_reg__
+  94 009e 00C0      		rjmp .L14
+  95 00a0 00C0      		rjmp .L33
+  96               	.L6:
+  97 00a2 282F      		mov r18,r24
+  98 00a4 2D7F      		andi r18,lo8(-3)
+  99 00a6 01F0      		breq .+2
+ 100 00a8 00C0      		rjmp .L3
+ 101 00aa 8823      		tst r24
+ 102 00ac 01F0      		breq .L19
+ 103 00ae 8230      		cpi r24,lo8(2)
+ 104 00b0 01F0      		breq .L20
+ 105 00b2 00C0      		rjmp .L18
+ 106               	.L19:
+ 107 00b4 8091 0000 		lds r24,USB_ControlRequest+2
+ 108 00b8 8130      		cpi r24,lo8(1)
+ 109 00ba 01F0      		breq .+2
+ 110 00bc 00C0      		rjmp .L33
+ 111 00be 9330      		cpi r25,lo8(3)
+ 112 00c0 01F0      		breq .L21
+ 113 00c2 80E0      		ldi r24,0
+ 114               	.L21:
+ 115 00c4 8093 0000 		sts USB_RemoteWakeupEnabled,r24
+ 116 00c8 00C0      		rjmp .L18
+ 117               	.L20:
+ 118 00ca 8091 0000 		lds r24,USB_ControlRequest+2
+ 119 00ce 8111      		cpse r24,__zero_reg__
+ 120 00d0 00C0      		rjmp .L18
+ 121 00d2 8091 0000 		lds r24,USB_ControlRequest+4
+ 122 00d6 8770      		andi r24,lo8(7)
+ 123 00d8 01F4      		brne .+2
+ 124 00da 00C0      		rjmp .L33
+ 125 00dc 8093 E900 		sts 233,r24
+ 126 00e0 2091 EB00 		lds r18,235
+ 127 00e4 20FF      		sbrs r18,0
+ 128 00e6 00C0      		rjmp .L18
+ 129 00e8 9130      		cpi r25,lo8(1)
+ 130 00ea 01F4      		brne .L24
+ 131 00ec 9091 EB00 		lds r25,235
+ 132 00f0 9061      		ori r25,lo8(16)
+ 133 00f2 9093 EB00 		sts 235,r25
+ 134 00f6 21E0      		ldi r18,lo8(1)
+ 135 00f8 30E0      		ldi r19,0
+ 136 00fa A901      		movw r20,r18
+ 137 00fc 00C0      		rjmp 2f
+ 138               		1:
+ 139 00fe 440F      		lsl r20
+ 140 0100 551F      		rol r21
+ 141               		2:
+ 142 0102 8A95      		dec r24
+ 143 0104 02F4      		brpl 1b
+ 144 0106 4093 EA00 		sts 234,r20
+ 145 010a 1092 EA00 		sts 234,__zero_reg__
+ 146 010e 8091 EB00 		lds r24,235
+ 147 0112 8860      		ori r24,lo8(8)
+ 148 0114 00C0      		rjmp .L65
+ 149               	.L24:
+ 150 0116 8091 EB00 		lds r24,235
+ 151 011a 8062      		ori r24,lo8(32)
+ 152               	.L65:
+ 153 011c 8093 EB00 		sts 235,r24
+ 154               	.L18:
+ 155 0120 1092 E900 		sts 233,__zero_reg__
+ 156 0124 8091 E800 		lds r24,232
+ 157 0128 877F      		andi r24,lo8(-9)
+ 158 012a 8093 E800 		sts 232,r24
+ 159 012e 8091 E800 		lds r24,232
+ 160 0132 982F      		mov r25,r24
+ 161 0134 9E7F      		andi r25,lo8(-2)
+ 162 0136 00C0      		rjmp .L68
+ 163               	.L7:
+ 164 0138 8111      		cpse r24,__zero_reg__
+ 165 013a 00C0      		rjmp .L3
+ 166 013c 8091 0000 		lds r24,USB_ControlRequest+2
+ 167 0140 9091 E800 		lds r25,232
+ 168 0144 977F      		andi r25,lo8(-9)
+ 169 0146 9093 E800 		sts 232,r25
+ 170 014a 9091 E800 		lds r25,232
+ 171 014e 292F      		mov r18,r25
+ 172 0150 2E7F      		andi r18,lo8(-2)
+ 173 0152 2093 E800 		sts 232,r18
+ 174 0156 9F77      		andi r25,lo8(127)
+ 175 0158 9093 E800 		sts 232,r25
+ 176               	.L25:
+ 177 015c 9091 E800 		lds r25,232
+ 178 0160 90FD      		sbrc r25,0
+ 179 0162 00C0      		rjmp .L70
+ 180 0164 9091 0000 		lds r25,USB_DeviceState
+ 181 0168 9111      		cpse r25,__zero_reg__
+ 182 016a 00C0      		rjmp .L25
+ 183 016c 00C0      		rjmp .L33
+ 184               	.L70:
+ 185 016e 8F77      		andi r24,lo8(127)
+ 186 0170 982F      		mov r25,r24
+ 187 0172 9068      		ori r25,lo8(-128)
+ 188 0174 9093 E300 		sts 227,r25
+ 189 0178 8823      		tst r24
+ 190 017a 01F4      		brne .+2
+ 191 017c 00C0      		rjmp .L33
+ 192 017e 83E0      		ldi r24,lo8(3)
+ 193 0180 8093 0000 		sts USB_DeviceState,r24
+ 194 0184 00C0      		rjmp .L33
+ 195               	.L8:
+ 196 0186 8058      		subi r24,lo8(-(-128))
+ 197 0188 8230      		cpi r24,lo8(2)
+ 198 018a 00F0      		brlo .+2
+ 199 018c 00C0      		rjmp .L3
+ 200 018e AE01      		movw r20,r28
+ 201 0190 4F5F      		subi r20,-1
+ 202 0192 5F4F      		sbci r21,-1
+ 203 0194 6091 0000 		lds r22,USB_ControlRequest+4
+ 204 0198 8091 0000 		lds r24,USB_ControlRequest+2
+ 205 019c 9091 0000 		lds r25,USB_ControlRequest+2+1
+ 206 01a0 0E94 0000 		call CALLBACK_USB_GetDescriptor
+ 207 01a4 BC01      		movw r22,r24
+ 208 01a6 892B      		or r24,r25
+ 209 01a8 01F4      		brne .+2
+ 210 01aa 00C0      		rjmp .L33
+ 211 01ac 9091 E800 		lds r25,232
+ 212 01b0 977F      		andi r25,lo8(-9)
+ 213 01b2 9093 E800 		sts 232,r25
+ 214 01b6 8981      		ldd r24,Y+1
+ 215 01b8 9A81      		ldd r25,Y+2
+ 216 01ba 0E94 0000 		call Endpoint_Write_Control_PStream_LE
+ 217 01be 00C0      		rjmp .L67
+ 218               	.L9:
+ 219 01c0 8038      		cpi r24,lo8(-128)
+ 220 01c2 01F0      		breq .+2
+ 221 01c4 00C0      		rjmp .L3
+ 222 01c6 8091 E800 		lds r24,232
+ 223 01ca 877F      		andi r24,lo8(-9)
+ 224 01cc 8093 E800 		sts 232,r24
+ 225 01d0 8091 0000 		lds r24,USB_ConfigurationNumber
+ 226 01d4 8093 F100 		sts 241,r24
+ 227 01d8 8091 E800 		lds r24,232
+ 228 01dc 982F      		mov r25,r24
+ 229 01de 9E7F      		andi r25,lo8(-2)
+ 230 01e0 9093 E800 		sts 232,r25
+ 231 01e4 8F77      		andi r24,lo8(127)
+ 232 01e6 8093 E800 		sts 232,r24
+ 233               	.L28:
+ 234 01ea 8091 E800 		lds r24,232
+ 235 01ee 82FD      		sbrc r24,2
+ 236 01f0 00C0      		rjmp .L67
+ 237 01f2 8091 0000 		lds r24,USB_DeviceState
+ 238 01f6 8111      		cpse r24,__zero_reg__
+ 239 01f8 00C0      		rjmp .L28
+ 240 01fa 00C0      		rjmp .L33
+ 241               	.L67:
+ 242 01fc 8091 E800 		lds r24,232
+ 243 0200 982F      		mov r25,r24
+ 244 0202 9B7F      		andi r25,lo8(-5)
+ 245               	.L68:
+ 246 0204 9093 E800 		sts 232,r25
+ 247 0208 8F77      		andi r24,lo8(127)
+ 248 020a 8093 E800 		sts 232,r24
+ 249 020e 00C0      		rjmp .L33
+ 250               	.L10:
+ 251 0210 8111      		cpse r24,__zero_reg__
+ 252 0212 00C0      		rjmp .L3
+ 253 0214 8091 0000 		lds r24,USB_ControlRequest+2
+ 254 0218 9091 0000 		lds r25,USB_ControlRequest+2+1
+ 255 021c 9927      		clr r25
+ 256 021e 0297      		sbiw r24,2
+ 257 0220 04F4      		brge .L33
+ 258 0222 8091 E800 		lds r24,232
+ 259 0226 877F      		andi r24,lo8(-9)
+ 260 0228 8093 E800 		sts 232,r24
+ 261 022c 8091 0000 		lds r24,USB_ControlRequest+2
+ 262 0230 8093 0000 		sts USB_ConfigurationNumber,r24
+ 263 0234 8091 E800 		lds r24,232
+ 264 0238 982F      		mov r25,r24
+ 265 023a 9E7F      		andi r25,lo8(-2)
+ 266 023c 9093 E800 		sts 232,r25
+ 267 0240 8F77      		andi r24,lo8(127)
+ 268 0242 8093 E800 		sts 232,r24
+ 269 0246 8091 0000 		lds r24,USB_ConfigurationNumber
+ 270 024a 8823      		tst r24
+ 271 024c 01F0      		breq .L30
+ 272 024e 84E0      		ldi r24,lo8(4)
+ 273 0250 00C0      		rjmp .L66
+ 274               	.L30:
+ 275 0252 83E0      		ldi r24,lo8(3)
+ 276               	.L66:
+ 277 0254 8093 0000 		sts USB_DeviceState,r24
+ 278 0258 0E94 0000 		call EVENT_USB_Device_ConfigurationChanged
+ 279               	.L33:
+ 280 025c 8091 E800 		lds r24,232
+ 281 0260 83FF      		sbrs r24,3
+ 282 0262 00C0      		rjmp .L1
+ 283 0264 8091 EB00 		lds r24,235
+ 284 0268 8062      		ori r24,lo8(32)
+ 285 026a 8093 EB00 		sts 235,r24
+ 286 026e 8091 E800 		lds r24,232
+ 287 0272 877F      		andi r24,lo8(-9)
+ 288 0274 8093 E800 		sts 232,r24
+ 289 0278 00C0      		rjmp .L1
+ 290               	.L3:
+ 291 027a 0E94 0000 		call EVENT_USB_Device_UnhandledControlRequest
+ 292 027e 00C0      		rjmp .L33
+ 293               	.L1:
+ 294               	/* epilogue start */
+ 295 0280 2296      		adiw r28,2
+ 296 0282 E2E0      		ldi r30, lo8(2)
+ 297 0284 0C94 0000 		jmp __epilogue_restores__ + ((18 - 2) * 2)
+ 299               		.comm	USB_CurrentlySelfPowered,1,1
+ 300               		.comm	USB_RemoteWakeupEnabled,1,1
+ 301               		.comm	USB_ConfigurationNumber,1,1
+ 302               		.ident	"GCC: (GNU) 5.4.0"
+ 303               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 DevChapter9.c
+     /tmp/cchwscZ6.s:2      *ABS*:0000003e __SP_H__
+     /tmp/cchwscZ6.s:3      *ABS*:0000003d __SP_L__
+     /tmp/cchwscZ6.s:4      *ABS*:0000003f __SREG__
+     /tmp/cchwscZ6.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/cchwscZ6.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/cchwscZ6.s:10     .text.USB_Device_ProcessControlRequest:00000000 USB_Device_ProcessControlRequest
+                            *COM*:00000001 USB_CurrentlySelfPowered
+                            *COM*:00000001 USB_RemoteWakeupEnabled
+                            *COM*:00000001 USB_ConfigurationNumber
+
+UNDEFINED SYMBOLS
+__prologue_saves__
+USB_ControlRequest
+__tablejump2__
+USB_DeviceState
+CALLBACK_USB_GetDescriptor
+Endpoint_Write_Control_PStream_LE
+EVENT_USB_Device_ConfigurationChanged
+EVENT_USB_Device_UnhandledControlRequest
+__epilogue_restores__
+__do_clear_bss

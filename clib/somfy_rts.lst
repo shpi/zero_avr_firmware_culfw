@@ -1,0 +1,582 @@
+   1               		.file	"somfy_rts.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.somfy_rts_func,"ax",@progbits
+   8               	.global	somfy_rts_func
+  10               	somfy_rts_func:
+  11 0000 A1E0      		ldi r26,lo8(1)
+  12 0002 B0E0      		ldi r27,0
+  13 0004 E0E0      		ldi r30,lo8(gs(1f))
+  14 0006 F0E0      		ldi r31,hi8(gs(1f))
+  15 0008 0C94 0000 		jmp __prologue_saves__+((18 - 16) * 2)
+  16               	1:
+  17               	/* prologue: function */
+  18               	/* frame size = 1 */
+  19               	/* stack size = 17 */
+  20               	.L__stack_usage = 17
+  21 000c 7C01      		movw r14,r24
+  22 000e FC01      		movw r30,r24
+  23 0010 8181      		ldd r24,Z+1
+  24 0012 8337      		cpi r24,lo8(115)
+  25 0014 01F0      		breq .+2
+  26 0016 00C0      		rjmp .L2
+  27 0018 1982      		std Y+1,__zero_reg__
+  28 001a 87E0      		ldi r24,lo8(7)
+  29 001c 90E0      		ldi r25,0
+  30 001e 0E94 0000 		call malloc
+  31 0022 8C01      		movw r16,r24
+  32 0024 41E0      		ldi r20,lo8(1)
+  33 0026 BE01      		movw r22,r28
+  34 0028 6F5F      		subi r22,-1
+  35 002a 7F4F      		sbci r23,-1
+  36 002c C701      		movw r24,r14
+  37 002e 0296      		adiw r24,2
+  38 0030 0E94 0000 		call fromhex
+  39 0034 8981      		ldd r24,Y+1
+  40 0036 F801      		movw r30,r16
+  41 0038 8083      		st Z,r24
+  42 003a 41E0      		ldi r20,lo8(1)
+  43 003c BE01      		movw r22,r28
+  44 003e 6F5F      		subi r22,-1
+  45 0040 7F4F      		sbci r23,-1
+  46 0042 C701      		movw r24,r14
+  47 0044 0496      		adiw r24,4
+  48 0046 0E94 0000 		call fromhex
+  49 004a 8981      		ldd r24,Y+1
+  50 004c 807F      		andi r24,lo8(-16)
+  51 004e D82E      		mov r13,r24
+  52 0050 F801      		movw r30,r16
+  53 0052 8183      		std Z+1,r24
+  54 0054 41E0      		ldi r20,lo8(1)
+  55 0056 BE01      		movw r22,r28
+  56 0058 6F5F      		subi r22,-1
+  57 005a 7F4F      		sbci r23,-1
+  58 005c C701      		movw r24,r14
+  59 005e 0696      		adiw r24,6
+  60 0060 0E94 0000 		call fromhex
+  61 0064 8981      		ldd r24,Y+1
+  62 0066 F801      		movw r30,r16
+  63 0068 8283      		std Z+2,r24
+  64 006a 41E0      		ldi r20,lo8(1)
+  65 006c BE01      		movw r22,r28
+  66 006e 6F5F      		subi r22,-1
+  67 0070 7F4F      		sbci r23,-1
+  68 0072 C701      		movw r24,r14
+  69 0074 0896      		adiw r24,8
+  70 0076 0E94 0000 		call fromhex
+  71 007a 8981      		ldd r24,Y+1
+  72 007c F801      		movw r30,r16
+  73 007e 8383      		std Z+3,r24
+  74 0080 41E0      		ldi r20,lo8(1)
+  75 0082 BE01      		movw r22,r28
+  76 0084 6F5F      		subi r22,-1
+  77 0086 7F4F      		sbci r23,-1
+  78 0088 C701      		movw r24,r14
+  79 008a 0A96      		adiw r24,10
+  80 008c 0E94 0000 		call fromhex
+  81 0090 8981      		ldd r24,Y+1
+  82 0092 F801      		movw r30,r16
+  83 0094 8683      		std Z+6,r24
+  84 0096 41E0      		ldi r20,lo8(1)
+  85 0098 BE01      		movw r22,r28
+  86 009a 6F5F      		subi r22,-1
+  87 009c 7F4F      		sbci r23,-1
+  88 009e C701      		movw r24,r14
+  89 00a0 0C96      		adiw r24,12
+  90 00a2 0E94 0000 		call fromhex
+  91 00a6 8981      		ldd r24,Y+1
+  92 00a8 F801      		movw r30,r16
+  93 00aa 8583      		std Z+5,r24
+  94 00ac 41E0      		ldi r20,lo8(1)
+  95 00ae BE01      		movw r22,r28
+  96 00b0 6F5F      		subi r22,-1
+  97 00b2 7F4F      		sbci r23,-1
+  98 00b4 C701      		movw r24,r14
+  99 00b6 0E96      		adiw r24,14
+ 100 00b8 0E94 0000 		call fromhex
+ 101 00bc 8981      		ldd r24,Y+1
+ 102 00be F801      		movw r30,r16
+ 103 00c0 8483      		std Z+4,r24
+ 104 00c2 3801      		movw r6,r16
+ 105 00c4 F7E0      		ldi r31,7
+ 106 00c6 6F0E      		add r6,r31
+ 107 00c8 711C      		adc r7,__zero_reg__
+ 108 00ca F801      		movw r30,r16
+ 109 00cc 80E0      		ldi r24,0
+ 110               	.L3:
+ 111 00ce 9191      		ld r25,Z+
+ 112 00d0 292F      		mov r18,r25
+ 113 00d2 2295      		swap r18
+ 114 00d4 2F70      		andi r18,lo8(15)
+ 115 00d6 9227      		eor r25,r18
+ 116 00d8 8927      		eor r24,r25
+ 117 00da E615      		cp r30,r6
+ 118 00dc F705      		cpc r31,r7
+ 119 00de 01F4      		brne .L3
+ 120 00e0 8F70      		andi r24,lo8(15)
+ 121 00e2 8D29      		or r24,r13
+ 122 00e4 F801      		movw r30,r16
+ 123 00e6 8183      		std Z+1,r24
+ 124 00e8 87E0      		ldi r24,lo8(7)
+ 125 00ea 90E0      		ldi r25,0
+ 126 00ec 0E94 0000 		call malloc
+ 127 00f0 7C01      		movw r14,r24
+ 128 00f2 87E0      		ldi r24,lo8(7)
+ 129 00f4 F801      		movw r30,r16
+ 130 00f6 D701      		movw r26,r14
+ 131               		0:
+ 132 00f8 0190      		ld r0,Z+
+ 133 00fa 0D92      		st X+,r0
+ 134 00fc 8A95      		dec r24
+ 135 00fe 01F4      		brne 0b
+ 136 0100 9801      		movw r18,r16
+ 137 0102 2A5F      		subi r18,-6
+ 138 0104 3F4F      		sbci r19,-1
+ 139 0106 F801      		movw r30,r16
+ 140               	.L4:
+ 141 0108 DF01      		movw r26,r30
+ 142 010a 3196      		adiw r30,1
+ 143 010c 1196      		adiw r26,1
+ 144 010e 9C91      		ld r25,X
+ 145 0110 1197      		sbiw r26,1
+ 146 0112 8C91      		ld r24,X
+ 147 0114 8927      		eor r24,r25
+ 148 0116 8083      		st Z,r24
+ 149 0118 E217      		cp r30,r18
+ 150 011a F307      		cpc r31,r19
+ 151 011c 01F4      		brne .L4
+ 152 011e 8091 0000 		lds r24,somfy_rts_on
+ 153 0122 8111      		cpse r24,__zero_reg__
+ 154 0124 00C0      		rjmp .L5
+ 155 0126 8091 0000 		lds r24,asksin_on
+ 156 012a 8823      		tst r24
+ 157 012c 01F0      		breq .L6
+ 158 012e 81E0      		ldi r24,lo8(1)
+ 159 0130 8093 0000 		sts somfy_restore_asksin,r24
+ 160 0134 1092 0000 		sts asksin_on,__zero_reg__
+ 161               	.L6:
+ 162 0138 EE98      		cbi 0x1d,6
+ 163 013a 569A      		sbi 0xa,6
+ 164 013c 5E9A      		sbi 0xb,6
+ 165 013e 8EE1      		ldi r24,lo8(30)
+ 166 0140 90E0      		ldi r25,0
+ 167 0142 0E94 0000 		call my_delay_us
+ 168 0146 5E98      		cbi 0xb,6
+ 169 0148 8EE1      		ldi r24,lo8(30)
+ 170 014a 90E0      		ldi r25,0
+ 171 014c 0E94 0000 		call my_delay_us
+ 172 0150 5E9A      		sbi 0xb,6
+ 173 0152 8DE2      		ldi r24,lo8(45)
+ 174 0154 90E0      		ldi r25,0
+ 175 0156 0E94 0000 		call my_delay_us
+ 176 015a 80E3      		ldi r24,lo8(48)
+ 177 015c 0E94 0000 		call ccStrobe
+ 178 0160 84E6      		ldi r24,lo8(100)
+ 179 0162 90E0      		ldi r25,0
+ 180 0164 0E94 0000 		call my_delay_us
+ 181 0168 5E98      		cbi 0xb,6
+ 182 016a 80E4      		ldi r24,lo8(64)
+ 183 016c 0E94 0000 		call cc1100_sendbyte
+ 184 0170 E0E0      		ldi r30,lo8(CC1100_SOMFY_RTS_CFG)
+ 185 0172 CE2E      		mov r12,r30
+ 186 0174 E0E0      		ldi r30,hi8(CC1100_SOMFY_RTS_CFG)
+ 187 0176 DE2E      		mov r13,r30
+ 188 0178 F0E0      		ldi r31,lo8(CC1100_SOMFY_RTS_CFG+41)
+ 189 017a AF2E      		mov r10,r31
+ 190 017c F0E0      		ldi r31,hi8(CC1100_SOMFY_RTS_CFG+41)
+ 191 017e BF2E      		mov r11,r31
+ 192               	.L7:
+ 193 0180 F601      		movw r30,r12
+ 194               	/* #APP */
+ 195               	 ;  132 "../../clib/somfy_rts.c" 1
+ 196 0182 8491      		lpm r24, Z
+ 197               		
+ 198               	 ;  0 "" 2
+ 199               	/* #NOAPP */
+ 200 0184 0E94 0000 		call cc1100_sendbyte
+ 201 0188 FFEF      		ldi r31,-1
+ 202 018a CF1A      		sub r12,r31
+ 203 018c DF0A      		sbc r13,r31
+ 204 018e AC14      		cp r10,r12
+ 205 0190 BD04      		cpc r11,r13
+ 206 0192 01F4      		brne .L7
+ 207 0194 5E9A      		sbi 0xb,6
+ 208 0196 5E98      		cbi 0xb,6
+ 209 0198 8EE7      		ldi r24,lo8(126)
+ 210 019a 0E94 0000 		call cc1100_sendbyte
+ 211 019e 8BE2      		ldi r24,lo8(43)
+ 212 01a0 90E0      		ldi r25,0
+ 213               	.L8:
+ 214 01a2 6C01      		movw r12,r24
+ 215 01a4 2FEF      		ldi r18,-1
+ 216 01a6 C21A      		sub r12,r18
+ 217 01a8 D20A      		sbc r13,r18
+ 218 01aa 0E94 0000 		call erb
+ 219 01ae 0E94 0000 		call cc1100_sendbyte
+ 220 01b2 C601      		movw r24,r12
+ 221 01b4 8333      		cpi r24,51
+ 222 01b6 9105      		cpc r25,__zero_reg__
+ 223 01b8 01F4      		brne .L8
+ 224 01ba 5E9A      		sbi 0xb,6
+ 225 01bc 83E3      		ldi r24,lo8(51)
+ 226 01be 0E94 0000 		call ccStrobe
+ 227 01c2 81E0      		ldi r24,lo8(1)
+ 228 01c4 0E94 0000 		call my_delay_ms
+ 229 01c8 81E0      		ldi r24,lo8(1)
+ 230 01ca 8093 0000 		sts cc_on,r24
+ 231 01ce 83E0      		ldi r24,lo8(3)
+ 232 01d0 0E94 0000 		call my_delay_ms
+ 233               	.L5:
+ 234 01d4 86E3      		ldi r24,lo8(54)
+ 235 01d6 0E94 0000 		call ccStrobe
+ 236 01da 8AE3      		ldi r24,lo8(58)
+ 237 01dc 0E94 0000 		call ccStrobe
+ 238 01e0 8BE3      		ldi r24,lo8(59)
+ 239 01e2 0E94 0000 		call ccStrobe
+ 240 01e6 0E94 0000 		call ccTX
+ 241 01ea 8F9A      		sbi 0x11,7
+ 242 01ec 87EC      		ldi r24,lo8(-57)
+ 243 01ee 94E2      		ldi r25,lo8(36)
+ 244 01f0 0E94 0000 		call my_delay_us
+ 245 01f4 8F98      		cbi 0x11,7
+ 246 01f6 89E5      		ldi r24,lo8(89)
+ 247 01f8 0E94 0000 		call my_delay_ms
+ 248 01fc 85E3      		ldi r24,lo8(53)
+ 249 01fe 92E0      		ldi r25,lo8(2)
+ 250 0200 0E94 0000 		call my_delay_us
+ 251 0204 512C      		mov r5,__zero_reg__
+ 252               	.L9:
+ 253 0206 8091 0000 		lds r24,somfy_rts_repetition
+ 254 020a 90E0      		ldi r25,0
+ 255 020c 252D      		mov r18,r5
+ 256 020e 052C      		mov __tmp_reg__,r5
+ 257 0210 000C      		lsl r0
+ 258 0212 330B      		sbc r19,r19
+ 259 0214 2817      		cp r18,r24
+ 260 0216 3907      		cpc r19,r25
+ 261 0218 04F0      		brlt .+2
+ 262 021a 00C0      		rjmp .L47
+ 263 021c 5520      		tst r5
+ 264 021e 01F0      		breq .L30
+ 265 0220 77E0      		ldi r23,lo8(7)
+ 266 0222 C72E      		mov r12,r23
+ 267 0224 00C0      		rjmp .L10
+ 268               	.L30:
+ 269 0226 62E0      		ldi r22,lo8(2)
+ 270 0228 C62E      		mov r12,r22
+ 271               	.L10:
+ 272 022a D12C      		mov r13,__zero_reg__
+ 273               	.L11:
+ 274 022c 8F9A      		sbi 0x11,7
+ 275 022e 86EF      		ldi r24,lo8(-10)
+ 276 0230 99E0      		ldi r25,lo8(9)
+ 277 0232 0E94 0000 		call my_delay_us
+ 278 0236 8F98      		cbi 0x11,7
+ 279 0238 86EF      		ldi r24,lo8(-10)
+ 280 023a 99E0      		ldi r25,lo8(9)
+ 281 023c 0E94 0000 		call my_delay_us
+ 282 0240 D394      		inc r13
+ 283 0242 CD10      		cpse r12,r13
+ 284 0244 00C0      		rjmp .L11
+ 285 0246 8F9A      		sbi 0x11,7
+ 286 0248 8CEF      		ldi r24,lo8(-4)
+ 287 024a 92E1      		ldi r25,lo8(18)
+ 288 024c 0E94 0000 		call my_delay_us
+ 289 0250 8F98      		cbi 0x11,7
+ 290 0252 8091 0000 		lds r24,somfy_rts_interval_half
+ 291 0256 9091 0000 		lds r25,somfy_rts_interval_half+1
+ 292 025a 0E94 0000 		call my_delay_us
+ 293 025e 6801      		movw r12,r16
+ 294               	.L15:
+ 295 0260 F601      		movw r30,r12
+ 296 0262 8190      		ld r8,Z+
+ 297 0264 6F01      		movw r12,r30
+ 298 0266 48E0      		ldi r20,lo8(8)
+ 299 0268 442E      		mov r4,r20
+ 300 026a 50E8      		ldi r21,lo8(-128)
+ 301 026c A52E      		mov r10,r21
+ 302 026e B12C      		mov r11,__zero_reg__
+ 303 0270 912C      		mov r9,__zero_reg__
+ 304               	.L14:
+ 305 0272 C401      		movw r24,r8
+ 306 0274 8A21      		and r24,r10
+ 307 0276 9B21      		and r25,r11
+ 308 0278 892B      		or r24,r25
+ 309 027a 01F4      		brne .L12
+ 310 027c 8F9A      		sbi 0x11,7
+ 311 027e 8091 0000 		lds r24,somfy_rts_interval_half
+ 312 0282 9091 0000 		lds r25,somfy_rts_interval_half+1
+ 313 0286 0E94 0000 		call my_delay_us
+ 314 028a 8F98      		cbi 0x11,7
+ 315 028c 00C0      		rjmp .L42
+ 316               	.L12:
+ 317 028e 8F98      		cbi 0x11,7
+ 318 0290 8091 0000 		lds r24,somfy_rts_interval_half
+ 319 0294 9091 0000 		lds r25,somfy_rts_interval_half+1
+ 320 0298 0E94 0000 		call my_delay_us
+ 321 029c 8F9A      		sbi 0x11,7
+ 322               	.L42:
+ 323 029e 8091 0000 		lds r24,somfy_rts_interval_half
+ 324 02a2 9091 0000 		lds r25,somfy_rts_interval_half+1
+ 325 02a6 0E94 0000 		call my_delay_us
+ 326 02aa B694      		lsr r11
+ 327 02ac A794      		ror r10
+ 328 02ae 4A94      		dec r4
+ 329 02b0 4110      		cpse r4,__zero_reg__
+ 330 02b2 00C0      		rjmp .L14
+ 331 02b4 C614      		cp r12,r6
+ 332 02b6 D704      		cpc r13,r7
+ 333 02b8 01F4      		brne .L15
+ 334 02ba 8F98      		cbi 0x11,7
+ 335 02bc 80E0      		ldi r24,0
+ 336 02be 90E0      		ldi r25,0
+ 337 02c0 0E94 0000 		call my_delay_us
+ 338 02c4 5394      		inc r5
+ 339 02c6 00C0      		rjmp .L9
+ 340               	.L47:
+ 341 02c8 8091 0000 		lds r24,somfy_rts_on
+ 342 02cc 8823      		tst r24
+ 343 02ce 01F0      		breq .L17
+ 344 02d0 8091 0000 		lds r24,tx_report
+ 345 02d4 8111      		cpse r24,__zero_reg__
+ 346 02d6 00C0      		rjmp .L43
+ 347 02d8 86E3      		ldi r24,lo8(54)
+ 348 02da 0E94 0000 		call ccStrobe
+ 349 02de 00C0      		rjmp .L19
+ 350               	.L17:
+ 351 02e0 8091 0000 		lds r24,somfy_restore_asksin
+ 352 02e4 8823      		tst r24
+ 353 02e6 01F0      		breq .L20
+ 354 02e8 1092 0000 		sts somfy_restore_asksin,__zero_reg__
+ 355 02ec 0E94 0000 		call rf_asksin_init
+ 356 02f0 81E0      		ldi r24,lo8(1)
+ 357 02f2 8093 0000 		sts asksin_on,r24
+ 358               	.L43:
+ 359 02f6 0E94 0000 		call ccRX
+ 360 02fa 00C0      		rjmp .L19
+ 361               	.L20:
+ 362 02fc 0E94 0000 		call set_txrestore
+ 363               	.L19:
+ 364 0300 89E5      		ldi r24,lo8(89)
+ 365 0302 0E94 0000 		call display_char
+ 366 0306 83E7      		ldi r24,lo8(115)
+ 367 0308 0E94 0000 		call display_char
+ 368 030c 6701      		movw r12,r14
+ 369 030e 5701      		movw r10,r14
+ 370 0310 F7E0      		ldi r31,7
+ 371 0312 AF0E      		add r10,r31
+ 372 0314 B11C      		adc r11,__zero_reg__
+ 373               	.L21:
+ 374 0316 F601      		movw r30,r12
+ 375 0318 8191      		ld r24,Z+
+ 376 031a 6F01      		movw r12,r30
+ 377 031c 0E94 0000 		call display_hex2
+ 378 0320 AC14      		cp r10,r12
+ 379 0322 BD04      		cpc r11,r13
+ 380 0324 01F4      		brne .L21
+ 381 0326 0E94 0000 		call display_nl
+ 382 032a C701      		movw r24,r14
+ 383 032c 0E94 0000 		call free
+ 384 0330 C801      		movw r24,r16
+ 385 0332 0E94 0000 		call free
+ 386 0336 00C0      		rjmp .L1
+ 387               	.L2:
+ 388 0338 8237      		cpi r24,lo8(114)
+ 389 033a 01F4      		brne .L23
+ 390 033c 60E0      		ldi r22,lo8(somfy_rts_repetition)
+ 391 033e 70E0      		ldi r23,hi8(somfy_rts_repetition)
+ 392 0340 C701      		movw r24,r14
+ 393 0342 0296      		adiw r24,2
+ 394 0344 0E94 0000 		call fromdec
+ 395 0348 89E5      		ldi r24,lo8(89)
+ 396 034a 0E94 0000 		call display_char
+ 397 034e 82E7      		ldi r24,lo8(114)
+ 398 0350 0E94 0000 		call display_char
+ 399 0354 8AE3      		ldi r24,lo8(58)
+ 400 0356 0E94 0000 		call display_char
+ 401 035a 8091 0000 		lds r24,somfy_rts_repetition
+ 402 035e 40E2      		ldi r20,lo8(32)
+ 403 0360 60E0      		ldi r22,0
+ 404 0362 90E0      		ldi r25,0
+ 405 0364 00C0      		rjmp .L45
+ 406               	.L23:
+ 407 0366 8437      		cpi r24,lo8(116)
+ 408 0368 01F4      		brne .L24
+ 409 036a F701      		movw r30,r14
+ 410 036c 8281      		ldd r24,Z+2
+ 411 036e 8033      		cpi r24,lo8(48)
+ 412 0370 01F4      		brne .L25
+ 413 0372 88ED      		ldi r24,lo8(-40)
+ 414 0374 94E0      		ldi r25,lo8(4)
+ 415 0376 9093 0000 		sts somfy_rts_interval+1,r25
+ 416 037a 8093 0000 		sts somfy_rts_interval,r24
+ 417 037e 00C0      		rjmp .L26
+ 418               	.L25:
+ 419 0380 60E0      		ldi r22,lo8(somfy_rts_interval)
+ 420 0382 70E0      		ldi r23,hi8(somfy_rts_interval)
+ 421 0384 C701      		movw r24,r14
+ 422 0386 0296      		adiw r24,2
+ 423 0388 0E94 0000 		call fromdec
+ 424               	.L26:
+ 425 038c 8091 0000 		lds r24,somfy_rts_interval
+ 426 0390 9091 0000 		lds r25,somfy_rts_interval+1
+ 427 0394 9695      		lsr r25
+ 428 0396 8795      		ror r24
+ 429 0398 9093 0000 		sts somfy_rts_interval_half+1,r25
+ 430 039c 8093 0000 		sts somfy_rts_interval_half,r24
+ 431 03a0 89E5      		ldi r24,lo8(89)
+ 432 03a2 0E94 0000 		call display_char
+ 433 03a6 84E7      		ldi r24,lo8(116)
+ 434 03a8 0E94 0000 		call display_char
+ 435 03ac 8AE3      		ldi r24,lo8(58)
+ 436 03ae 0E94 0000 		call display_char
+ 437 03b2 40E2      		ldi r20,lo8(32)
+ 438 03b4 66E0      		ldi r22,lo8(6)
+ 439 03b6 8091 0000 		lds r24,somfy_rts_interval
+ 440 03ba 9091 0000 		lds r25,somfy_rts_interval+1
+ 441               	.L45:
+ 442 03be 0E94 0000 		call display_udec
+ 443 03c2 0E94 0000 		call display_nl
+ 444 03c6 00C0      		rjmp .L1
+ 445               	.L24:
+ 446 03c8 8837      		cpi r24,lo8(120)
+ 447 03ca 01F4      		brne .L1
+ 448 03cc 8091 0000 		lds r24,somfy_restore_asksin
+ 449 03d0 8823      		tst r24
+ 450 03d2 01F0      		breq .L27
+ 451 03d4 1092 0000 		sts somfy_restore_asksin,__zero_reg__
+ 452 03d8 0E94 0000 		call rf_asksin_init
+ 453 03dc 81E0      		ldi r24,lo8(1)
+ 454 03de 8093 0000 		sts asksin_on,r24
+ 455 03e2 00C0      		rjmp .L44
+ 456               	.L27:
+ 457 03e4 82E0      		ldi r24,lo8(2)
+ 458 03e6 90E0      		ldi r25,0
+ 459 03e8 0E94 0000 		call ccInitChip
+ 460 03ec 8091 0000 		lds r24,tx_report
+ 461 03f0 8823      		tst r24
+ 462 03f2 01F0      		breq .L29
+ 463               	.L44:
+ 464 03f4 0E94 0000 		call ccRX
+ 465 03f8 00C0      		rjmp .L28
+ 466               	.L29:
+ 467 03fa 86E3      		ldi r24,lo8(54)
+ 468 03fc 0E94 0000 		call ccStrobe
+ 469               	.L28:
+ 470 0400 1092 0000 		sts somfy_rts_on,__zero_reg__
+ 471               	.L1:
+ 472               	/* epilogue start */
+ 473 0404 2196      		adiw r28,1
+ 474 0406 E0E1      		ldi r30, lo8(16)
+ 475 0408 0C94 0000 		jmp __epilogue_restores__ + ((18 - 16) * 2)
+ 477               	.global	somfy_rts_interval_half
+ 478               		.data
+ 481               	somfy_rts_interval_half:
+ 482 0000 6C02      		.word	620
+ 483               	.global	somfy_rts_interval
+ 486               	somfy_rts_interval:
+ 487 0002 D804      		.word	1240
+ 488               	.global	somfy_rts_repetition
+ 491               	somfy_rts_repetition:
+ 492 0004 06        		.byte	6
+ 493               	.global	somfy_restore_moritz
+ 494               		.section .bss
+ 497               	somfy_restore_moritz:
+ 498 0000 00        		.zero	1
+ 499               	.global	somfy_restore_asksin
+ 502               	somfy_restore_asksin:
+ 503 0001 00        		.zero	1
+ 504               	.global	CC1100_SOMFY_RTS_CFG
+ 505               		.section	.progmem.data,"a",@progbits
+ 508               	CC1100_SOMFY_RTS_CFG:
+ 509 0000 0D        		.byte	13
+ 510 0001 2E        		.byte	46
+ 511 0002 2D        		.byte	45
+ 512 0003 07        		.byte	7
+ 513 0004 D3        		.byte	-45
+ 514 0005 91        		.byte	-111
+ 515 0006 3D        		.byte	61
+ 516 0007 04        		.byte	4
+ 517 0008 32        		.byte	50
+ 518 0009 00        		.byte	0
+ 519 000a 00        		.byte	0
+ 520 000b 06        		.byte	6
+ 521 000c 00        		.byte	0
+ 522 000d 10        		.byte	16
+ 523 000e AB        		.byte	-85
+ 524 000f A5        		.byte	-91
+ 525 0010 55        		.byte	85
+ 526 0011 0A        		.byte	10
+ 527 0012 30        		.byte	48
+ 528 0013 23        		.byte	35
+ 529 0014 B9        		.byte	-71
+ 530 0015 00        		.byte	0
+ 531 0016 07        		.byte	7
+ 532 0017 00        		.byte	0
+ 533 0018 18        		.byte	24
+ 534 0019 14        		.byte	20
+ 535 001a 6C        		.byte	108
+ 536 001b 07        		.byte	7
+ 537 001c 00        		.byte	0
+ 538 001d 90        		.byte	-112
+ 539 001e 87        		.byte	-121
+ 540 001f 6B        		.byte	107
+ 541 0020 F8        		.byte	-8
+ 542 0021 56        		.byte	86
+ 543 0022 11        		.byte	17
+ 544 0023 E9        		.byte	-23
+ 545 0024 2A        		.byte	42
+ 546 0025 00        		.byte	0
+ 547 0026 1F        		.byte	31
+ 548 0027 41        		.byte	65
+ 549 0028 00        		.byte	0
+ 550               		.local	somfy_rts_on
+ 551               		.comm	somfy_rts_on,1,1
+ 552               		.ident	"GCC: (GNU) 5.4.0"
+ 553               	.global __do_copy_data
+ 554               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 somfy_rts.c
+     /tmp/cc61UGHC.s:2      *ABS*:0000003e __SP_H__
+     /tmp/cc61UGHC.s:3      *ABS*:0000003d __SP_L__
+     /tmp/cc61UGHC.s:4      *ABS*:0000003f __SREG__
+     /tmp/cc61UGHC.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/cc61UGHC.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/cc61UGHC.s:10     .text.somfy_rts_func:00000000 somfy_rts_func
+                             .bss:00000002 somfy_rts_on
+     /tmp/cc61UGHC.s:502    .bss:00000001 somfy_restore_asksin
+     /tmp/cc61UGHC.s:508    .progmem.data:00000000 CC1100_SOMFY_RTS_CFG
+     /tmp/cc61UGHC.s:491    .data:00000004 somfy_rts_repetition
+     /tmp/cc61UGHC.s:481    .data:00000000 somfy_rts_interval_half
+     /tmp/cc61UGHC.s:486    .data:00000002 somfy_rts_interval
+     /tmp/cc61UGHC.s:497    .bss:00000000 somfy_restore_moritz
+
+UNDEFINED SYMBOLS
+__prologue_saves__
+malloc
+fromhex
+asksin_on
+my_delay_us
+ccStrobe
+cc1100_sendbyte
+erb
+my_delay_ms
+cc_on
+ccTX
+tx_report
+rf_asksin_init
+ccRX
+set_txrestore
+display_char
+display_hex2
+display_nl
+free
+fromdec
+display_udec
+ccInitChip
+__epilogue_restores__
+__do_copy_data
+__do_clear_bss

@@ -1,0 +1,2213 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+                              ../../clib/display.o (__udivmodhi4)
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+                              CUL.o (__divmodsi4)
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+                              /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o) (__negsi2)
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o (exit)
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+                              CUL.o (__tablejump2__)
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+                              CUL.o (__do_copy_data)
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+                              CUL.o (__do_clear_bss)
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+                              CUL.o (__prologue_saves__)
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+                              CUL.o (__epilogue_restores__)
+/usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+                              /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o) (__udivmodsi4)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
+                              CUL.o (__fixunssfsi)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(floatsisf.o)
+                              CUL.o (__floatunsisf)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_split3.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o) (__fp_splitA)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_zero.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o) (__fp_zero)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
+                              CUL.o (__mulsf3)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o) (__mulsf3x)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_inf.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o) (__fp_inf)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_nan.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o) (__fp_nan)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscA.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o) (__fp_pscA)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscB.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o) (__fp_pscB)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_round.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o) (__fp_round)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                              ../../clib/somfy_rts.o (malloc)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(memset.o)
+                              ../../clib/memory.o (memset)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eerd_byte.o)
+                              ../../clib/fncollection.o (eeprom_read_byte)
+/usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eewr_byte.o)
+                              ../../clib/fncollection.o (eeprom_write_byte)
+
+Allocating common symbols
+Common symbol       size              file
+
+USB_IsInitialized   0x1               ../../lufa/Drivers/USB/HighLevel/USBTask.o
+zwave_sMsg          0xa8              ../../clib/rf_zwave.o
+cc_on               0x1               ../../clib/cc1100.o
+USB_CurrentlySelfPowered
+                    0x1               ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+clock_hsec          0x1               ../../clib/clock.o
+output_flush_func   0x2               CUL.o
+USB_RemoteWakeupEnabled
+                    0x1               ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+vcc                 0x2               CUL.o
+a1                  0x2               CUL.o
+fht_hc0             0x1               ../../clib/fht.o
+changeled           0x1               CUL.o
+temp                0x2               CUL.o
+USB_DeviceState     0x1               ../../lufa/Drivers/USB/HighLevel/USBTask.o
+a3                  0x2               CUL.o
+__brkval            0x2               /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+buffer_address      0x1               CUL.o
+zwave_sLen          0x1               ../../clib/rf_zwave.o
+led                 0x3               CUL.o
+credit_10ms         0x2               ../../clib/rf_send.o
+fastrf_on           0x1               ../../clib/fastrf.o
+fanspin             0x2               CUL.o
+packetCheckValues   0x1               ../../clib/rf_receive.o
+rpm                 0x2               CUL.o
+a7                  0x2               CUL.o
+a7avg               0x2               CUL.o
+a7max               0x2               CUL.o
+a5                  0x2               CUL.o
+a7min               0x2               CUL.o
+a2                  0x2               CUL.o
+commandbyte         0x1               CUL.o
+TTY_Tx_Buffer       0x83              ../../clib/ttydata.o
+USB_ControlRequest  0x8               ../../lufa/Drivers/USB/HighLevel/USBTask.o
+USB_ConfigurationNumber
+                    0x1               ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+zwave_drate         0x1               ../../clib/rf_zwave.o
+count               0x1               CUL.o
+input_handle_func   0x2               CUL.o
+zwave_sStamp        0x4               ../../clib/rf_zwave.o
+ticks               0x4               ../../clib/clock.o
+tx_report           0x1               ../../clib/rf_receive.o
+fht_hc1             0x1               ../../clib/fht.o
+isrtimer            0x2               ../../clib/clock.o
+__flp               0x2               /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+zwave_hcid          0x5               ../../clib/rf_zwave.o
+a0                  0x2               CUL.o
+TTY_Rx_Buffer       0x83              ../../clib/ttydata.o
+a4                  0x2               CUL.o
+
+Discarded input sections
+
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+ .text          0x00000000        0x0 CUL.o
+ .text.ws2812_setleds_rgbw
+                0x00000000       0x1c CUL.o
+ .text.ws2812_sendarray
+                0x00000000        0x8 CUL.o
+ .text          0x00000000        0x0 ../../clib/Descriptors.o
+ .data          0x00000000        0x0 ../../clib/Descriptors.o
+ .bss           0x00000000        0x0 ../../clib/Descriptors.o
+ .text          0x00000000        0x0 ../../clib/cc1100.o
+ .data          0x00000000        0x0 ../../clib/cc1100.o
+ .bss           0x00000000        0x0 ../../clib/cc1100.o
+ .text          0x00000000        0x0 ../../clib/cc1101_pllcheck.o
+ .data          0x00000000        0x0 ../../clib/cc1101_pllcheck.o
+ .bss           0x00000000        0x0 ../../clib/cc1101_pllcheck.o
+ .comment       0x00000000       0x12 ../../clib/cc1101_pllcheck.o
+ .text          0x00000000        0x0 ../../clib/cdcLUFA.o
+ .text.cdc_flush
+                0x00000000       0x1c ../../clib/cdcLUFA.o
+ .text          0x00000000        0x0 ../../clib/clock.o
+ .data          0x00000000        0x0 ../../clib/clock.o
+ .text          0x00000000        0x0 ../../clib/belfox.o
+ .data          0x00000000        0x0 ../../clib/belfox.o
+ .bss           0x00000000        0x0 ../../clib/belfox.o
+ .comment       0x00000000       0x12 ../../clib/belfox.o
+ .text          0x00000000        0x0 ../../clib/delay.o
+ .data          0x00000000        0x0 ../../clib/delay.o
+ .bss           0x00000000        0x0 ../../clib/delay.o
+ .text          0x00000000        0x0 ../../clib/display.o
+ .data          0x00000000        0x0 ../../clib/display.o
+ .text          0x00000000        0x0 ../../clib/stringfunc.o
+ .data          0x00000000        0x0 ../../clib/stringfunc.o
+ .bss           0x00000000        0x0 ../../clib/stringfunc.o
+ .text.fromip   0x00000000       0x54 ../../clib/stringfunc.o
+ .text.tohex    0x00000000       0x26 ../../clib/stringfunc.o
+ .text          0x00000000        0x0 ../../clib/fncollection.o
+ .data          0x00000000        0x1 ../../clib/fncollection.o
+ .bss           0x00000000        0x0 ../../clib/fncollection.o
+ .text.ledfunc  0x00000000       0x1a ../../clib/fncollection.o
+ .text.dumpmem  0x00000000       0x9a ../../clib/fncollection.o
+ .text          0x00000000        0x0 ../../clib/ringbuffer.o
+ .data          0x00000000        0x0 ../../clib/ringbuffer.o
+ .bss           0x00000000        0x0 ../../clib/ringbuffer.o
+ .text.rb_reset
+                0x00000000        0xa ../../clib/ringbuffer.o
+ .text          0x00000000        0x0 ../../clib/rf_send.o
+ .data          0x00000000        0x0 ../../clib/rf_send.o
+ .text          0x00000000        0x0 ../../clib/rf_receive.o
+ .data          0x00000000        0x0 ../../clib/rf_receive.o
+ .text.makeavg  0x00000000       0x1a ../../clib/rf_receive.o
+ .text.check_rf_sync
+                0x00000000       0x20 ../../clib/rf_receive.o
+ .text.rf_isreceiving
+                0x00000000       0x1c ../../clib/rf_receive.o
+ .text          0x00000000        0x0 ../../clib/rf_router.o
+ .data          0x00000000        0x0 ../../clib/rf_router.o
+ .bss           0x00000000        0x0 ../../clib/rf_router.o
+ .comment       0x00000000       0x12 ../../clib/rf_router.o
+ .text          0x00000000        0x0 ../../clib/rf_asksin.o
+ .data          0x00000000        0x0 ../../clib/rf_asksin.o
+ .text          0x00000000        0x0 ../../clib/rf_evohome.o
+ .data          0x00000000        0x0 ../../clib/rf_evohome.o
+ .bss           0x00000000        0x0 ../../clib/rf_evohome.o
+ .comment       0x00000000       0x12 ../../clib/rf_evohome.o
+ .text          0x00000000        0x0 ../../clib/rf_moritz.o
+ .data          0x00000000        0x0 ../../clib/rf_moritz.o
+ .bss           0x00000000        0x0 ../../clib/rf_moritz.o
+ .comment       0x00000000       0x12 ../../clib/rf_moritz.o
+ .text          0x00000000        0x0 ../../clib/rf_rwe.o
+ .data          0x00000000        0x0 ../../clib/rf_rwe.o
+ .bss           0x00000000        0x0 ../../clib/rf_rwe.o
+ .comment       0x00000000       0x12 ../../clib/rf_rwe.o
+ .text          0x00000000        0x0 ../../clib/rf_native.o
+ .data          0x00000000        0x0 ../../clib/rf_native.o
+ .bss           0x00000000        0x0 ../../clib/rf_native.o
+ .comment       0x00000000       0x12 ../../clib/rf_native.o
+ .text          0x00000000        0x0 ../../clib/rf_zwave.o
+ .data          0x00000000        0x0 ../../clib/rf_zwave.o
+ .text          0x00000000        0x0 ../../clib/intertechno.o
+ .text          0x00000000        0x0 ../../clib/somfy_rts.o
+ .text          0x00000000        0x0 ../../clib/kopp-fc.o
+ .data          0x00000000        0x0 ../../clib/kopp-fc.o
+ .bss           0x00000000        0x0 ../../clib/kopp-fc.o
+ .comment       0x00000000       0x12 ../../clib/kopp-fc.o
+ .text          0x00000000        0x0 ../../clib/fht.o
+ .data          0x00000000        0x0 ../../clib/fht.o
+ .bss           0x00000000        0x0 ../../clib/fht.o
+ .text.fht_display_buf
+                0x00000000       0x46 ../../clib/fht.o
+ .text          0x00000000        0x0 ../../clib/fastrf.o
+ .data          0x00000000        0x0 ../../clib/fastrf.o
+ .text          0x00000000        0x0 ../../clib/ttydata.o
+ .data          0x00000000        0x0 ../../clib/ttydata.o
+ .text          0x00000000        0x0 ../../clib/spi.o
+ .data          0x00000000        0x0 ../../clib/spi.o
+ .bss           0x00000000        0x0 ../../clib/spi.o
+ .text.spi_send
+                0x00000000        0xc ../../clib/spi.o
+ .text          0x00000000        0x0 ../../clib/memory.o
+ .data          0x00000000        0x0 ../../clib/memory.o
+ .bss           0x00000000        0x0 ../../clib/memory.o
+ .text.freeMem  0x00000000       0x44 ../../clib/memory.o
+ .text.getfreemem
+                0x00000000       0x66 ../../clib/memory.o
+ .text.testmem  0x00000000       0xb0 ../../clib/memory.o
+ .progmem.data  0x00000000       0x37 ../../clib/memory.o
+ .comment       0x00000000       0x12 ../../clib/memory.o
+ .text          0x00000000        0x0 ../../clib/lacrosse.o
+ .data          0x00000000        0x0 ../../clib/lacrosse.o
+ .bss           0x00000000        0x0 ../../clib/lacrosse.o
+ .comment       0x00000000       0x12 ../../clib/lacrosse.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_BytesToEPSizeMaskDynamic
+                0x00000000       0x1c ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Discard_Stream
+                0x00000000       0x3e ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_Stream_LE
+                0x00000000       0x50 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_PStream_LE
+                0x00000000       0x56 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_EStream_LE
+                0x00000000       0x5c ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_Stream_BE
+                0x00000000       0x60 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_EStream_BE
+                0x00000000       0x70 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_PStream_BE
+                0x00000000       0x66 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Read_Stream_LE
+                0x00000000       0x50 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Read_EStream_LE
+                0x00000000       0x5c ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Read_Stream_BE
+                0x00000000       0x60 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Read_EStream_BE
+                0x00000000       0x70 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_Control_EStream_LE
+                0x00000000       0xb4 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_Control_Stream_BE
+                0x00000000       0xa6 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_Control_PStream_BE
+                0x00000000       0xb0 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Write_Control_EStream_BE
+                0x00000000       0xd4 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Read_Control_EStream_LE
+                0x00000000       0x80 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Read_Control_Stream_BE
+                0x00000000       0x74 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text.Endpoint_Read_Control_EStream_BE
+                0x00000000       0x86 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/Host.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/Host.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/Host.o
+ .comment       0x00000000       0x12 ../../lufa/Drivers/USB/LowLevel/Host.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/HostChapter9.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/HostChapter9.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/HostChapter9.o
+ .comment       0x00000000       0x12 ../../lufa/Drivers/USB/LowLevel/HostChapter9.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/Pipe.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/Pipe.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/LowLevel/Pipe.o
+ .comment       0x00000000       0x12 ../../lufa/Drivers/USB/LowLevel/Pipe.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/Events.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/Events.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/Events.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/USBTask.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/USBTask.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/USBTask.o
+ .text          0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+ .data          0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+ .bss           0x00000000        0x0 ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+ .text.USB_GetNextDescriptorOfType
+                0x00000000       0x3a ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+ .text.USB_GetNextDescriptorOfTypeBefore
+                0x00000000       0x4c ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+ .text.USB_GetNextDescriptorOfTypeAfter
+                0x00000000       0x32 ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+ .text.USB_GetNextDescriptorComp
+                0x00000000       0x66 ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+ .comment       0x00000000       0x12 ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+ .text          0x00000000        0x0 ../../clib/rf_mbus.o
+ .data          0x00000000        0x0 ../../clib/rf_mbus.o
+ .bss           0x00000000        0x0 ../../clib/rf_mbus.o
+ .comment       0x00000000       0x12 ../../clib/rf_mbus.o
+ .text          0x00000000        0x0 ../../clib/mbus/manchester.o
+ .data          0x00000000        0x0 ../../clib/mbus/manchester.o
+ .bss           0x00000000        0x0 ../../clib/mbus/manchester.o
+ .text.manchEncode
+                0x00000000       0x26 ../../clib/mbus/manchester.o
+ .text.manchDecode
+                0x00000000       0x8a ../../clib/mbus/manchester.o
+ .rodata        0x00000000       0x20 ../../clib/mbus/manchester.o
+ .comment       0x00000000       0x12 ../../clib/mbus/manchester.o
+ .text          0x00000000        0x0 ../../clib/mbus/3outof6.o
+ .data          0x00000000        0x0 ../../clib/mbus/3outof6.o
+ .bss           0x00000000        0x0 ../../clib/mbus/3outof6.o
+ .text.encode3outof6
+                0x00000000       0x88 ../../clib/mbus/3outof6.o
+ .text.decode3outof6
+                0x00000000       0xb2 ../../clib/mbus/3outof6.o
+ .rodata        0x00000000       0x50 ../../clib/mbus/3outof6.o
+ .comment       0x00000000       0x12 ../../clib/mbus/3outof6.o
+ .text          0x00000000        0x0 ../../clib/mbus/mbus_packet.o
+ .data          0x00000000        0x0 ../../clib/mbus/mbus_packet.o
+ .bss           0x00000000        0x0 ../../clib/mbus/mbus_packet.o
+ .text.packetSize
+                0x00000000       0x2c ../../clib/mbus/mbus_packet.o
+ .text.byteSize
+                0x00000000       0x28 ../../clib/mbus/mbus_packet.o
+ .text.encodeTXPacket
+                0x00000000      0x18c ../../clib/mbus/mbus_packet.o
+ .text.encodeTXBytesSmode
+                0x00000000       0x52 ../../clib/mbus/mbus_packet.o
+ .text.encodeTXBytesTmode
+                0x00000000       0x68 ../../clib/mbus/mbus_packet.o
+ .text.decodeRXBytesSmode
+                0x00000000       0xfc ../../clib/mbus/mbus_packet.o
+ .text.decodeRXBytesTmode
+                0x00000000      0x124 ../../clib/mbus/mbus_packet.o
+ .comment       0x00000000       0x12 ../../clib/mbus/mbus_packet.o
+ .text          0x00000000        0x0 ../../clib/mbus/crc.o
+ .data          0x00000000        0x0 ../../clib/mbus/crc.o
+ .bss           0x00000000        0x0 ../../clib/mbus/crc.o
+ .text.crcCalc  0x00000000       0x2c ../../clib/mbus/crc.o
+ .comment       0x00000000       0x12 ../../clib/mbus/crc.o
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.div
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.div
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.div
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.div
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+ .text.libgcc.div
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+ .text.libgcc.div
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.mul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(floatsisf.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(floatsisf.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(floatsisf.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_split3.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_split3.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_split3.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_zero.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_zero.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_zero.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_inf.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_inf.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_inf.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_nan.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_nan.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_nan.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscA.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscA.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscA.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscB.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscB.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscB.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_round.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_round.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_round.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(memset.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(memset.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(memset.o)
+ .text.avr-libc
+                0x00000000        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(memset.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eerd_byte.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eerd_byte.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eerd_byte.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eewr_byte.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eewr_byte.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eewr_byte.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000003         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+user_signatures  0x00850000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+LOAD CUL.o
+LOAD ../../clib/Descriptors.o
+LOAD ../../clib/cc1100.o
+LOAD ../../clib/cc1101_pllcheck.o
+LOAD ../../clib/cdcLUFA.o
+LOAD ../../clib/clock.o
+LOAD ../../clib/belfox.o
+LOAD ../../clib/delay.o
+LOAD ../../clib/display.o
+LOAD ../../clib/stringfunc.o
+LOAD ../../clib/fncollection.o
+LOAD ../../clib/ringbuffer.o
+LOAD ../../clib/rf_send.o
+LOAD ../../clib/rf_receive.o
+LOAD ../../clib/rf_router.o
+LOAD ../../clib/rf_asksin.o
+LOAD ../../clib/rf_evohome.o
+LOAD ../../clib/rf_moritz.o
+LOAD ../../clib/rf_rwe.o
+LOAD ../../clib/rf_native.o
+LOAD ../../clib/rf_zwave.o
+LOAD ../../clib/intertechno.o
+LOAD ../../clib/somfy_rts.o
+LOAD ../../clib/kopp-fc.o
+LOAD ../../clib/fht.o
+LOAD ../../clib/fastrf.o
+LOAD ../../clib/ttydata.o
+LOAD ../../clib/spi.o
+LOAD ../../clib/memory.o
+LOAD ../../clib/lacrosse.o
+LOAD ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+LOAD ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+LOAD ../../lufa/Drivers/USB/LowLevel/Host.o
+LOAD ../../lufa/Drivers/USB/LowLevel/HostChapter9.o
+LOAD ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+LOAD ../../lufa/Drivers/USB/LowLevel/Pipe.o
+LOAD ../../lufa/Drivers/USB/HighLevel/Events.o
+LOAD ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+LOAD ../../lufa/Drivers/USB/HighLevel/USBTask.o
+LOAD ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+LOAD ../../clib/rf_mbus.o
+LOAD ../../clib/mbus/manchester.o
+LOAD ../../clib/mbus/3outof6.o
+LOAD ../../clib/mbus/mbus_packet.o
+LOAD ../../clib/mbus/crc.o
+START GROUP
+LOAD /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a
+LOAD /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a
+LOAD /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a
+LOAD /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a
+END GROUP
+                0x00020000                __TEXT_REGION_LENGTH__ = DEFINED (__TEXT_REGION_LENGTH__)?__TEXT_REGION_LENGTH__:0x20000
+                0x0000ffa0                __DATA_REGION_LENGTH__ = DEFINED (__DATA_REGION_LENGTH__)?__DATA_REGION_LENGTH__:0xffa0
+                0x00010000                __EEPROM_REGION_LENGTH__ = DEFINED (__EEPROM_REGION_LENGTH__)?__EEPROM_REGION_LENGTH__:0x10000
+                [0x00000003]                __FUSE_REGION_LENGTH__ = DEFINED (__FUSE_REGION_LENGTH__)?__FUSE_REGION_LENGTH__:0x400
+                0x00000400                __LOCK_REGION_LENGTH__ = DEFINED (__LOCK_REGION_LENGTH__)?__LOCK_REGION_LENGTH__:0x400
+                0x00000400                __SIGNATURE_REGION_LENGTH__ = DEFINED (__SIGNATURE_REGION_LENGTH__)?__SIGNATURE_REGION_LENGTH__:0x400
+                0x00000400                __USER_SIGNATURE_REGION_LENGTH__ = DEFINED (__USER_SIGNATURE_REGION_LENGTH__)?__USER_SIGNATURE_REGION_LENGTH__:0x400
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000     0x4d6a
+ *(.vectors)
+ .vectors       0x00000000       0xac /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ .progmem.gcc_sw_table.main
+                0x000000ac       0x16 CUL.o
+ .progmem.gcc_sw_table.USB_Device_ProcessControlRequest
+                0x000000c2       0x14 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                0x000000d6                . = ALIGN (0x2)
+                0x000000d6                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x000000d6        0x0 linker stubs
+ *(.trampolines*)
+                0x000000d6                __trampolines_end = .
+ *libprintf_flt.a:*(.progmem.data)
+ *libc.a:*(.progmem.data)
+ *(.progmem*)
+ .progmem.data  0x000000d6       0x3f CUL.o
+                0x000000d6                fntab
+ .progmem.data  0x00000115       0x81 ../../clib/Descriptors.o
+                0x00000115                ProductString
+                0x00000125                ManufacturerString
+                0x0000013d                LanguageString
+                0x00000141                ConfigurationDescriptor
+                0x00000184                DeviceDescriptor
+ .progmem.data  0x00000196       0xaa ../../clib/cc1100.o
+                0x0000019e                FASTRF_CFG
+                0x000001c7                CC1100_CFG
+                0x000001f0                CC1100_PA
+ .progmem.data  0x00000240       0x1d ../../clib/fncollection.o
+ .progmem.data  0x0000025d        0x7 ../../clib/rf_send.o
+ .progmem.data  0x00000264        0x7 ../../clib/rf_receive.o
+ .progmem.data  0x0000026b       0x52 ../../clib/rf_asksin.o
+                0x00000275                ASKSIN_UPDATE_CFG
+                0x0000028b                ASKSIN_CFG
+ .progmem.data  0x000002bd       0x96 ../../clib/rf_zwave.o
+                0x000002bd                ZWAVE_CFG_100k
+                0x000002ef                ZWAVE_CFG_40k
+                0x00000321                ZWAVE_CFG_9600
+ .progmem.data  0x00000353       0x29 ../../clib/intertechno.o
+                0x00000353                CC1100_ITCFG
+ .progmem.data  0x0000037c       0x29 ../../clib/somfy_rts.o
+                0x0000037c                CC1100_SOMFY_RTS_CFG
+ .progmem.data  0x000003a5       0x1c ../../clib/ttydata.o
+                0x000003c2                . = ALIGN (0x2)
+ *fill*         0x000003c1        0x1 
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x000003c2                __ctors_start = .
+ *(.ctors)
+                0x000003c2                __ctors_end = .
+                0x000003c2                __dtors_start = .
+ *(.dtors)
+                0x000003c2                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x000003c2        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+                0x000003c2                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x000003c2        0xc /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x000003ce       0x16 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+                0x000003ce                __do_copy_data
+ .init4         0x000003e4       0x10 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+                0x000003e4                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x000003f4        0x6 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+ *(.init9)
+ *(.text)
+ .text          0x000003fa        0x2 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+                0x000003fa                __vector_38
+                0x000003fa                __vector_22
+                0x000003fa                __vector_28
+                0x000003fa                __vector_1
+                0x000003fa                __vector_32
+                0x000003fa                __vector_34
+                0x000003fa                __vector_24
+                0x000003fa                __vector_12
+                0x000003fa                __bad_interrupt
+                0x000003fa                __vector_6
+                0x000003fa                __vector_31
+                0x000003fa                __vector_35
+                0x000003fa                __vector_39
+                0x000003fa                __vector_3
+                0x000003fa                __vector_30
+                0x000003fa                __vector_25
+                0x000003fa                __vector_11
+                0x000003fa                __vector_13
+                0x000003fa                __vector_19
+                0x000003fa                __vector_41
+                0x000003fa                __vector_27
+                0x000003fa                __vector_5
+                0x000003fa                __vector_33
+                0x000003fa                __vector_37
+                0x000003fa                __vector_4
+                0x000003fa                __vector_2
+                0x000003fa                __vector_21
+                0x000003fa                __vector_15
+                0x000003fa                __vector_29
+                0x000003fa                __vector_40
+                0x000003fa                __vector_8
+                0x000003fa                __vector_26
+                0x000003fa                __vector_14
+                0x000003fa                __vector_16
+                0x000003fa                __vector_18
+                0x000003fa                __vector_20
+                0x000003fa                __vector_42
+                0x000003fc                . = ALIGN (0x2)
+ *(.text.*)
+ .text.ws2812_sendarray_mask
+                0x000003fc       0x56 CUL.o
+                0x000003fc                ws2812_sendarray_mask
+ .text.ws2812_setleds_pin
+                0x00000452       0x1a CUL.o
+                0x00000452                ws2812_setleds_pin
+ .text.ws2812_setleds
+                0x0000046c        0x4 CUL.o
+                0x0000046c                ws2812_setleds
+ .text.writebl  0x00000470       0x7a CUL.o
+                0x00000470                writebl
+ .text.initbl   0x000004ea       0x36 CUL.o
+                0x000004ea                initbl
+ .text.write    0x00000520       0x54 CUL.o
+                0x00000520                write
+ .text.setup_lcd
+                0x00000574       0x4c CUL.o
+                0x00000574                setup_lcd
+ .text.readAna  0x000005c0       0x6e CUL.o
+                0x000005c0                readAna
+ .text.readVcc  0x0000062e       0x6e CUL.o
+                0x0000062e                readVcc
+ .text.GetTemp  0x0000069c       0x5e CUL.o
+                0x0000069c                GetTemp
+ .text.freeRam  0x000006fa       0x2e CUL.o
+                0x000006fa                freeRam
+ .text.I2C_init
+                0x00000728       0x1a CUL.o
+                0x00000728                I2C_init
+ .text.__vector_9
+                0x00000742       0x32 CUL.o
+                0x00000742                __vector_9
+ .text.__vector_36
+                0x00000774      0x460 CUL.o
+                0x00000774                __vector_36
+ .text.start_bootloader
+                0x00000bd4       0x12 CUL.o
+                0x00000bd4                start_bootloader
+ .text.startup.main
+                0x00000be6      0x2c2 CUL.o
+                0x00000be6                main
+ .text.CALLBACK_USB_GetDescriptor
+                0x00000ea8       0x60 ../../clib/Descriptors.o
+                0x00000ea8                CALLBACK_USB_GetDescriptor
+ .text.cc1100_sendbyte
+                0x00000f08        0xc ../../clib/cc1100.o
+                0x00000f08                cc1100_sendbyte
+ .text.cc_set_pa
+                0x00000f14       0x5e ../../clib/cc1100.o
+                0x00000f14                cc_set_pa
+ .text.cc_factory_reset
+                0x00000f72       0x40 ../../clib/cc1100.o
+                0x00000f72                cc_factory_reset
+ .text.cc1100_readReg
+                0x00000fb2        0xe ../../clib/cc1100.o
+                0x00000fb2                cc1100_readReg
+ .text.cc1100_writeReg
+                0x00000fc0       0x14 ../../clib/cc1100.o
+                0x00000fc0                cc1100_writeReg
+ .text.ccStrobe
+                0x00000fd4        0x8 ../../clib/cc1100.o
+                0x00000fd4                ccStrobe
+ .text.ccInitChip
+                0x00000fdc       0x84 ../../clib/cc1100.o
+                0x00000fdc                ccInitChip
+ .text.ccsetpa  0x00001060       0x2e ../../clib/cc1100.o
+                0x00001060                ccsetpa
+ .text.ccTX     0x0000108e       0x24 ../../clib/cc1100.o
+                0x0000108e                ccTX
+ .text.ccRX     0x000010b2       0x20 ../../clib/cc1100.o
+                0x000010b2                ccRX
+ .text.ccreg    0x000010d2       0xb2 ../../clib/cc1100.o
+                0x000010d2                ccreg
+ .text.set_ccoff
+                0x00001184        0xe ../../clib/cc1100.o
+                0x00001184                set_ccoff
+ .text.set_ccon
+                0x00001192       0x12 ../../clib/cc1100.o
+                0x00001192                set_ccon
+ .text.CDC_Task
+                0x000011a4       0xde ../../clib/cdcLUFA.o
+                0x000011a4                CDC_Task
+ .text.EVENT_USB_Device_ConfigurationChanged
+                0x00001282       0x30 ../../clib/cdcLUFA.o
+                0x00001282                EVENT_USB_Device_ConfigurationChanged
+ .text.EVENT_USB_Device_UnhandledControlRequest
+                0x000012b2       0x7c ../../clib/cdcLUFA.o
+                0x000012b2                EVENT_USB_Device_UnhandledControlRequest
+ .text.__vector_23
+                0x0000132e       0x7a ../../clib/clock.o
+                0x0000132e                __vector_23
+ .text.get_timestamp
+                0x000013a8       0x22 ../../clib/clock.o
+                0x000013a8                get_timestamp
+ .text.gettime  0x000013ca       0x2c ../../clib/clock.o
+                0x000013ca                gettime
+ .text.Minute_Task
+                0x000013f6       0x6a ../../clib/clock.o
+                0x000013f6                Minute_Task
+ .text.my_delay_us
+                0x00001460        0xa ../../clib/delay.o
+                0x00001460                my_delay_us
+ .text.my_delay_ms
+                0x0000146a       0x12 ../../clib/delay.o
+                0x0000146a                my_delay_ms
+ .text.display_char
+                0x0000147c       0x2e ../../clib/display.o
+                0x0000147c                display_char
+ .text.display_string
+                0x000014aa       0x16 ../../clib/display.o
+                0x000014aa                display_string
+ .text.display_string_P
+                0x000014c0       0x1a ../../clib/display.o
+                0x000014c0                display_string_P
+ .text.display_nl
+                0x000014da        0x8 ../../clib/display.o
+                0x000014da                display_nl
+ .text.display_udec
+                0x000014e2       0x6e ../../clib/display.o
+                0x000014e2                display_udec
+ .text.display_hex
+                0x00001550       0x78 ../../clib/display.o
+                0x00001550                display_hex
+ .text.display_hex2
+                0x000015c8        0x8 ../../clib/display.o
+                0x000015c8                display_hex2
+ .text.fromhex  0x000015d0       0x60 ../../clib/stringfunc.o
+                0x000015d0                fromhex
+ .text.fromdec  0x00001630       0x34 ../../clib/stringfunc.o
+                0x00001630                fromdec
+ .text.ewb      0x00001664        0xa ../../clib/fncollection.o
+                0x00001664                ewb
+ .text.erb      0x0000166e        0x6 ../../clib/fncollection.o
+                0x0000166e                erb
+ .text.display_ee_bytes
+                0x00001674       0x2e ../../clib/fncollection.o
+ .text.read_eeprom
+                0x000016a2       0x84 ../../clib/fncollection.o
+                0x000016a2                read_eeprom
+ .text.write_eeprom
+                0x00001726       0x82 ../../clib/fncollection.o
+                0x00001726                write_eeprom
+ .text.prepare_boot
+                0x000017a8       0x52 ../../clib/fncollection.o
+                0x000017a8                prepare_boot
+ .text.eeprom_factory_reset
+                0x000017fa       0x4a ../../clib/fncollection.o
+                0x000017fa                eeprom_factory_reset
+ .text.eeprom_init
+                0x00001844       0x1c ../../clib/fncollection.o
+                0x00001844                eeprom_init
+ .text.version  0x00001860       0x16 ../../clib/fncollection.o
+                0x00001860                version
+ .text.rb_put   0x00001876       0x2c ../../clib/ringbuffer.o
+                0x00001876                rb_put
+ .text.rb_get   0x000018a2       0x34 ../../clib/ringbuffer.o
+                0x000018a2                rb_get
+ .text.abit     0x000018d6       0x46 ../../clib/rf_send.o
+ .text.send_bit
+                0x0000191c       0x3c ../../clib/rf_send.o
+ .text.sendraw  0x00001958      0x160 ../../clib/rf_send.o
+ .text.addParityAndSendData
+                0x00001ab8       0xda ../../clib/rf_send.o
+                0x00001ab8                addParityAndSendData
+ .text.addParityAndSend
+                0x00001b92       0x30 ../../clib/rf_send.o
+                0x00001b92                addParityAndSend
+ .text.fs20send
+                0x00001bc2        0x6 ../../clib/rf_send.o
+                0x00001bc2                fs20send
+ .text.rawsend  0x00001bc8       0x7c ../../clib/rf_send.o
+                0x00001bc8                rawsend
+ .text.em_send  0x00001c44       0xd6 ../../clib/rf_send.o
+                0x00001c44                em_send
+ .text.ks_send  0x00001d1a      0x102 ../../clib/rf_send.o
+                0x00001d1a                ks_send
+ .text.hm_send  0x00001e1c       0x76 ../../clib/rf_send.o
+                0x00001e1c                hm_send
+ .text.analyze  0x00001e92      0x188 ../../clib/rf_receive.o
+ .text.reset_input
+                0x0000201a       0x18 ../../clib/rf_receive.o
+ .text.addbit   0x00002032       0x4c ../../clib/rf_receive.o
+ .text.wave_equals.isra.0
+                0x0000207e       0x58 ../../clib/rf_receive.o
+ .text.tx_init  0x000020d6       0x2c ../../clib/rf_receive.o
+                0x000020d6                tx_init
+ .text.set_txrestore
+                0x00002102       0x10 ../../clib/rf_receive.o
+                0x00002102                set_txrestore
+ .text.set_txreport
+                0x00002112       0x2a ../../clib/rf_receive.o
+                0x00002112                set_txreport
+ .text.cksum1   0x0000213c       0x14 ../../clib/rf_receive.o
+                0x0000213c                cksum1
+ .text.cksum2   0x00002150       0x18 ../../clib/rf_receive.o
+                0x00002150                cksum2
+ .text.cksum3   0x00002168       0x44 ../../clib/rf_receive.o
+                0x00002168                cksum3
+ .text.getbit   0x000021ac       0x36 ../../clib/rf_receive.o
+                0x000021ac                getbit
+ .text.getbits  0x000021e2       0x6a ../../clib/rf_receive.o
+                0x000021e2                getbits
+ .text.analyze_hms
+                0x0000224c       0xe8 ../../clib/rf_receive.o
+                0x0000224c                analyze_hms
+ .text.checkForRepeatedPackage
+                0x00002334       0x10 ../../clib/rf_receive.o
+                0x00002334                checkForRepeatedPackage
+ .text.RfAnalyze_Task
+                0x00002344      0x498 ../../clib/rf_receive.o
+                0x00002344                RfAnalyze_Task
+ .text.__vector_17
+                0x000027dc       0xa6 ../../clib/rf_receive.o
+                0x000027dc                __vector_17
+ .text.__vector_7
+                0x00002882      0x242 ../../clib/rf_receive.o
+                0x00002882                __vector_7
+ .text.rf_asksin_init
+                0x00002ac4       0xa4 ../../clib/rf_asksin.o
+                0x00002ac4                rf_asksin_init
+ .text.rf_asksin_task
+                0x00002b68      0x144 ../../clib/rf_asksin.o
+                0x00002b68                rf_asksin_task
+ .text.asksin_send
+                0x00002cac      0x17e ../../clib/rf_asksin.o
+                0x00002cac                asksin_send
+ .text.asksin_func
+                0x00002e2a       0x32 ../../clib/rf_asksin.o
+                0x00002e2a                asksin_func
+ .text.zccRX    0x00002e5c        0x8 ../../clib/rf_zwave.o
+                0x00002e5c                zccRX
+ .text.rf_zwave_init
+                0x00002e64       0xb8 ../../clib/rf_zwave.o
+                0x00002e64                rf_zwave_init
+ .text.zwave_forMe
+                0x00002f1c       0x42 ../../clib/rf_zwave.o
+                0x00002f1c                zwave_forMe
+ .text.zwave_ckSum_8bit
+                0x00002f5e       0x18 ../../clib/rf_zwave.o
+                0x00002f5e                zwave_ckSum_8bit
+ .text.zwave_ckSum_16bit
+                0x00002f76       0x5a ../../clib/rf_zwave.o
+                0x00002f76                zwave_ckSum_16bit
+ .text.zwave_doSend
+                0x00002fd0      0x190 ../../clib/rf_zwave.o
+                0x00002fd0                zwave_doSend
+ .text.rf_zwave_task
+                0x00003160      0x25c ../../clib/rf_zwave.o
+                0x00003160                rf_zwave_task
+ .text.zwave_func
+                0x000033bc       0xa6 ../../clib/rf_zwave.o
+                0x000033bc                zwave_func
+ .text.it_tunein
+                0x00003462       0xbc ../../clib/intertechno.o
+ .text.it_func  0x0000351e      0x408 ../../clib/intertechno.o
+                0x0000351e                it_func
+ .text.somfy_rts_func
+                0x00003926      0x404 ../../clib/somfy_rts.o
+                0x00003926                somfy_rts_func
+ .text.fht_init
+                0x00003d2a       0x1a ../../clib/fht.o
+                0x00003d2a                fht_init
+ .text.fhtsend  0x00003d44       0x58 ../../clib/fht.o
+                0x00003d44                fhtsend
+ .text.fastrf_func
+                0x00003d9c       0x88 ../../clib/fastrf.o
+                0x00003d9c                fastrf_func
+ .text.FastRF_Task
+                0x00003e24       0xc4 ../../clib/fastrf.o
+                0x00003e24                FastRF_Task
+ .text.callfn   0x00003ee8       0x62 ../../clib/ttydata.o
+                0x00003ee8                callfn
+ .text.analyze_ttydata
+                0x00003f4a       0x96 ../../clib/ttydata.o
+                0x00003f4a                analyze_ttydata
+ .text.spi_init
+                0x00003fe0       0x22 ../../clib/spi.o
+                0x00003fe0                spi_init
+ .text.USB_Device_ProcessControlRequest
+                0x00004002      0x280 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                0x00004002                USB_Device_ProcessControlRequest
+ .text.Endpoint_ConfigureEndpoint_Prv
+                0x00004282       0x26 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x00004282                Endpoint_ConfigureEndpoint_Prv
+ .text.Endpoint_ClearEndpoints
+                0x000042a8       0x2e ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x000042a8                Endpoint_ClearEndpoints
+ .text.Endpoint_ClearStatusStage
+                0x000042d6       0x48 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x000042d6                Endpoint_ClearStatusStage
+ .text.Endpoint_WaitUntilReady
+                0x0000431e       0x56 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x0000431e                Endpoint_WaitUntilReady
+ .text.Endpoint_Write_Control_Stream_LE
+                0x00004374       0xa4 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x00004374                Endpoint_Write_Control_Stream_LE
+ .text.Endpoint_Write_Control_PStream_LE
+                0x00004418       0xa6 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x00004418                Endpoint_Write_Control_PStream_LE
+ .text.Endpoint_Read_Control_Stream_LE
+                0x000044be       0x70 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x000044be                Endpoint_Read_Control_Stream_LE
+ .text.USB_ResetInterface
+                0x0000452e       0x96 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+                0x0000452e                USB_ResetInterface
+ .text.USB_Init
+                0x000045c4       0x16 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+                0x000045c4                USB_Init
+ .text.USB_ShutDown
+                0x000045da       0x24 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+                0x000045da                USB_ShutDown
+ .text.USB_Event_Stub
+                0x000045fe        0x2 ../../lufa/Drivers/USB/HighLevel/Events.o
+                0x000045fe                EVENT_USB_Device_Connect
+                0x000045fe                EVENT_USB_Device_WakeUp
+                0x000045fe                USB_Event_Stub
+                0x000045fe                EVENT_USB_Device_Suspend
+                0x000045fe                EVENT_USB_Device_Disconnect
+                0x000045fe                EVENT_USB_Device_Reset
+ .text.USB_INT_DisableAllInterrupts
+                0x00004600       0x10 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                0x00004600                USB_INT_DisableAllInterrupts
+ .text.USB_INT_ClearAllInterrupts
+                0x00004610        0xa ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                0x00004610                USB_INT_ClearAllInterrupts
+ .text.__vector_10
+                0x0000461a      0x162 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                0x0000461a                __vector_10
+ .text.USB_USBTask
+                0x0000477c       0x24 ../../lufa/Drivers/USB/HighLevel/USBTask.o
+                0x0000477c                USB_USBTask
+ .text.libgcc.div
+                0x000047a0       0x28 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+                0x000047a0                __udivmodhi4
+ .text.libgcc.div
+                0x000047c8       0x28 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+                0x000047c8                __divmodsi4
+ .text.libgcc.div
+                0x000047f0       0x10 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+                0x000047f0                __negsi2
+ .text.libgcc   0x00004800        0xc /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+                0x00004800                __tablejump2__
+ .text.libgcc.prologue
+                0x0000480c       0x38 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+                0x0000480c                __prologue_saves__
+ .text.libgcc.prologue
+                0x00004844       0x36 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+                0x00004844                __epilogue_restores__
+ .text.libgcc.div
+                0x0000487a       0x44 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+                0x0000487a                __udivmodsi4
+ .text.avr-libc.fplib
+                0x000048be       0x58 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
+                0x000048be                __fixunssfsi
+ .text.avr-libc.fplib
+                0x00004916       0x7a /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(floatsisf.o)
+                0x00004916                __floatunsisf
+                0x0000491a                __floatsisf
+ .text.avr-libc.fplib
+                0x00004990       0x44 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_split3.o)
+                0x00004990                __fp_split3
+                0x000049a0                __fp_splitA
+ .text.avr-libc.fplib
+                0x000049d4        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_zero.o)
+                0x000049d4                __fp_zero
+                0x000049d6                __fp_szero
+ .text.avr-libc.fplib
+                0x000049e2        0x4 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
+                0x000049e2                __mulsf3
+ .text.avr-libc.fplib
+                0x000049e6       0xc2 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+                0x000049fa                __mulsf3x
+                0x000049fe                __mulsf3_pse
+ .text.avr-libc.fplib
+                0x00004aa8        0xc /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_inf.o)
+                0x00004aa8                __fp_inf
+ .text.avr-libc.fplib
+                0x00004ab4        0x6 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_nan.o)
+                0x00004ab4                __fp_nan
+ .text.avr-libc.fplib
+                0x00004aba        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscA.o)
+                0x00004aba                __fp_pscA
+ .text.avr-libc.fplib
+                0x00004ac8        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscB.o)
+                0x00004ac8                __fp_pscB
+ .text.avr-libc.fplib
+                0x00004ad6       0x22 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_round.o)
+                0x00004ad6                __fp_round
+ .text.avr-libc
+                0x00004af8      0x242 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x00004af8                malloc
+                0x00004c28                free
+ .text.avr-libc
+                0x00004d3a       0x10 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eerd_byte.o)
+                0x00004d3a                eeprom_read_byte
+ .text.avr-libc
+                0x00004d4a       0x1c /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eewr_byte.o)
+                0x00004d4a                eeprom_write_byte
+                0x00004d4c                eeprom_write_r18
+                0x00004d66                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x00004d66        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x00004d66                exit
+                0x00004d66                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x00004d66        0x4 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ *(.fini0)
+                0x00004d6a                _etext = .
+
+.data           0x00800100       0xbc load address 0x00004d6a
+                0x00800100                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800100       0xa0 CUL.o
+                0x00800100                commands2
+                0x00800188                commands
+                0x0080019e                newbllevel
+                0x0080019f                bllevel
+ .data          0x008001a0        0x7 ../../clib/cdcLUFA.o
+                0x008001a0                LineCoding
+ .data          0x008001a7        0x9 ../../clib/intertechno.o
+                0x008001a7                it_frequency
+                0x008001aa                it_repetition
+                0x008001ac                it_interval_v3
+                0x008001ae                it_interval
+ .data          0x008001b0        0x5 ../../clib/somfy_rts.o
+                0x008001b0                somfy_rts_interval_half
+                0x008001b2                somfy_rts_interval
+                0x008001b4                somfy_rts_repetition
+ .data          0x008001b5        0x6 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x008001b5                __malloc_heap_end
+                0x008001b7                __malloc_heap_start
+                0x008001b9                __malloc_margin
+ *(.data*)
+ *(.gnu.linkonce.d*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.r*)
+                0x008001bc                . = ALIGN (0x2)
+ *fill*         0x008001bb        0x1 
+                0x008001bc                _edata = .
+                0x008001bc                PROVIDE (__data_end, .)
+
+.bss            0x008001bc      0x30e
+                0x008001bc                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x008001bc        0x2 CUL.o
+                0x008001bc                adcselect
+                0x008001bd                a7count
+ .bss           0x008001be        0x1 ../../clib/cdcLUFA.o
+ .bss           0x008001bf        0x3 ../../clib/clock.o
+                0x008001bf                ir_ticks
+ .bss           0x008001c2        0x2 ../../clib/display.o
+                0x008001c2                display_channel
+                0x008001c3                log_enabled
+ .bss           0x008001c4        0x4 ../../clib/rf_send.o
+ .bss           0x008001c8       0x74 ../../clib/rf_receive.o
+ .bss           0x0080023c        0x2 ../../clib/rf_asksin.o
+                0x0080023c                asksin_on
+ .bss           0x0080023e        0x2 ../../clib/rf_zwave.o
+                0x0080023e                zwave_ackState
+                0x0080023f                zwave_on
+ .bss           0x00800240        0x3 ../../clib/intertechno.o
+                0x00800240                restore_moritz
+                0x00800241                restore_asksin
+ .bss           0x00800243        0x3 ../../clib/somfy_rts.o
+                0x00800243                somfy_restore_moritz
+                0x00800244                somfy_restore_asksin
+ .bss           0x00800246        0x1 ../../clib/fastrf.o
+ .bss           0x00800247       0x83 ../../clib/ttydata.o
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x008002ca       0x27 CUL.o
+                0x008002ca                output_flush_func
+                0x008002cc                vcc
+                0x008002ce                a1
+                0x008002d0                changeled
+                0x008002d1                temp
+                0x008002d3                a3
+                0x008002d5                buffer_address
+                0x008002d6                led
+                0x008002d9                fanspin
+                0x008002db                rpm
+                0x008002dd                a7
+                0x008002df                a7avg
+                0x008002e1                a7max
+                0x008002e3                a5
+                0x008002e5                a7min
+                0x008002e7                a2
+                0x008002e9                commandbyte
+                0x008002ea                count
+                0x008002eb                input_handle_func
+                0x008002ed                a0
+                0x008002ef                a4
+ COMMON         0x008002f1        0x1 ../../clib/cc1100.o
+                0x008002f1                cc_on
+ COMMON         0x008002f2        0x7 ../../clib/clock.o
+                0x008002f2                clock_hsec
+                0x008002f3                ticks
+                0x008002f7                isrtimer
+ COMMON         0x008002f9        0x2 ../../clib/rf_send.o
+                0x008002f9                credit_10ms
+ COMMON         0x008002fb        0x2 ../../clib/rf_receive.o
+                0x008002fb                packetCheckValues
+                0x008002fc                tx_report
+ COMMON         0x008002fd       0xb3 ../../clib/rf_zwave.o
+                0x008002fd                zwave_sMsg
+                0x008003a5                zwave_sLen
+                0x008003a6                zwave_drate
+                0x008003a7                zwave_sStamp
+                0x008003ab                zwave_hcid
+ COMMON         0x008003b0        0x2 ../../clib/fht.o
+                0x008003b0                fht_hc0
+                0x008003b1                fht_hc1
+ COMMON         0x008003b2        0x1 ../../clib/fastrf.o
+                0x008003b2                fastrf_on
+ COMMON         0x008003b3      0x106 ../../clib/ttydata.o
+                0x008003b3                TTY_Tx_Buffer
+                0x00800436                TTY_Rx_Buffer
+ COMMON         0x008004b9        0x3 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                0x008004b9                USB_CurrentlySelfPowered
+                0x008004ba                USB_RemoteWakeupEnabled
+                0x008004bb                USB_ConfigurationNumber
+ COMMON         0x008004bc        0xa ../../lufa/Drivers/USB/HighLevel/USBTask.o
+                0x008004bc                USB_IsInitialized
+                0x008004bd                USB_DeviceState
+                0x008004be                USB_ControlRequest
+ COMMON         0x008004c6        0x4 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x008004c6                __brkval
+                0x008004c8                __flp
+                0x008004ca                PROVIDE (__bss_end, .)
+                0x00004d6a                __data_load_start = LOADADDR (.data)
+                0x00004e26                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008004ca        0x0
+                [!provide]                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                [!provide]                PROVIDE (__noinit_end, .)
+                0x008004ca                _end = .
+                0x008004ca                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.user_signatures
+ *(.user_signatures*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000       0x11
+ *(.comment)
+ .comment       0x00000000       0x11 CUL.o
+                                 0x12 (size before relaxing)
+ .comment       0x00000011       0x12 ../../clib/Descriptors.o
+ .comment       0x00000011       0x12 ../../clib/cc1100.o
+ .comment       0x00000011       0x12 ../../clib/cdcLUFA.o
+ .comment       0x00000011       0x12 ../../clib/clock.o
+ .comment       0x00000011       0x12 ../../clib/delay.o
+ .comment       0x00000011       0x12 ../../clib/display.o
+ .comment       0x00000011       0x12 ../../clib/stringfunc.o
+ .comment       0x00000011       0x12 ../../clib/fncollection.o
+ .comment       0x00000011       0x12 ../../clib/ringbuffer.o
+ .comment       0x00000011       0x12 ../../clib/rf_send.o
+ .comment       0x00000011       0x12 ../../clib/rf_receive.o
+ .comment       0x00000011       0x12 ../../clib/rf_asksin.o
+ .comment       0x00000011       0x12 ../../clib/rf_zwave.o
+ .comment       0x00000011       0x12 ../../clib/intertechno.o
+ .comment       0x00000011       0x12 ../../clib/somfy_rts.o
+ .comment       0x00000011       0x12 ../../clib/fht.o
+ .comment       0x00000011       0x12 ../../clib/fastrf.o
+ .comment       0x00000011       0x12 ../../clib/ttydata.o
+ .comment       0x00000011       0x12 ../../clib/spi.o
+ .comment       0x00000011       0x12 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+ .comment       0x00000011       0x12 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+ .comment       0x00000011       0x12 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+ .comment       0x00000011       0x12 ../../lufa/Drivers/USB/HighLevel/Events.o
+ .comment       0x00000011       0x12 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+ .comment       0x00000011       0x12 ../../lufa/Drivers/USB/HighLevel/USBTask.o
+ .comment       0x00000011       0x12 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+
+.note.gnu.avr.deviceinfo
+                0x00000000       0x40
+ .note.gnu.avr.deviceinfo
+                0x00000000       0x40 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000      0x9f4
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000      0x9f4 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+
+.debug_abbrev   0x00000000      0x96a
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x96a /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+
+.debug_line     0x00000000       0x1a
+ *(.debug_line .debug_line.* .debug_line_end)
+ .debug_line    0x00000000       0x1a /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str      0x00000000      0x371
+ *(.debug_str)
+ .debug_str     0x00000000      0x371 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.debug_macro
+ *(.debug_macro)
+OUTPUT(CUL_V3.elf elf32-avr)
+LOAD linker stubs
+
+Cross Reference Table
+
+Symbol                                            File
+ASKSIN_CFG                                        ../../clib/rf_asksin.o
+ASKSIN_UPDATE_CFG                                 ../../clib/rf_asksin.o
+CALLBACK_USB_GetDescriptor                        ../../clib/Descriptors.o
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+CC1100_CFG                                        ../../clib/cc1100.o
+CC1100_ITCFG                                      ../../clib/intertechno.o
+CC1100_PA                                         ../../clib/cc1100.o
+CC1100_SOMFY_RTS_CFG                              ../../clib/somfy_rts.o
+CDC_Task                                          ../../clib/cdcLUFA.o
+                                                  ../../clib/display.o
+                                                  CUL.o
+ConfigurationDescriptor                           ../../clib/Descriptors.o
+DeviceDescriptor                                  ../../clib/Descriptors.o
+EVENT_USB_Device_ConfigurationChanged             ../../clib/cdcLUFA.o
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+EVENT_USB_Device_Connect                          ../../lufa/Drivers/USB/HighLevel/Events.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+EVENT_USB_Device_Disconnect                       ../../lufa/Drivers/USB/HighLevel/Events.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+EVENT_USB_Device_Reset                            ../../lufa/Drivers/USB/HighLevel/Events.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+EVENT_USB_Device_Suspend                          ../../lufa/Drivers/USB/HighLevel/Events.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+EVENT_USB_Device_UnhandledControlRequest          ../../clib/cdcLUFA.o
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+EVENT_USB_Device_WakeUp                           ../../lufa/Drivers/USB/HighLevel/Events.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+Endpoint_BytesToEPSizeMaskDynamic                 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_ClearEndpoints                           ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+Endpoint_ClearStatusStage                         ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../clib/cdcLUFA.o
+Endpoint_ConfigureEndpoint_Prv                    ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                                                  ../../clib/cdcLUFA.o
+Endpoint_Discard_Stream                           ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Read_Control_EStream_BE                  ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Read_Control_EStream_LE                  ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Read_Control_Stream_BE                   ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Read_Control_Stream_LE                   ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../clib/cdcLUFA.o
+Endpoint_Read_EStream_BE                          ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Read_EStream_LE                          ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Read_Stream_BE                           ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Read_Stream_LE                           ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_WaitUntilReady                           ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../clib/cdcLUFA.o
+Endpoint_Write_Control_EStream_BE                 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Write_Control_EStream_LE                 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Write_Control_PStream_BE                 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Write_Control_PStream_LE                 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+Endpoint_Write_Control_Stream_BE                  ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Write_Control_Stream_LE                  ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../clib/cdcLUFA.o
+Endpoint_Write_EStream_BE                         ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Write_EStream_LE                         ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Write_PStream_BE                         ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Write_PStream_LE                         ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Write_Stream_BE                          ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+Endpoint_Write_Stream_LE                          ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+FASTRF_CFG                                        ../../clib/cc1100.o
+FastRF_Task                                       ../../clib/fastrf.o
+                                                  CUL.o
+GetTemp                                           CUL.o
+I2C_init                                          CUL.o
+LanguageString                                    ../../clib/Descriptors.o
+LineCoding                                        ../../clib/cdcLUFA.o
+ManufacturerString                                ../../clib/Descriptors.o
+Minute_Task                                       ../../clib/clock.o
+                                                  CUL.o
+ProductString                                     ../../clib/Descriptors.o
+RfAnalyze_Task                                    ../../clib/rf_receive.o
+                                                  CUL.o
+TTY_Rx_Buffer                                     ../../clib/ttydata.o
+                                                  ../../clib/cdcLUFA.o
+TTY_Tx_Buffer                                     ../../clib/ttydata.o
+                                                  ../../clib/display.o
+                                                  ../../clib/cdcLUFA.o
+USB_ConfigurationNumber                           ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                                                  ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+USB_ControlRequest                                ../../lufa/Drivers/USB/HighLevel/USBTask.o
+                                                  ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  ../../clib/cdcLUFA.o
+USB_CurrentlySelfPowered                          ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+USB_DeviceState                                   ../../lufa/Drivers/USB/HighLevel/USBTask.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                                                  ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+                                                  ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  ../../clib/display.o
+                                                  ../../clib/cdcLUFA.o
+USB_Device_ProcessControlRequest                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  ../../lufa/Drivers/USB/HighLevel/USBTask.o
+USB_Event_Stub                                    ../../lufa/Drivers/USB/HighLevel/Events.o
+USB_GetNextDescriptorComp                         ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+USB_GetNextDescriptorOfType                       ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+USB_GetNextDescriptorOfTypeAfter                  ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+USB_GetNextDescriptorOfTypeBefore                 ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+USB_INT_ClearAllInterrupts                        ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                                                  ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+USB_INT_DisableAllInterrupts                      ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                                                  ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+USB_Init                                          ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+                                                  CUL.o
+USB_IsInitialized                                 ../../lufa/Drivers/USB/HighLevel/USBTask.o
+                                                  ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+USB_RemoteWakeupEnabled                           ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+USB_ResetInterface                                ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+USB_ShutDown                                      ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+                                                  ../../clib/fncollection.o
+USB_USBTask                                       ../../lufa/Drivers/USB/HighLevel/USBTask.o
+                                                  CUL.o
+ZWAVE_CFG_100k                                    ../../clib/rf_zwave.o
+ZWAVE_CFG_40k                                     ../../clib/rf_zwave.o
+ZWAVE_CFG_9600                                    ../../clib/rf_zwave.o
+__FUSE_REGION_LENGTH__                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__bad_interrupt                                   /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__brkval                                          /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                                                  ../../clib/memory.o
+                                                  CUL.o
+__bss_end                                         /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+__bss_start                                       /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+__data_end                                        /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+__data_load_start                                 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+__data_start                                      /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+__divmodsi4                                       /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+                                                  CUL.o
+__do_clear_bss                                    /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                                                  ../../lufa/Drivers/USB/HighLevel/USBTask.o
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  ../../clib/ttydata.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+                                                  ../../clib/display.o
+                                                  ../../clib/clock.o
+                                                  ../../clib/cdcLUFA.o
+                                                  ../../clib/cc1100.o
+                                                  CUL.o
+__do_copy_data                                    /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                                                  ../../clib/mbus/3outof6.o
+                                                  ../../clib/mbus/manchester.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/fncollection.o
+                                                  ../../clib/cdcLUFA.o
+                                                  CUL.o
+__epilogue_restores__                             /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+                                                  ../../clib/mbus/mbus_packet.o
+                                                  ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+                                                  ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+                                                  ../../clib/fncollection.o
+                                                  ../../clib/display.o
+                                                  ../../clib/clock.o
+                                                  ../../clib/cc1100.o
+                                                  CUL.o
+__fixunssfsi                                      /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
+                                                  CUL.o
+__floatsisf                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(floatsisf.o)
+__floatunsisf                                     /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(floatsisf.o)
+                                                  CUL.o
+__flp                                             /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+__fp_inf                                          /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_inf.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+__fp_nan                                          /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_nan.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+__fp_pscA                                         /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscA.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+__fp_pscB                                         /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscB.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+__fp_round                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_round.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
+__fp_split3                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_split3.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+__fp_splitA                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_split3.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
+__fp_szero                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_zero.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+__fp_zero                                         /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_zero.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
+__heap_end                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+__heap_start                                      /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                                                  CUL.o
+__init                                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__malloc_heap_end                                 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                                                  ../../clib/memory.o
+__malloc_heap_start                               /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                                                  ../../clib/memory.o
+__malloc_margin                                   /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                                                  ../../clib/memory.o
+__mulsf3                                          /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
+                                                  CUL.o
+__mulsf3_pse                                      /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+__mulsf3x                                         /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
+__negsi2                                          /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+                                                  /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+__prologue_saves__                                /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+                                                  ../../clib/mbus/mbus_packet.o
+                                                  ../../lufa/Drivers/USB/HighLevel/ConfigDescriptor.o
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+                                                  ../../clib/fncollection.o
+                                                  ../../clib/display.o
+                                                  ../../clib/clock.o
+                                                  ../../clib/cc1100.o
+                                                  CUL.o
+__stack                                           /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__tablejump2__                                    /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+                                                  ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                                                  CUL.o
+__udivmodhi4                                      /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+                                                  ../../clib/mbus/mbus_packet.o
+                                                  ../../clib/display.o
+__udivmodsi4                                      /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+                                                  /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+__vector_1                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_10                                       ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_11                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_12                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_13                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_14                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_15                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_16                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_17                                       ../../clib/rf_receive.o
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_18                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_19                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_2                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_20                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_21                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_22                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_23                                       ../../clib/clock.o
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_24                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_25                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_26                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_27                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_28                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_29                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_3                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_30                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_31                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_32                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_33                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_34                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_35                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_36                                       CUL.o
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_37                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_38                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_39                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_4                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_40                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_41                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_42                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_5                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_6                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_7                                        ../../clib/rf_receive.o
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_8                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_9                                        CUL.o
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vector_default                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+__vectors                                         /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+_exit                                             /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+a0                                                CUL.o
+a1                                                CUL.o
+a2                                                CUL.o
+a3                                                CUL.o
+a4                                                CUL.o
+a5                                                CUL.o
+a7                                                CUL.o
+a7avg                                             CUL.o
+a7count                                           CUL.o
+a7max                                             CUL.o
+a7min                                             CUL.o
+adcselect                                         CUL.o
+addParityAndSend                                  ../../clib/rf_send.o
+addParityAndSendData                              ../../clib/rf_send.o
+analyze_hms                                       ../../clib/rf_receive.o
+analyze_ttydata                                   ../../clib/ttydata.o
+                                                  CUL.o
+asksin_func                                       ../../clib/rf_asksin.o
+                                                  CUL.o
+asksin_on                                         ../../clib/rf_asksin.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/cc1100.o
+asksin_send                                       ../../clib/rf_asksin.o
+bllevel                                           CUL.o
+buffer_address                                    CUL.o
+byteSize                                          ../../clib/mbus/mbus_packet.o
+callfn                                            ../../clib/ttydata.o
+cc1100_readReg                                    ../../clib/cc1100.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_receive.o
+cc1100_sendbyte                                   ../../clib/cc1100.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+cc1100_writeReg                                   ../../clib/cc1100.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+ccInitChip                                        ../../clib/cc1100.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+ccRX                                              ../../clib/cc1100.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+ccStrobe                                          ../../clib/cc1100.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_send.o
+ccTX                                              ../../clib/cc1100.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_send.o
+cc_factory_reset                                  ../../clib/cc1100.o
+                                                  ../../clib/fncollection.o
+cc_on                                             ../../clib/cc1100.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+cc_set_pa                                         ../../clib/cc1100.o
+ccreg                                             ../../clib/cc1100.o
+                                                  CUL.o
+ccsetpa                                           ../../clib/cc1100.o
+                                                  CUL.o
+cdc_flush                                         ../../clib/cdcLUFA.o
+changeled                                         CUL.o
+checkForRepeatedPackage                           ../../clib/rf_receive.o
+check_rf_sync                                     ../../clib/rf_receive.o
+cksum1                                            ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+cksum2                                            ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+cksum3                                            ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+clock_hsec                                        ../../clib/clock.o
+commandbyte                                       CUL.o
+commands                                          CUL.o
+commands2                                         CUL.o
+count                                             CUL.o
+crcCalc                                           ../../clib/mbus/crc.o
+                                                  ../../clib/mbus/mbus_packet.o
+credit_10ms                                       ../../clib/rf_send.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/clock.o
+decode3outof6                                     ../../clib/mbus/3outof6.o
+                                                  ../../clib/mbus/mbus_packet.o
+decodeRXBytesSmode                                ../../clib/mbus/mbus_packet.o
+decodeRXBytesTmode                                ../../clib/mbus/mbus_packet.o
+display_channel                                   ../../clib/display.o
+                                                  ../../clib/ttydata.o
+                                                  ../../clib/fastrf.o
+                                                  CUL.o
+display_char                                      ../../clib/display.o
+                                                  ../../clib/memory.o
+                                                  ../../clib/ttydata.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/fncollection.o
+                                                  ../../clib/cc1100.o
+display_hex                                       ../../clib/display.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/fncollection.o
+display_hex2                                      ../../clib/display.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/fncollection.o
+                                                  ../../clib/clock.o
+                                                  ../../clib/cc1100.o
+display_nl                                        ../../clib/display.o
+                                                  ../../clib/memory.o
+                                                  ../../clib/ttydata.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/fncollection.o
+                                                  ../../clib/clock.o
+                                                  ../../clib/cc1100.o
+display_string                                    ../../clib/display.o
+                                                  ../../clib/ttydata.o
+display_string_P                                  ../../clib/display.o
+                                                  ../../clib/memory.o
+                                                  ../../clib/ttydata.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+                                                  ../../clib/fncollection.o
+                                                  ../../clib/cc1100.o
+display_udec                                      ../../clib/display.o
+                                                  ../../clib/memory.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/fncollection.o
+                                                  ../../clib/cc1100.o
+dumpmem                                           ../../clib/fncollection.o
+eeprom_factory_reset                              ../../clib/fncollection.o
+                                                  CUL.o
+eeprom_init                                       ../../clib/fncollection.o
+                                                  CUL.o
+eeprom_read_byte                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eerd_byte.o)
+                                                  ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../clib/fncollection.o
+eeprom_write_byte                                 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eewr_byte.o)
+                                                  ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                                                  ../../clib/fncollection.o
+eeprom_write_r18                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eewr_byte.o)
+em_send                                           ../../clib/rf_send.o
+                                                  CUL.o
+encode3outof6                                     ../../clib/mbus/3outof6.o
+                                                  ../../clib/mbus/mbus_packet.o
+encodeTXBytesSmode                                ../../clib/mbus/mbus_packet.o
+encodeTXBytesTmode                                ../../clib/mbus/mbus_packet.o
+encodeTXPacket                                    ../../clib/mbus/mbus_packet.o
+erb                                               ../../clib/fncollection.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/cc1100.o
+                                                  CUL.o
+ewb                                               ../../clib/fncollection.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/cc1100.o
+                                                  CUL.o
+exit                                              /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+fanspin                                           CUL.o
+fastrf_func                                       ../../clib/fastrf.o
+                                                  CUL.o
+fastrf_on                                         ../../clib/fastrf.o
+                                                  ../../clib/rf_receive.o
+fht_display_buf                                   ../../clib/fht.o
+fht_hc0                                           ../../clib/fht.o
+fht_hc1                                           ../../clib/fht.o
+fht_init                                          ../../clib/fht.o
+                                                  CUL.o
+fhtsend                                           ../../clib/fht.o
+                                                  CUL.o
+fntab                                             CUL.o
+                                                  ../../clib/ttydata.o
+free                                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                                                  ../../clib/memory.o
+                                                  ../../clib/somfy_rts.o
+freeMem                                           ../../clib/memory.o
+freeRam                                           CUL.o
+fromdec                                           ../../clib/stringfunc.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+fromhex                                           ../../clib/stringfunc.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+                                                  ../../clib/fncollection.o
+                                                  ../../clib/cc1100.o
+fromip                                            ../../clib/stringfunc.o
+fs20send                                          ../../clib/rf_send.o
+                                                  CUL.o
+get_timestamp                                     ../../clib/clock.o
+                                                  ../../clib/rf_asksin.o
+getbit                                            ../../clib/rf_receive.o
+getbits                                           ../../clib/rf_receive.o
+getfreemem                                        ../../clib/memory.o
+gettime                                           ../../clib/clock.o
+                                                  CUL.o
+hm_send                                           ../../clib/rf_send.o
+                                                  CUL.o
+initbl                                            CUL.o
+input_handle_func                                 ../../clib/ttydata.o
+                                                  ../../clib/display.o
+                                                  ../../clib/cdcLUFA.o
+                                                  CUL.o
+ir_ticks                                          ../../clib/clock.o
+isrtimer                                          ../../clib/clock.o
+                                                  CUL.o
+it_frequency                                      ../../clib/intertechno.o
+it_func                                           ../../clib/intertechno.o
+                                                  CUL.o
+it_interval                                       ../../clib/intertechno.o
+it_interval_v3                                    ../../clib/intertechno.o
+it_repetition                                     ../../clib/intertechno.o
+ks_send                                           ../../clib/rf_send.o
+                                                  CUL.o
+led                                               CUL.o
+led_mode                                          ../../clib/fncollection.o
+ledfunc                                           ../../clib/fncollection.o
+log_enabled                                       ../../clib/display.o
+main                                              CUL.o
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+makeavg                                           ../../clib/rf_receive.o
+malloc                                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                                                  ../../clib/memory.o
+                                                  ../../clib/somfy_rts.o
+manchDecode                                       ../../clib/mbus/manchester.o
+                                                  ../../clib/mbus/mbus_packet.o
+manchEncode                                       ../../clib/mbus/manchester.o
+                                                  ../../clib/mbus/mbus_packet.o
+memset                                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(memset.o)
+                                                  ../../clib/memory.o
+my_delay_ms                                       ../../clib/delay.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_send.o
+                                                  ../../clib/cc1100.o
+my_delay_us                                       ../../clib/delay.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_send.o
+                                                  ../../clib/cc1100.o
+newbllevel                                        CUL.o
+output_flush_func                                 ../../clib/ttydata.o
+                                                  ../../clib/display.o
+                                                  ../../clib/cdcLUFA.o
+                                                  CUL.o
+packetCheckValues                                 ../../clib/rf_receive.o
+packetSize                                        ../../clib/mbus/mbus_packet.o
+prepare_boot                                      ../../clib/fncollection.o
+                                                  CUL.o
+rawsend                                           ../../clib/rf_send.o
+                                                  CUL.o
+rb_get                                            ../../clib/ringbuffer.o
+                                                  ../../clib/ttydata.o
+                                                  ../../clib/cdcLUFA.o
+rb_put                                            ../../clib/ringbuffer.o
+                                                  ../../clib/display.o
+                                                  ../../clib/cdcLUFA.o
+rb_reset                                          ../../clib/ringbuffer.o
+readAna                                           CUL.o
+readVcc                                           CUL.o
+read_eeprom                                       ../../clib/fncollection.o
+                                                  CUL.o
+restore_asksin                                    ../../clib/intertechno.o
+restore_moritz                                    ../../clib/intertechno.o
+rf_asksin_init                                    ../../clib/rf_asksin.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+rf_asksin_task                                    ../../clib/rf_asksin.o
+                                                  CUL.o
+rf_isreceiving                                    ../../clib/rf_receive.o
+rf_zwave_init                                     ../../clib/rf_zwave.o
+rf_zwave_task                                     ../../clib/rf_zwave.o
+                                                  CUL.o
+rpm                                               CUL.o
+set_ccoff                                         ../../clib/cc1100.o
+                                                  ../../clib/rf_receive.o
+set_ccon                                          ../../clib/cc1100.o
+                                                  ../../clib/rf_receive.o
+                                                  ../../clib/rf_send.o
+set_txreport                                      ../../clib/rf_receive.o
+                                                  CUL.o
+set_txrestore                                     ../../clib/rf_receive.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_asksin.o
+setup_lcd                                         CUL.o
+somfy_restore_asksin                              ../../clib/somfy_rts.o
+somfy_restore_moritz                              ../../clib/somfy_rts.o
+somfy_rts_func                                    ../../clib/somfy_rts.o
+                                                  CUL.o
+somfy_rts_interval                                ../../clib/somfy_rts.o
+somfy_rts_interval_half                           ../../clib/somfy_rts.o
+somfy_rts_repetition                              ../../clib/somfy_rts.o
+spi_init                                          ../../clib/spi.o
+                                                  CUL.o
+spi_send                                          ../../clib/spi.o
+start_bootloader                                  CUL.o
+temp                                              CUL.o
+testmem                                           ../../clib/memory.o
+ticks                                             ../../clib/clock.o
+                                                  ../../clib/fastrf.o
+                                                  ../../clib/rf_zwave.o
+                                                  ../../clib/rf_receive.o
+tohex                                             ../../clib/stringfunc.o
+tx_init                                           ../../clib/rf_receive.o
+                                                  CUL.o
+tx_report                                         ../../clib/rf_receive.o
+                                                  ../../clib/fht.o
+                                                  ../../clib/somfy_rts.o
+                                                  ../../clib/intertechno.o
+                                                  ../../clib/rf_asksin.o
+                                                  ../../clib/rf_send.o
+vcc                                               CUL.o
+version                                           ../../clib/fncollection.o
+                                                  CUL.o
+write                                             CUL.o
+write_eeprom                                      ../../clib/fncollection.o
+                                                  CUL.o
+writebl                                           CUL.o
+ws2812_sendarray                                  CUL.o
+ws2812_sendarray_mask                             CUL.o
+ws2812_setleds                                    CUL.o
+ws2812_setleds_pin                                CUL.o
+ws2812_setleds_rgbw                               CUL.o
+zccRX                                             ../../clib/rf_zwave.o
+zwave_ackState                                    ../../clib/rf_zwave.o
+zwave_ckSum_16bit                                 ../../clib/rf_zwave.o
+zwave_ckSum_8bit                                  ../../clib/rf_zwave.o
+zwave_doSend                                      ../../clib/rf_zwave.o
+zwave_drate                                       ../../clib/rf_zwave.o
+zwave_forMe                                       ../../clib/rf_zwave.o
+zwave_func                                        ../../clib/rf_zwave.o
+                                                  CUL.o
+zwave_hcid                                        ../../clib/rf_zwave.o
+zwave_on                                          ../../clib/rf_zwave.o
+zwave_sLen                                        ../../clib/rf_zwave.o
+zwave_sMsg                                        ../../clib/rf_zwave.o
+zwave_sStamp                                      ../../clib/rf_zwave.o

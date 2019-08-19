@@ -1,0 +1,57 @@
+   1               		.file	"delay.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.my_delay_us,"ax",@progbits
+   8               	.global	my_delay_us
+  10               	my_delay_us:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 880F      		lsl r24
+  16 0002 991F      		rol r25
+  17               	/* #APP */
+  18               	 ;  105 "/usr/lib/avr/include/util/delay_basic.h" 1
+  19 0004 0197      		1: sbiw r24,1
+  20 0006 01F4      		brne 1b
+  21               	 ;  0 "" 2
+  22               	/* #NOAPP */
+  23 0008 0895      		ret
+  25               		.section	.text.my_delay_ms,"ax",@progbits
+  26               	.global	my_delay_ms
+  28               	my_delay_ms:
+  29               	/* prologue: function */
+  30               	/* frame size = 0 */
+  31               	/* stack size = 0 */
+  32               	.L__stack_usage = 0
+  33 0000 20ED      		ldi r18,lo8(-48)
+  34 0002 37E0      		ldi r19,lo8(7)
+  35               	.L3:
+  36 0004 8150      		subi r24,1
+  37 0006 00F0      		brcs .L6
+  38 0008 F901      		movw r30,r18
+  39               	/* #APP */
+  40               	 ;  105 "/usr/lib/avr/include/util/delay_basic.h" 1
+  41 000a 3197      		1: sbiw r30,1
+  42 000c 01F4      		brne 1b
+  43               	 ;  0 "" 2
+  44               	/* #NOAPP */
+  45 000e 00C0      		rjmp .L3
+  46               	.L6:
+  47               	/* epilogue start */
+  48 0010 0895      		ret
+  50               		.ident	"GCC: (GNU) 5.4.0"
+DEFINED SYMBOLS
+                            *ABS*:00000000 delay.c
+     /tmp/ccjA7LvY.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccjA7LvY.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccjA7LvY.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccjA7LvY.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccjA7LvY.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccjA7LvY.s:10     .text.my_delay_us:00000000 my_delay_us
+     /tmp/ccjA7LvY.s:28     .text.my_delay_ms:00000000 my_delay_ms
+
+NO UNDEFINED SYMBOLS

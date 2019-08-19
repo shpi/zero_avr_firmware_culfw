@@ -1,0 +1,650 @@
+   1               		.file	"intertechno.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.it_tunein,"ax",@progbits
+   9               	it_tunein:
+  10 0000 CF93      		push r28
+  11 0002 DF93      		push r29
+  12               	/* prologue: function */
+  13               	/* frame size = 0 */
+  14               	/* stack size = 2 */
+  15               	.L__stack_usage = 2
+  16 0004 EE98      		cbi 0x1d,6
+  17 0006 569A      		sbi 0xa,6
+  18 0008 5E9A      		sbi 0xb,6
+  19 000a 8EE1      		ldi r24,lo8(30)
+  20 000c 90E0      		ldi r25,0
+  21 000e 0E94 0000 		call my_delay_us
+  22 0012 5E98      		cbi 0xb,6
+  23 0014 8EE1      		ldi r24,lo8(30)
+  24 0016 90E0      		ldi r25,0
+  25 0018 0E94 0000 		call my_delay_us
+  26 001c 5E9A      		sbi 0xb,6
+  27 001e 8DE2      		ldi r24,lo8(45)
+  28 0020 90E0      		ldi r25,0
+  29 0022 0E94 0000 		call my_delay_us
+  30 0026 80E3      		ldi r24,lo8(48)
+  31 0028 0E94 0000 		call ccStrobe
+  32 002c 84E6      		ldi r24,lo8(100)
+  33 002e 90E0      		ldi r25,0
+  34 0030 0E94 0000 		call my_delay_us
+  35 0034 5E98      		cbi 0xb,6
+  36 0036 80E4      		ldi r24,lo8(64)
+  37 0038 0E94 0000 		call cc1100_sendbyte
+  38 003c C0E0      		ldi r28,lo8(CC1100_ITCFG)
+  39 003e D0E0      		ldi r29,hi8(CC1100_ITCFG)
+  40               	.L2:
+  41 0040 FE01      		movw r30,r28
+  42               	/* #APP */
+  43               	 ;  110 "../../clib/intertechno.c" 1
+  44 0042 8491      		lpm r24, Z
+  45               		
+  46               	 ;  0 "" 2
+  47               	/* #NOAPP */
+  48 0044 0E94 0000 		call cc1100_sendbyte
+  49 0048 2196      		adiw r28,1
+  50 004a F0E0      		ldi r31,hi8(CC1100_ITCFG+13)
+  51 004c C030      		cpi r28,lo8(CC1100_ITCFG+13)
+  52 004e DF07      		cpc r29,r31
+  53 0050 01F4      		brne .L2
+  54 0052 8091 0000 		lds r24,it_frequency
+  55 0056 0E94 0000 		call cc1100_sendbyte
+  56 005a 8091 0000 		lds r24,it_frequency+1
+  57 005e 0E94 0000 		call cc1100_sendbyte
+  58 0062 8091 0000 		lds r24,it_frequency+2
+  59 0066 0E94 0000 		call cc1100_sendbyte
+  60 006a C0E0      		ldi r28,0
+  61 006c D0E0      		ldi r29,0
+  62               	.L3:
+  63 006e FE01      		movw r30,r28
+  64 0070 E050      		subi r30,lo8(-(CC1100_ITCFG+16))
+  65 0072 F040      		sbci r31,hi8(-(CC1100_ITCFG+16))
+  66               	/* #APP */
+  67               	 ;  116 "../../clib/intertechno.c" 1
+  68 0074 8491      		lpm r24, Z
+  69               		
+  70               	 ;  0 "" 2
+  71               	/* #NOAPP */
+  72 0076 0E94 0000 		call cc1100_sendbyte
+  73 007a 2196      		adiw r28,1
+  74 007c C931      		cpi r28,25
+  75 007e D105      		cpc r29,__zero_reg__
+  76 0080 01F4      		brne .L3
+  77 0082 5E9A      		sbi 0xb,6
+  78 0084 5E98      		cbi 0xb,6
+  79 0086 8EE7      		ldi r24,lo8(126)
+  80 0088 0E94 0000 		call cc1100_sendbyte
+  81 008c 8BE2      		ldi r24,lo8(43)
+  82 008e 90E0      		ldi r25,0
+  83               	.L4:
+  84 0090 EC01      		movw r28,r24
+  85 0092 2196      		adiw r28,1
+  86 0094 0E94 0000 		call erb
+  87 0098 0E94 0000 		call cc1100_sendbyte
+  88 009c CE01      		movw r24,r28
+  89 009e E397      		sbiw r28,51
+  90 00a0 01F4      		brne .L4
+  91 00a2 5E9A      		sbi 0xb,6
+  92 00a4 83E3      		ldi r24,lo8(51)
+  93 00a6 0E94 0000 		call ccStrobe
+  94 00aa 81E0      		ldi r24,lo8(1)
+  95 00ac 0E94 0000 		call my_delay_ms
+  96 00b0 81E0      		ldi r24,lo8(1)
+  97 00b2 8093 0000 		sts cc_on,r24
+  98               	/* epilogue start */
+  99 00b6 DF91      		pop r29
+ 100 00b8 CF91      		pop r28
+ 101 00ba 0895      		ret
+ 103               		.section	.text.it_func,"ax",@progbits
+ 104               	.global	it_func
+ 106               	it_func:
+ 107 0000 A0E0      		ldi r26,0
+ 108 0002 B0E0      		ldi r27,0
+ 109 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 110 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 111 0008 0C94 0000 		jmp __prologue_saves__+((18 - 10) * 2)
+ 112               	1:
+ 113               	/* prologue: function */
+ 114               	/* frame size = 0 */
+ 115               	/* stack size = 10 */
+ 116               	.L__stack_usage = 10
+ 117 000c EC01      		movw r28,r24
+ 118 000e 8981      		ldd r24,Y+1
+ 119 0010 8437      		cpi r24,lo8(116)
+ 120 0012 01F4      		brne .L10
+ 121 0014 60E0      		ldi r22,lo8(it_interval)
+ 122 0016 70E0      		ldi r23,hi8(it_interval)
+ 123 0018 CE01      		movw r24,r28
+ 124 001a 0296      		adiw r24,2
+ 125 001c 0E94 0000 		call fromdec
+ 126 0020 40E2      		ldi r20,lo8(32)
+ 127 0022 60E0      		ldi r22,0
+ 128 0024 8091 0000 		lds r24,it_interval
+ 129 0028 9091 0000 		lds r25,it_interval+1
+ 130 002c 00C0      		rjmp .L60
+ 131               	.L10:
+ 132 002e 8337      		cpi r24,lo8(115)
+ 133 0030 01F0      		breq .+2
+ 134 0032 00C0      		rjmp .L12
+ 135 0034 8A81      		ldd r24,Y+2
+ 136 0036 8237      		cpi r24,lo8(114)
+ 137 0038 01F4      		brne .L13
+ 138 003a 60E0      		ldi r22,lo8(it_repetition)
+ 139 003c 70E0      		ldi r23,hi8(it_repetition)
+ 140 003e CE01      		movw r24,r28
+ 141 0040 0396      		adiw r24,3
+ 142 0042 0E94 0000 		call fromdec
+ 143 0046 40E2      		ldi r20,lo8(32)
+ 144 0048 60E0      		ldi r22,0
+ 145 004a 8091 0000 		lds r24,it_repetition
+ 146 004e 9091 0000 		lds r25,it_repetition+1
+ 147               	.L60:
+ 148 0052 0E94 0000 		call display_udec
+ 149               	.L61:
+ 150 0056 0E94 0000 		call display_nl
+ 151 005a 00C0      		rjmp .L9
+ 152               	.L13:
+ 153 005c 8091 0000 		lds r24,intertechno_on
+ 154 0060 8111      		cpse r24,__zero_reg__
+ 155 0062 00C0      		rjmp .L14
+ 156 0064 8091 0000 		lds r24,asksin_on
+ 157 0068 8823      		tst r24
+ 158 006a 01F0      		breq .L15
+ 159 006c 81E0      		ldi r24,lo8(1)
+ 160 006e 8093 0000 		sts restore_asksin,r24
+ 161 0072 1092 0000 		sts asksin_on,__zero_reg__
+ 162               	.L15:
+ 163 0076 0E94 0000 		call it_tunein
+ 164 007a 83E0      		ldi r24,lo8(3)
+ 165 007c 0E94 0000 		call my_delay_ms
+ 166               	.L14:
+ 167 0080 86E3      		ldi r24,lo8(54)
+ 168 0082 0E94 0000 		call ccStrobe
+ 169 0086 8AE3      		ldi r24,lo8(58)
+ 170 0088 0E94 0000 		call ccStrobe
+ 171 008c 8BE3      		ldi r24,lo8(59)
+ 172 008e 0E94 0000 		call ccStrobe
+ 173 0092 0E94 0000 		call ccTX
+ 174 0096 FE01      		movw r30,r28
+ 175               		0:
+ 176 0098 0190      		ld __tmp_reg__,Z+
+ 177 009a 0020      		tst __tmp_reg__
+ 178 009c 01F4      		brne 0b
+ 179 009e EC1B      		sub r30,r28
+ 180 00a0 FEEF      		ldi r31,lo8(-2)
+ 181 00a2 FF2E      		mov r15,r31
+ 182 00a4 FE0E      		add r15,r30
+ 183 00a6 10E0      		ldi r17,0
+ 184 00a8 AAE0      		ldi r26,lo8(10)
+ 185 00aa BA2E      		mov r11,r26
+ 186 00ac B5E0      		ldi r27,lo8(5)
+ 187 00ae EB2E      		mov r14,r27
+ 188 00b0 88E2      		ldi r24,lo8(40)
+ 189 00b2 A82E      		mov r10,r24
+ 190               	.L16:
+ 191 00b4 2091 0000 		lds r18,it_repetition
+ 192 00b8 3091 0000 		lds r19,it_repetition+1
+ 193 00bc 812F      		mov r24,r17
+ 194 00be 012E      		mov __tmp_reg__,r17
+ 195 00c0 000C      		lsl r0
+ 196 00c2 990B      		sbc r25,r25
+ 197 00c4 8217      		cp r24,r18
+ 198 00c6 9307      		cpc r25,r19
+ 199 00c8 00F0      		brlo .+2
+ 200 00ca 00C0      		rjmp .L63
+ 201 00cc 31E2      		ldi r19,lo8(33)
+ 202 00ce F312      		cpse r15,r19
+ 203 00d0 00C0      		rjmp .L17
+ 204 00d2 8F9A      		sbi 0x11,7
+ 205 00d4 8091 0000 		lds r24,it_interval
+ 206 00d8 9091 0000 		lds r25,it_interval+1
+ 207 00dc 0E94 0000 		call my_delay_us
+ 208 00e0 8F98      		cbi 0x11,7
+ 209 00e2 8091 0000 		lds r24,it_interval_v3
+ 210 00e6 9091 0000 		lds r25,it_interval_v3+1
+ 211 00ea FC01      		movw r30,r24
+ 212 00ec BE9E      		mul r11,r30
+ 213 00ee C001      		movw r24,r0
+ 214 00f0 BF9E      		mul r11,r31
+ 215 00f2 900D      		add r25,r0
+ 216 00f4 1124      		clr __zero_reg__
+ 217 00f6 0E94 0000 		call my_delay_us
+ 218               	.L17:
+ 219 00fa 6E01      		movw r12,r28
+ 220 00fc F2E0      		ldi r31,2
+ 221 00fe CF0E      		add r12,r31
+ 222 0100 D11C      		adc r13,__zero_reg__
+ 223 0102 01E0      		ldi r16,lo8(1)
+ 224               	.L18:
+ 225 0104 0F15      		cp r16,r15
+ 226 0106 04F0      		brlt .+2
+ 227 0108 00C0      		rjmp .L64
+ 228 010a F601      		movw r30,r12
+ 229 010c 8191      		ld r24,Z+
+ 230 010e 6F01      		movw r12,r30
+ 231 0110 8033      		cpi r24,lo8(48)
+ 232 0112 01F0      		breq .+2
+ 233 0114 00C0      		rjmp .L19
+ 234 0116 F1E2      		ldi r31,lo8(33)
+ 235 0118 8F9A      		sbi 0x11,7
+ 236 011a FF12      		cpse r15,r31
+ 237 011c 00C0      		rjmp .L20
+ 238 011e 8091 0000 		lds r24,it_interval_v3
+ 239 0122 9091 0000 		lds r25,it_interval_v3+1
+ 240 0126 0E94 0000 		call my_delay_us
+ 241 012a 8F98      		cbi 0x11,7
+ 242 012c 8091 0000 		lds r24,it_interval_v3
+ 243 0130 9091 0000 		lds r25,it_interval_v3+1
+ 244 0134 0E94 0000 		call my_delay_us
+ 245 0138 8F9A      		sbi 0x11,7
+ 246 013a 8091 0000 		lds r24,it_interval_v3
+ 247 013e 9091 0000 		lds r25,it_interval_v3+1
+ 248 0142 0E94 0000 		call my_delay_us
+ 249 0146 8F98      		cbi 0x11,7
+ 250 0148 8091 0000 		lds r24,it_interval_v3
+ 251 014c 9091 0000 		lds r25,it_interval_v3+1
+ 252 0150 9C01      		movw r18,r24
+ 253 0152 E29E      		mul r14,r18
+ 254 0154 C001      		movw r24,r0
+ 255 0156 E39E      		mul r14,r19
+ 256 0158 900D      		add r25,r0
+ 257 015a 1124      		clr __zero_reg__
+ 258 015c 00C0      		rjmp .L55
+ 259               	.L20:
+ 260 015e 8091 0000 		lds r24,it_interval
+ 261 0162 9091 0000 		lds r25,it_interval+1
+ 262 0166 0E94 0000 		call my_delay_us
+ 263 016a 8F98      		cbi 0x11,7
+ 264 016c 8091 0000 		lds r24,it_interval
+ 265 0170 9091 0000 		lds r25,it_interval+1
+ 266 0174 9C01      		movw r18,r24
+ 267 0176 220F      		lsl r18
+ 268 0178 331F      		rol r19
+ 269 017a 820F      		add r24,r18
+ 270 017c 931F      		adc r25,r19
+ 271 017e 0E94 0000 		call my_delay_us
+ 272 0182 8F9A      		sbi 0x11,7
+ 273 0184 8091 0000 		lds r24,it_interval
+ 274 0188 9091 0000 		lds r25,it_interval+1
+ 275 018c 0E94 0000 		call my_delay_us
+ 276 0190 8F98      		cbi 0x11,7
+ 277 0192 8091 0000 		lds r24,it_interval
+ 278 0196 9091 0000 		lds r25,it_interval+1
+ 279 019a 9C01      		movw r18,r24
+ 280 019c 220F      		lsl r18
+ 281 019e 331F      		rol r19
+ 282 01a0 820F      		add r24,r18
+ 283 01a2 931F      		adc r25,r19
+ 284 01a4 00C0      		rjmp .L55
+ 285               	.L19:
+ 286 01a6 8133      		cpi r24,lo8(49)
+ 287 01a8 01F4      		brne .L22
+ 288 01aa 31E2      		ldi r19,lo8(33)
+ 289 01ac 8F9A      		sbi 0x11,7
+ 290 01ae F312      		cpse r15,r19
+ 291 01b0 00C0      		rjmp .L23
+ 292 01b2 8091 0000 		lds r24,it_interval_v3
+ 293 01b6 9091 0000 		lds r25,it_interval_v3+1
+ 294 01ba 0E94 0000 		call my_delay_us
+ 295 01be 8F98      		cbi 0x11,7
+ 296 01c0 8091 0000 		lds r24,it_interval_v3
+ 297 01c4 9091 0000 		lds r25,it_interval_v3+1
+ 298 01c8 FC01      		movw r30,r24
+ 299 01ca EE9E      		mul r14,r30
+ 300 01cc C001      		movw r24,r0
+ 301 01ce EF9E      		mul r14,r31
+ 302 01d0 900D      		add r25,r0
+ 303 01d2 1124      		clr __zero_reg__
+ 304 01d4 00C0      		rjmp .L62
+ 305               	.L23:
+ 306 01d6 8091 0000 		lds r24,it_interval
+ 307 01da 9091 0000 		lds r25,it_interval+1
+ 308 01de 9C01      		movw r18,r24
+ 309 01e0 220F      		lsl r18
+ 310 01e2 331F      		rol r19
+ 311 01e4 820F      		add r24,r18
+ 312 01e6 931F      		adc r25,r19
+ 313 01e8 0E94 0000 		call my_delay_us
+ 314 01ec 8F98      		cbi 0x11,7
+ 315 01ee 8091 0000 		lds r24,it_interval
+ 316 01f2 9091 0000 		lds r25,it_interval+1
+ 317 01f6 00C0      		rjmp .L56
+ 318               	.L22:
+ 319 01f8 F1E2      		ldi r31,lo8(33)
+ 320 01fa 8F9A      		sbi 0x11,7
+ 321 01fc FF12      		cpse r15,r31
+ 322 01fe 00C0      		rjmp .L24
+ 323 0200 8091 0000 		lds r24,it_interval_v3
+ 324 0204 9091 0000 		lds r25,it_interval_v3+1
+ 325 0208 0E94 0000 		call my_delay_us
+ 326 020c 8F98      		cbi 0x11,7
+ 327 020e 8091 0000 		lds r24,it_interval_v3
+ 328 0212 9091 0000 		lds r25,it_interval_v3+1
+ 329               	.L62:
+ 330 0216 0E94 0000 		call my_delay_us
+ 331 021a 8F9A      		sbi 0x11,7
+ 332 021c 8091 0000 		lds r24,it_interval_v3
+ 333 0220 9091 0000 		lds r25,it_interval_v3+1
+ 334 0224 0E94 0000 		call my_delay_us
+ 335 0228 8F98      		cbi 0x11,7
+ 336 022a 8091 0000 		lds r24,it_interval_v3
+ 337 022e 9091 0000 		lds r25,it_interval_v3+1
+ 338 0232 00C0      		rjmp .L55
+ 339               	.L24:
+ 340 0234 8091 0000 		lds r24,it_interval
+ 341 0238 9091 0000 		lds r25,it_interval+1
+ 342 023c 0E94 0000 		call my_delay_us
+ 343 0240 8F98      		cbi 0x11,7
+ 344 0242 8091 0000 		lds r24,it_interval
+ 345 0246 9091 0000 		lds r25,it_interval+1
+ 346 024a 9C01      		movw r18,r24
+ 347 024c 220F      		lsl r18
+ 348 024e 331F      		rol r19
+ 349 0250 820F      		add r24,r18
+ 350 0252 931F      		adc r25,r19
+ 351               	.L56:
+ 352 0254 0E94 0000 		call my_delay_us
+ 353 0258 8F9A      		sbi 0x11,7
+ 354 025a 8091 0000 		lds r24,it_interval
+ 355 025e 9091 0000 		lds r25,it_interval+1
+ 356 0262 9C01      		movw r18,r24
+ 357 0264 220F      		lsl r18
+ 358 0266 331F      		rol r19
+ 359 0268 820F      		add r24,r18
+ 360 026a 931F      		adc r25,r19
+ 361 026c 0E94 0000 		call my_delay_us
+ 362 0270 8F98      		cbi 0x11,7
+ 363 0272 8091 0000 		lds r24,it_interval
+ 364 0276 9091 0000 		lds r25,it_interval+1
+ 365               	.L55:
+ 366 027a 0E94 0000 		call my_delay_us
+ 367 027e 0F5F      		subi r16,lo8(-(1))
+ 368 0280 00C0      		rjmp .L18
+ 369               	.L64:
+ 370 0282 21E2      		ldi r18,lo8(33)
+ 371 0284 8F9A      		sbi 0x11,7
+ 372 0286 F212      		cpse r15,r18
+ 373 0288 00C0      		rjmp .L26
+ 374 028a 8091 0000 		lds r24,it_interval_v3
+ 375 028e 9091 0000 		lds r25,it_interval_v3+1
+ 376 0292 0E94 0000 		call my_delay_us
+ 377 0296 8F98      		cbi 0x11,7
+ 378 0298 8091 0000 		lds r24,it_interval_v3
+ 379 029c 9091 0000 		lds r25,it_interval_v3+1
+ 380 02a0 FC01      		movw r30,r24
+ 381 02a2 AE9E      		mul r10,r30
+ 382 02a4 C001      		movw r24,r0
+ 383 02a6 AF9E      		mul r10,r31
+ 384 02a8 900D      		add r25,r0
+ 385 02aa 1124      		clr __zero_reg__
+ 386 02ac 0E94 0000 		call my_delay_us
+ 387 02b0 00C0      		rjmp .L27
+ 388               	.L26:
+ 389 02b2 8091 0000 		lds r24,it_interval
+ 390 02b6 9091 0000 		lds r25,it_interval+1
+ 391 02ba 0E94 0000 		call my_delay_us
+ 392 02be 8F98      		cbi 0x11,7
+ 393 02c0 0FE1      		ldi r16,lo8(31)
+ 394               	.L28:
+ 395 02c2 8091 0000 		lds r24,it_interval
+ 396 02c6 9091 0000 		lds r25,it_interval+1
+ 397 02ca 0E94 0000 		call my_delay_us
+ 398 02ce 0150      		subi r16,lo8(-(-1))
+ 399 02d0 01F4      		brne .L28
+ 400               	.L27:
+ 401 02d2 1F5F      		subi r17,lo8(-(1))
+ 402 02d4 00C0      		rjmp .L16
+ 403               	.L63:
+ 404 02d6 8091 0000 		lds r24,intertechno_on
+ 405 02da 8823      		tst r24
+ 406 02dc 01F0      		breq .L30
+ 407 02de 8091 0000 		lds r24,tx_report
+ 408 02e2 8111      		cpse r24,__zero_reg__
+ 409 02e4 00C0      		rjmp .L57
+ 410 02e6 86E3      		ldi r24,lo8(54)
+ 411 02e8 0E94 0000 		call ccStrobe
+ 412 02ec 00C0      		rjmp .L32
+ 413               	.L30:
+ 414 02ee 8091 0000 		lds r24,restore_asksin
+ 415 02f2 8823      		tst r24
+ 416 02f4 01F0      		breq .L33
+ 417 02f6 1092 0000 		sts restore_asksin,__zero_reg__
+ 418 02fa 0E94 0000 		call rf_asksin_init
+ 419 02fe 81E0      		ldi r24,lo8(1)
+ 420 0300 8093 0000 		sts asksin_on,r24
+ 421               	.L57:
+ 422 0304 0E94 0000 		call ccRX
+ 423 0308 00C0      		rjmp .L32
+ 424               	.L33:
+ 425 030a 0E94 0000 		call set_txrestore
+ 426               	.L32:
+ 427 030e 89E6      		ldi r24,lo8(105)
+ 428 0310 0E94 0000 		call display_char
+ 429 0314 83E7      		ldi r24,lo8(115)
+ 430 0316 0E94 0000 		call display_char
+ 431 031a 11E0      		ldi r17,lo8(1)
+ 432               	.L34:
+ 433 031c 1F15      		cp r17,r15
+ 434 031e 04F0      		brlt .+2
+ 435 0320 00C0      		rjmp .L61
+ 436 0322 FE01      		movw r30,r28
+ 437 0324 E10F      		add r30,r17
+ 438 0326 F11D      		adc r31,__zero_reg__
+ 439 0328 17FD      		sbrc r17,7
+ 440 032a FA95      		dec r31
+ 441 032c 8181      		ldd r24,Z+1
+ 442 032e 8033      		cpi r24,lo8(48)
+ 443 0330 01F0      		breq .L58
+ 444 0332 8133      		cpi r24,lo8(49)
+ 445 0334 01F0      		breq .L58
+ 446 0336 86E4      		ldi r24,lo8(70)
+ 447               	.L58:
+ 448 0338 0E94 0000 		call display_char
+ 449 033c 1F5F      		subi r17,lo8(-(1))
+ 450 033e 00C0      		rjmp .L34
+ 451               	.L12:
+ 452 0340 8237      		cpi r24,lo8(114)
+ 453 0342 01F4      		brne .L39
+ 454 0344 8091 0000 		lds r24,asksin_on
+ 455 0348 8823      		tst r24
+ 456 034a 01F0      		breq .L40
+ 457 034c 81E0      		ldi r24,lo8(1)
+ 458 034e 8093 0000 		sts restore_asksin,r24
+ 459 0352 1092 0000 		sts asksin_on,__zero_reg__
+ 460               	.L40:
+ 461 0356 0E94 0000 		call it_tunein
+ 462 035a 81E0      		ldi r24,lo8(1)
+ 463 035c 8093 0000 		sts intertechno_on,r24
+ 464 0360 00C0      		rjmp .L9
+ 465               	.L39:
+ 466 0362 8636      		cpi r24,lo8(102)
+ 467 0364 01F4      		brne .L41
+ 468 0366 8A81      		ldd r24,Y+2
+ 469 0368 8033      		cpi r24,lo8(48)
+ 470 036a 01F4      		brne .L42
+ 471 036c 80E1      		ldi r24,lo8(16)
+ 472 036e 8093 0000 		sts it_frequency,r24
+ 473 0372 80EB      		ldi r24,lo8(-80)
+ 474 0374 8093 0000 		sts it_frequency+1,r24
+ 475 0378 81E7      		ldi r24,lo8(113)
+ 476 037a 8093 0000 		sts it_frequency+2,r24
+ 477 037e 00C0      		rjmp .L43
+ 478               	.L42:
+ 479 0380 43E0      		ldi r20,lo8(3)
+ 480 0382 60E0      		ldi r22,lo8(it_frequency)
+ 481 0384 70E0      		ldi r23,hi8(it_frequency)
+ 482 0386 CE01      		movw r24,r28
+ 483 0388 0296      		adiw r24,2
+ 484 038a 0E94 0000 		call fromhex
+ 485               	.L43:
+ 486 038e 89E6      		ldi r24,lo8(105)
+ 487 0390 0E94 0000 		call display_char
+ 488 0394 86E6      		ldi r24,lo8(102)
+ 489 0396 0E94 0000 		call display_char
+ 490 039a 8AE3      		ldi r24,lo8(58)
+ 491 039c 0E94 0000 		call display_char
+ 492 03a0 8091 0000 		lds r24,it_frequency
+ 493 03a4 0E94 0000 		call display_hex2
+ 494 03a8 8091 0000 		lds r24,it_frequency+1
+ 495 03ac 0E94 0000 		call display_hex2
+ 496 03b0 8091 0000 		lds r24,it_frequency+2
+ 497 03b4 0E94 0000 		call display_hex2
+ 498 03b8 00C0      		rjmp .L61
+ 499               	.L41:
+ 500 03ba 8837      		cpi r24,lo8(120)
+ 501 03bc 01F4      		brne .L44
+ 502 03be 8091 0000 		lds r24,restore_asksin
+ 503 03c2 8823      		tst r24
+ 504 03c4 01F0      		breq .L45
+ 505 03c6 1092 0000 		sts restore_asksin,__zero_reg__
+ 506 03ca 0E94 0000 		call rf_asksin_init
+ 507 03ce 81E0      		ldi r24,lo8(1)
+ 508 03d0 8093 0000 		sts asksin_on,r24
+ 509 03d4 00C0      		rjmp .L59
+ 510               	.L45:
+ 511 03d6 82E0      		ldi r24,lo8(2)
+ 512 03d8 90E0      		ldi r25,0
+ 513 03da 0E94 0000 		call ccInitChip
+ 514 03de 8091 0000 		lds r24,tx_report
+ 515 03e2 8823      		tst r24
+ 516 03e4 01F0      		breq .L47
+ 517               	.L59:
+ 518 03e6 0E94 0000 		call ccRX
+ 519 03ea 00C0      		rjmp .L46
+ 520               	.L47:
+ 521 03ec 86E3      		ldi r24,lo8(54)
+ 522 03ee 0E94 0000 		call ccStrobe
+ 523               	.L46:
+ 524 03f2 1092 0000 		sts intertechno_on,__zero_reg__
+ 525 03f6 00C0      		rjmp .L9
+ 526               	.L44:
+ 527 03f8 8336      		cpi r24,lo8(99)
+ 528 03fa 01F4      		brne .L9
+ 529 03fc 60E0      		ldi r22,lo8(it_interval)
+ 530 03fe 70E0      		ldi r23,hi8(it_interval)
+ 531 0400 CE01      		movw r24,r28
+ 532 0402 0196      		adiw r24,1
+ 533 0404 0E94 0000 		call fromdec
+ 534               	.L9:
+ 535               	/* epilogue start */
+ 536 0408 CDB7      		in r28,__SP_L__
+ 537 040a DEB7      		in r29,__SP_H__
+ 538 040c EAE0      		ldi r30, lo8(10)
+ 539 040e 0C94 0000 		jmp __epilogue_restores__ + ((18 - 10) * 2)
+ 541               	.global	it_frequency
+ 542               		.data
+ 545               	it_frequency:
+ 546 0000 10        		.byte	16
+ 547 0001 B0        		.byte	-80
+ 548 0002 71        		.byte	113
+ 549               	.global	restore_moritz
+ 550               		.section .bss
+ 553               	restore_moritz:
+ 554 0000 00        		.zero	1
+ 555               	.global	restore_asksin
+ 558               	restore_asksin:
+ 559 0001 00        		.zero	1
+ 560               	.global	it_repetition
+ 561               		.data
+ 564               	it_repetition:
+ 565 0003 0600      		.word	6
+ 566               	.global	it_interval_v3
+ 569               	it_interval_v3:
+ 570 0005 0401      		.word	260
+ 571               	.global	it_interval
+ 574               	it_interval:
+ 575 0007 A401      		.word	420
+ 576               	.global	CC1100_ITCFG
+ 577               		.section	.progmem.data,"a",@progbits
+ 580               	CC1100_ITCFG:
+ 581 0000 0D        		.byte	13
+ 582 0001 2E        		.byte	46
+ 583 0002 2D        		.byte	45
+ 584 0003 07        		.byte	7
+ 585 0004 D3        		.byte	-45
+ 586 0005 91        		.byte	-111
+ 587 0006 3D        		.byte	61
+ 588 0007 04        		.byte	4
+ 589 0008 32        		.byte	50
+ 590 0009 00        		.byte	0
+ 591 000a 00        		.byte	0
+ 592 000b 06        		.byte	6
+ 593 000c 00        		.byte	0
+ 594 000d 10        		.byte	16
+ 595 000e B0        		.byte	-80
+ 596 000f 71        		.byte	113
+ 597 0010 55        		.byte	85
+ 598 0011 E4        		.byte	-28
+ 599 0012 30        		.byte	48
+ 600 0013 23        		.byte	35
+ 601 0014 B9        		.byte	-71
+ 602 0015 00        		.byte	0
+ 603 0016 07        		.byte	7
+ 604 0017 00        		.byte	0
+ 605 0018 18        		.byte	24
+ 606 0019 14        		.byte	20
+ 607 001a 6C        		.byte	108
+ 608 001b 07        		.byte	7
+ 609 001c 00        		.byte	0
+ 610 001d 90        		.byte	-112
+ 611 001e 87        		.byte	-121
+ 612 001f 6B        		.byte	107
+ 613 0020 F8        		.byte	-8
+ 614 0021 56        		.byte	86
+ 615 0022 11        		.byte	17
+ 616 0023 E9        		.byte	-23
+ 617 0024 2A        		.byte	42
+ 618 0025 00        		.byte	0
+ 619 0026 1F        		.byte	31
+ 620 0027 41        		.byte	65
+ 621 0028 00        		.byte	0
+ 622               		.local	intertechno_on
+ 623               		.comm	intertechno_on,1,1
+ 624               		.ident	"GCC: (GNU) 5.4.0"
+ 625               	.global __do_copy_data
+ 626               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 intertechno.c
+     /tmp/ccGIYoKn.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccGIYoKn.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccGIYoKn.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccGIYoKn.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccGIYoKn.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccGIYoKn.s:9      .text.it_tunein:00000000 it_tunein
+     /tmp/ccGIYoKn.s:580    .progmem.data:00000000 CC1100_ITCFG
+     /tmp/ccGIYoKn.s:545    .data:00000000 it_frequency
+     /tmp/ccGIYoKn.s:106    .text.it_func:00000000 it_func
+     /tmp/ccGIYoKn.s:574    .data:00000007 it_interval
+     /tmp/ccGIYoKn.s:564    .data:00000003 it_repetition
+                             .bss:00000002 intertechno_on
+     /tmp/ccGIYoKn.s:558    .bss:00000001 restore_asksin
+     /tmp/ccGIYoKn.s:569    .data:00000005 it_interval_v3
+     /tmp/ccGIYoKn.s:553    .bss:00000000 restore_moritz
+
+UNDEFINED SYMBOLS
+my_delay_us
+ccStrobe
+cc1100_sendbyte
+erb
+my_delay_ms
+cc_on
+__prologue_saves__
+fromdec
+display_udec
+display_nl
+asksin_on
+ccTX
+tx_report
+rf_asksin_init
+ccRX
+set_txrestore
+display_char
+fromhex
+display_hex2
+ccInitChip
+__epilogue_restores__
+__do_copy_data
+__do_clear_bss

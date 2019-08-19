@@ -1,0 +1,138 @@
+   1               		.file	"fht.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.fht_display_buf,"ax",@progbits
+   8               	.global	fht_display_buf
+  10               	fht_display_buf:
+  11 0000 0F93      		push r16
+  12 0002 1F93      		push r17
+  13 0004 CF93      		push r28
+  14 0006 DF93      		push r29
+  15               	/* prologue: function */
+  16               	/* frame size = 0 */
+  17               	/* stack size = 4 */
+  18               	.L__stack_usage = 4
+  19 0008 2091 0000 		lds r18,tx_report
+  20 000c 26FF      		sbrs r18,6
+  21 000e 00C0      		rjmp .L1
+  22 0010 8C01      		movw r16,r24
+  23 0012 84E5      		ldi r24,lo8(84)
+  24 0014 0E94 0000 		call display_char
+  25 0018 E801      		movw r28,r16
+  26 001a 0B5F      		subi r16,-5
+  27 001c 1F4F      		sbci r17,-1
+  28               	.L3:
+  29 001e 8991      		ld r24,Y+
+  30 0020 0E94 0000 		call display_hex2
+  31 0024 C017      		cp r28,r16
+  32 0026 D107      		cpc r29,r17
+  33 0028 01F4      		brne .L3
+  34 002a 8091 0000 		lds r24,tx_report
+  35 002e 85FF      		sbrs r24,5
+  36 0030 00C0      		rjmp .L4
+  37 0032 8AEF      		ldi r24,lo8(-6)
+  38 0034 0E94 0000 		call display_hex2
+  39               	.L4:
+  40 0038 0E94 0000 		call display_nl
+  41               	.L1:
+  42               	/* epilogue start */
+  43 003c DF91      		pop r29
+  44 003e CF91      		pop r28
+  45 0040 1F91      		pop r17
+  46 0042 0F91      		pop r16
+  47 0044 0895      		ret
+  49               		.section	.text.fht_init,"ax",@progbits
+  50               	.global	fht_init
+  52               	fht_init:
+  53               	/* prologue: function */
+  54               	/* frame size = 0 */
+  55               	/* stack size = 0 */
+  56               	.L__stack_usage = 0
+  57 0000 85E3      		ldi r24,lo8(53)
+  58 0002 90E0      		ldi r25,0
+  59 0004 0E94 0000 		call erb
+  60 0008 8093 0000 		sts fht_hc0,r24
+  61 000c 86E3      		ldi r24,lo8(54)
+  62 000e 90E0      		ldi r25,0
+  63 0010 0E94 0000 		call erb
+  64 0014 8093 0000 		sts fht_hc1,r24
+  65 0018 0895      		ret
+  67               		.section	.text.fhtsend,"ax",@progbits
+  68               	.global	fhtsend
+  70               	fhtsend:
+  71 0000 A6E0      		ldi r26,lo8(6)
+  72 0002 B0E0      		ldi r27,0
+  73 0004 E0E0      		ldi r30,lo8(gs(1f))
+  74 0006 F0E0      		ldi r31,hi8(gs(1f))
+  75 0008 0C94 0000 		jmp __prologue_saves__+((18 - 2) * 2)
+  76               	1:
+  77               	/* prologue: function */
+  78               	/* frame size = 6 */
+  79               	/* stack size = 8 */
+  80               	.L__stack_usage = 8
+  81 000c 45E0      		ldi r20,lo8(5)
+  82 000e BE01      		movw r22,r28
+  83 0010 6F5F      		subi r22,-1
+  84 0012 7F4F      		sbci r23,-1
+  85 0014 0196      		adiw r24,1
+  86 0016 0E94 0000 		call fromhex
+  87 001a 8430      		cpi r24,lo8(4)
+  88 001c 00F4      		brsh .L14
+  89 001e 9981      		ldd r25,Y+1
+  90 0020 9130      		cpi r25,lo8(1)
+  91 0022 01F4      		brne .L16
+  92 0024 8330      		cpi r24,lo8(3)
+  93 0026 01F4      		brne .L17
+  94 0028 6A81      		ldd r22,Y+2
+  95 002a 85E3      		ldi r24,lo8(53)
+  96 002c 90E0      		ldi r25,0
+  97 002e 0E94 0000 		call ewb
+  98 0032 6B81      		ldd r22,Y+3
+  99 0034 86E3      		ldi r24,lo8(54)
+ 100 0036 90E0      		ldi r25,0
+ 101 0038 0E94 0000 		call ewb
+ 102 003c 0E94 0000 		call fht_init
+ 103 0040 00C0      		rjmp .L14
+ 104               	.L17:
+ 105 0042 8091 0000 		lds r24,fht_hc0
+ 106 0046 0E94 0000 		call display_hex2
+ 107 004a 8091 0000 		lds r24,fht_hc1
+ 108 004e 0E94 0000 		call display_hex2
+ 109               	.L16:
+ 110 0052 0E94 0000 		call display_nl
+ 111               	.L14:
+ 112               	/* epilogue start */
+ 113 0056 2696      		adiw r28,6
+ 114 0058 E2E0      		ldi r30, lo8(2)
+ 115 005a 0C94 0000 		jmp __epilogue_restores__ + ((18 - 2) * 2)
+ 117               		.comm	fht_hc1,1,1
+ 118               		.comm	fht_hc0,1,1
+ 119               		.ident	"GCC: (GNU) 5.4.0"
+ 120               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 fht.c
+     /tmp/ccHVwjXW.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccHVwjXW.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccHVwjXW.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccHVwjXW.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccHVwjXW.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccHVwjXW.s:10     .text.fht_display_buf:00000000 fht_display_buf
+     /tmp/ccHVwjXW.s:52     .text.fht_init:00000000 fht_init
+                            *COM*:00000001 fht_hc0
+                            *COM*:00000001 fht_hc1
+     /tmp/ccHVwjXW.s:70     .text.fhtsend:00000000 fhtsend
+
+UNDEFINED SYMBOLS
+tx_report
+display_char
+display_hex2
+display_nl
+erb
+__prologue_saves__
+fromhex
+ewb
+__epilogue_restores__
+__do_clear_bss

@@ -1,0 +1,286 @@
+   1               		.file	"display.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.display_char,"ax",@progbits
+   8               	.global	display_char
+  10               	display_char:
+  11 0000 CF93      		push r28
+  12               	/* prologue: function */
+  13               	/* frame size = 0 */
+  14               	/* stack size = 1 */
+  15               	.L__stack_usage = 1
+  16 0002 9091 0000 		lds r25,USB_DeviceState
+  17 0006 9430      		cpi r25,lo8(4)
+  18 0008 01F4      		brne .L1
+  19 000a 9091 0000 		lds r25,display_channel
+  20 000e 90FF      		sbrs r25,0
+  21 0010 00C0      		rjmp .L1
+  22 0012 C82F      		mov r28,r24
+  23 0014 8091 0000 		lds r24,TTY_Tx_Buffer+2
+  24 0018 87FD      		sbrc r24,7
+  25 001a 0E94 0000 		call CDC_Task
+  26               	.L5:
+  27 001e 6C2F      		mov r22,r28
+  28 0020 80E0      		ldi r24,lo8(TTY_Tx_Buffer)
+  29 0022 90E0      		ldi r25,hi8(TTY_Tx_Buffer)
+  30 0024 0E94 0000 		call rb_put
+  31 0028 CA30      		cpi r28,lo8(10)
+  32 002a 01F4      		brne .L1
+  33 002c 0E94 0000 		call CDC_Task
+  34               	.L1:
+  35               	/* epilogue start */
+  36 0030 CF91      		pop r28
+  37 0032 0895      		ret
+  39               		.section	.text.display_string,"ax",@progbits
+  40               	.global	display_string
+  42               	display_string:
+  43 0000 CF93      		push r28
+  44 0002 DF93      		push r29
+  45               	/* prologue: function */
+  46               	/* frame size = 0 */
+  47               	/* stack size = 2 */
+  48               	.L__stack_usage = 2
+  49 0004 EC01      		movw r28,r24
+  50               	.L11:
+  51 0006 8991      		ld r24,Y+
+  52 0008 8823      		tst r24
+  53 000a 01F0      		breq .L13
+  54 000c 0E94 0000 		call display_char
+  55 0010 00C0      		rjmp .L11
+  56               	.L13:
+  57               	/* epilogue start */
+  58 0012 DF91      		pop r29
+  59 0014 CF91      		pop r28
+  60 0016 0895      		ret
+  62               		.section	.text.display_string_P,"ax",@progbits
+  63               	.global	display_string_P
+  65               	display_string_P:
+  66 0000 CF93      		push r28
+  67 0002 DF93      		push r29
+  68               	/* prologue: function */
+  69               	/* frame size = 0 */
+  70               	/* stack size = 2 */
+  71               	.L__stack_usage = 2
+  72 0004 EC01      		movw r28,r24
+  73               	.L15:
+  74 0006 FE01      		movw r30,r28
+  75               	/* #APP */
+  76               	 ;  197 "../../clib/display.c" 1
+  77 0008 8491      		lpm r24, Z
+  78               		
+  79               	 ;  0 "" 2
+  80               	/* #NOAPP */
+  81 000a 8823      		tst r24
+  82 000c 01F0      		breq .L17
+  83 000e 0E94 0000 		call display_char
+  84 0012 2196      		adiw r28,1
+  85 0014 00C0      		rjmp .L15
+  86               	.L17:
+  87               	/* epilogue start */
+  88 0016 DF91      		pop r29
+  89 0018 CF91      		pop r28
+  90 001a 0895      		ret
+  92               		.section	.text.display_nl,"ax",@progbits
+  93               	.global	display_nl
+  95               	display_nl:
+  96               	/* prologue: function */
+  97               	/* frame size = 0 */
+  98               	/* stack size = 0 */
+  99               	.L__stack_usage = 0
+ 100 0000 8DE0      		ldi r24,lo8(13)
+ 101 0002 0E94 0000 		call display_char
+ 102 0006 8AE0      		ldi r24,lo8(10)
+ 103 0008 0E94 0000 		call display_char
+ 104 000c 0895      		ret
+ 106               		.section	.text.display_udec,"ax",@progbits
+ 107               	.global	display_udec
+ 109               	display_udec:
+ 110 0000 A6E0      		ldi r26,lo8(6)
+ 111 0002 B0E0      		ldi r27,0
+ 112 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 113 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 114 0008 0C94 0000 		jmp __prologue_saves__+((18 - 4) * 2)
+ 115               	1:
+ 116               	/* prologue: function */
+ 117               	/* frame size = 6 */
+ 118               	/* stack size = 10 */
+ 119               	.L__stack_usage = 10
+ 120 000c 362F      		mov r19,r22
+ 121 000e 1E82      		std Y+6,__zero_reg__
+ 122 0010 25E0      		ldi r18,lo8(5)
+ 123 0012 EAE0      		ldi r30,lo8(10)
+ 124 0014 F0E0      		ldi r31,0
+ 125               	.L21:
+ 126 0016 2150      		subi r18,lo8(-(-1))
+ 127 0018 01E0      		ldi r16,lo8(1)
+ 128 001a 10E0      		ldi r17,0
+ 129 001c 0C0F      		add r16,r28
+ 130 001e 1D1F      		adc r17,r29
+ 131 0020 020F      		add r16,r18
+ 132 0022 111D      		adc r17,__zero_reg__
+ 133 0024 BF01      		movw r22,r30
+ 134 0026 0E94 0000 		call __udivmodhi4
+ 135 002a 805D      		subi r24,lo8(-(48))
+ 136 002c D801      		movw r26,r16
+ 137 002e 8C93      		st X,r24
+ 138 0030 CB01      		movw r24,r22
+ 139 0032 3150      		subi r19,lo8(-(-1))
+ 140 0034 0097      		sbiw r24,0
+ 141 0036 01F0      		breq .L22
+ 142 0038 2111      		cpse r18,__zero_reg__
+ 143 003a 00C0      		rjmp .L21
+ 144 003c 00C0      		rjmp .L22
+ 145               	.L29:
+ 146 003e 2223      		tst r18
+ 147 0040 01F0      		breq .L23
+ 148 0042 2150      		subi r18,lo8(-(-1))
+ 149 0044 E1E0      		ldi r30,lo8(1)
+ 150 0046 F0E0      		ldi r31,0
+ 151 0048 EC0F      		add r30,r28
+ 152 004a FD1F      		adc r31,r29
+ 153 004c E20F      		add r30,r18
+ 154 004e F11D      		adc r31,__zero_reg__
+ 155 0050 4083      		st Z,r20
+ 156               	.L22:
+ 157 0052 3150      		subi r19,lo8(-(-1))
+ 158 0054 37FF      		sbrs r19,7
+ 159 0056 00C0      		rjmp .L29
+ 160               	.L23:
+ 161 0058 81E0      		ldi r24,lo8(1)
+ 162 005a 90E0      		ldi r25,0
+ 163 005c 8C0F      		add r24,r28
+ 164 005e 9D1F      		adc r25,r29
+ 165 0060 820F      		add r24,r18
+ 166 0062 911D      		adc r25,__zero_reg__
+ 167 0064 0E94 0000 		call display_string
+ 168               	/* epilogue start */
+ 169 0068 2696      		adiw r28,6
+ 170 006a E4E0      		ldi r30, lo8(4)
+ 171 006c 0C94 0000 		jmp __epilogue_restores__ + ((18 - 4) * 2)
+ 173               		.section	.text.display_hex,"ax",@progbits
+ 174               	.global	display_hex
+ 176               	display_hex:
+ 177 0000 A5E0      		ldi r26,lo8(5)
+ 178 0002 B0E0      		ldi r27,0
+ 179 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 180 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 181 0008 0C94 0000 		jmp __prologue_saves__+((18 - 4) * 2)
+ 182               	1:
+ 183               	/* prologue: function */
+ 184               	/* frame size = 5 */
+ 185               	/* stack size = 9 */
+ 186               	.L__stack_usage = 9
+ 187 000c FC01      		movw r30,r24
+ 188 000e 1D82      		std Y+5,__zero_reg__
+ 189 0010 94E0      		ldi r25,lo8(4)
+ 190               	.L33:
+ 191 0012 2E2F      		mov r18,r30
+ 192 0014 2F70      		andi r18,lo8(15)
+ 193 0016 9150      		subi r25,lo8(-(-1))
+ 194 0018 A92F      		mov r26,r25
+ 195 001a B0E0      		ldi r27,0
+ 196 001c 2A30      		cpi r18,lo8(10)
+ 197 001e 00F4      		brsh .L31
+ 198 0020 205D      		subi r18,lo8(-(48))
+ 199 0022 00C0      		rjmp .L32
+ 200               	.L31:
+ 201 0024 295C      		subi r18,lo8(-(55))
+ 202               	.L32:
+ 203 0026 01E0      		ldi r16,lo8(1)
+ 204 0028 10E0      		ldi r17,0
+ 205 002a 0C0F      		add r16,r28
+ 206 002c 1D1F      		adc r17,r29
+ 207 002e A00F      		add r26,r16
+ 208 0030 B11F      		adc r27,r17
+ 209 0032 2C93      		st X,r18
+ 210 0034 84E0      		ldi r24,4
+ 211               		1:
+ 212 0036 F695      		lsr r31
+ 213 0038 E795      		ror r30
+ 214 003a 8A95      		dec r24
+ 215 003c 01F4      		brne 1b
+ 216 003e 6150      		subi r22,lo8(-(-1))
+ 217 0040 3097      		sbiw r30,0
+ 218 0042 01F4      		brne .L33
+ 219               	.L34:
+ 220 0044 6150      		subi r22,lo8(-(-1))
+ 221 0046 67FD      		sbrc r22,7
+ 222 0048 00C0      		rjmp .L35
+ 223 004a 9923      		tst r25
+ 224 004c 01F0      		breq .L35
+ 225 004e 9150      		subi r25,lo8(-(-1))
+ 226 0050 E1E0      		ldi r30,lo8(1)
+ 227 0052 F0E0      		ldi r31,0
+ 228 0054 EC0F      		add r30,r28
+ 229 0056 FD1F      		adc r31,r29
+ 230 0058 E90F      		add r30,r25
+ 231 005a F11D      		adc r31,__zero_reg__
+ 232 005c 4083      		st Z,r20
+ 233 005e 00C0      		rjmp .L34
+ 234               	.L35:
+ 235 0060 21E0      		ldi r18,lo8(1)
+ 236 0062 30E0      		ldi r19,0
+ 237 0064 2C0F      		add r18,r28
+ 238 0066 3D1F      		adc r19,r29
+ 239 0068 290F      		add r18,r25
+ 240 006a 311D      		adc r19,__zero_reg__
+ 241 006c C901      		movw r24,r18
+ 242 006e 0E94 0000 		call display_string
+ 243               	/* epilogue start */
+ 244 0072 2596      		adiw r28,5
+ 245 0074 E4E0      		ldi r30, lo8(4)
+ 246 0076 0C94 0000 		jmp __epilogue_restores__ + ((18 - 4) * 2)
+ 248               		.section	.text.display_hex2,"ax",@progbits
+ 249               	.global	display_hex2
+ 251               	display_hex2:
+ 252               	/* prologue: function */
+ 253               	/* frame size = 0 */
+ 254               	/* stack size = 0 */
+ 255               	.L__stack_usage = 0
+ 256 0000 40E3      		ldi r20,lo8(48)
+ 257 0002 62E0      		ldi r22,lo8(2)
+ 258 0004 90E0      		ldi r25,0
+ 259 0006 0E94 0000 		call display_hex
+ 260 000a 0895      		ret
+ 262               	.global	display_channel
+ 263               		.section .bss
+ 266               	display_channel:
+ 267 0000 00        		.zero	1
+ 268               	.global	log_enabled
+ 271               	log_enabled:
+ 272 0001 00        		.zero	1
+ 273               		.comm	output_flush_func,2,1
+ 274               		.comm	input_handle_func,2,1
+ 275               		.ident	"GCC: (GNU) 5.4.0"
+ 276               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 display.c
+     /tmp/cci1ueoi.s:2      *ABS*:0000003e __SP_H__
+     /tmp/cci1ueoi.s:3      *ABS*:0000003d __SP_L__
+     /tmp/cci1ueoi.s:4      *ABS*:0000003f __SREG__
+     /tmp/cci1ueoi.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/cci1ueoi.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/cci1ueoi.s:10     .text.display_char:00000000 display_char
+     /tmp/cci1ueoi.s:266    .bss:00000000 display_channel
+     /tmp/cci1ueoi.s:42     .text.display_string:00000000 display_string
+     /tmp/cci1ueoi.s:65     .text.display_string_P:00000000 display_string_P
+     /tmp/cci1ueoi.s:95     .text.display_nl:00000000 display_nl
+     /tmp/cci1ueoi.s:109    .text.display_udec:00000000 display_udec
+     /tmp/cci1ueoi.s:176    .text.display_hex:00000000 display_hex
+     /tmp/cci1ueoi.s:251    .text.display_hex2:00000000 display_hex2
+     /tmp/cci1ueoi.s:271    .bss:00000001 log_enabled
+                            *COM*:00000002 output_flush_func
+                            *COM*:00000002 input_handle_func
+
+UNDEFINED SYMBOLS
+USB_DeviceState
+TTY_Tx_Buffer
+CDC_Task
+rb_put
+__prologue_saves__
+__udivmodhi4
+__epilogue_restores__
+__do_clear_bss

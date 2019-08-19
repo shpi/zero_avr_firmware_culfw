@@ -1,0 +1,204 @@
+   1               		.file	"fastrf.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.fastrf_func,"ax",@progbits
+   8               	.global	fastrf_func
+  10               	fastrf_func:
+  11 0000 FF92      		push r15
+  12 0002 0F93      		push r16
+  13 0004 1F93      		push r17
+  14 0006 CF93      		push r28
+  15 0008 DF93      		push r29
+  16               	/* prologue: function */
+  17               	/* frame size = 0 */
+  18               	/* stack size = 5 */
+  19               	.L__stack_usage = 5
+  20 000a EC01      		movw r28,r24
+  21 000c FC01      		movw r30,r24
+  22               		0:
+  23 000e 0190      		ld __tmp_reg__,Z+
+  24 0010 0020      		tst __tmp_reg__
+  25 0012 01F4      		brne 0b
+  26 0014 3197      		sbiw r30,1
+  27 0016 8F01      		movw r16,r30
+  28 0018 081B      		sub r16,r24
+  29 001a 190B      		sbc r17,r25
+  30 001c 8981      		ldd r24,Y+1
+  31 001e 8237      		cpi r24,lo8(114)
+  32 0020 01F4      		brne .L2
+  33 0022 87E3      		ldi r24,lo8(55)
+  34 0024 90E0      		ldi r25,0
+  35 0026 0E94 0000 		call ccInitChip
+  36 002a 0E94 0000 		call ccRX
+  37 002e 81E0      		ldi r24,lo8(1)
+  38 0030 8093 0000 		sts fastrf_on,r24
+  39 0034 00C0      		rjmp .L1
+  40               	.L2:
+  41 0036 8337      		cpi r24,lo8(115)
+  42 0038 01F4      		brne .L4
+  43 003a F02E      		mov r15,r16
+  44 003c 5E98      		cbi 0xb,6
+  45 003e 8FE7      		ldi r24,lo8(127)
+  46 0040 0E94 0000 		call cc1100_sendbyte
+  47 0044 8EEF      		ldi r24,lo8(-2)
+  48 0046 800F      		add r24,r16
+  49 0048 0E94 0000 		call cc1100_sendbyte
+  50 004c 2296      		adiw r28,2
+  51 004e 12E0      		ldi r17,lo8(2)
+  52               	.L5:
+  53 0050 1F15      		cp r17,r15
+  54 0052 00F4      		brsh .L10
+  55 0054 8991      		ld r24,Y+
+  56 0056 0E94 0000 		call cc1100_sendbyte
+  57 005a 1F5F      		subi r17,lo8(-(1))
+  58 005c 00C0      		rjmp .L5
+  59               	.L10:
+  60 005e 5E9A      		sbi 0xb,6
+  61 0060 0E94 0000 		call ccTX
+  62               	.L7:
+  63 0064 8AE3      		ldi r24,lo8(58)
+  64 0066 0E94 0000 		call cc1100_readReg
+  65 006a 8F77      		andi r24,lo8(127)
+  66 006c 01F0      		breq .L11
+  67 006e 81E0      		ldi r24,lo8(1)
+  68 0070 0E94 0000 		call my_delay_ms
+  69 0074 00C0      		rjmp .L7
+  70               	.L11:
+  71 0076 0E94 0000 		call ccRX
+  72 007a 00C0      		rjmp .L1
+  73               	.L4:
+  74 007c 1092 0000 		sts fastrf_on,__zero_reg__
+  75               	.L1:
+  76               	/* epilogue start */
+  77 0080 CDB7      		in r28,__SP_L__
+  78 0082 DEB7      		in r29,__SP_H__
+  79 0084 E5E0      		ldi r30, lo8(5)
+  80 0086 0C94 0000 		jmp __epilogue_restores__ + ((18 - 5) * 2)
+  82               		.section	.text.FastRF_Task,"ax",@progbits
+  83               	.global	FastRF_Task
+  85               	FastRF_Task:
+  86 0000 A0E8      		ldi r26,lo8(-128)
+  87 0002 B0E0      		ldi r27,0
+  88 0004 E0E0      		ldi r30,lo8(gs(1f))
+  89 0006 F0E0      		ldi r31,hi8(gs(1f))
+  90 0008 0C94 0000 		jmp __prologue_saves__+((18 - 8) * 2)
+  91               	1:
+  92               	/* prologue: function */
+  93               	/* frame size = 128 */
+  94               	/* stack size = 136 */
+  95               	.L__stack_usage = 136
+  96 000c 8091 0000 		lds r24,fastrf_on
+  97 0010 8823      		tst r24
+  98 0012 01F4      		brne .+2
+  99 0014 00C0      		rjmp .L12
+ 100 0016 8130      		cpi r24,lo8(1)
+ 101 0018 01F4      		brne .L14
+ 102 001a 8091 0000 		lds r24,ticks
+ 103 001e 9091 0000 		lds r25,ticks+1
+ 104 0022 A091 0000 		lds r26,ticks+2
+ 105 0026 B091 0000 		lds r27,ticks+3
+ 106 002a 2091 0000 		lds r18,lasttick.2055
+ 107 002e 2817      		cp r18,r24
+ 108 0030 01F4      		brne .+2
+ 109 0032 00C0      		rjmp .L12
+ 110 0034 85E3      		ldi r24,lo8(53)
+ 111 0036 0E94 0000 		call cc1100_readReg
+ 112 003a 8131      		cpi r24,lo8(17)
+ 113 003c 01F4      		brne .L15
+ 114 003e 8AE3      		ldi r24,lo8(58)
+ 115 0040 0E94 0000 		call ccStrobe
+ 116 0044 0E94 0000 		call ccRX
+ 117               	.L15:
+ 118 0048 8091 0000 		lds r24,ticks
+ 119 004c 9091 0000 		lds r25,ticks+1
+ 120 0050 A091 0000 		lds r26,ticks+2
+ 121 0054 B091 0000 		lds r27,ticks+3
+ 122 0058 8093 0000 		sts lasttick.2055,r24
+ 123 005c 00C0      		rjmp .L12
+ 124               	.L14:
+ 125 005e 8FE3      		ldi r24,lo8(63)
+ 126 0060 0E94 0000 		call cc1100_readReg
+ 127 0064 F82E      		mov r15,r24
+ 128 0066 87FD      		sbrc r24,7
+ 129 0068 00C0      		rjmp .L16
+ 130 006a 5E98      		cbi 0xb,6
+ 131 006c 8FEF      		ldi r24,lo8(-1)
+ 132 006e 0E94 0000 		call cc1100_sendbyte
+ 133 0072 8E01      		movw r16,r28
+ 134 0074 0F5F      		subi r16,-1
+ 135 0076 1F4F      		sbci r17,-1
+ 136 0078 6801      		movw r12,r16
+ 137 007a E02E      		mov r14,r16
+ 138               	.L17:
+ 139 007c 8C2D      		mov r24,r12
+ 140 007e 801B      		sub r24,r16
+ 141 0080 8F15      		cp r24,r15
+ 142 0082 00F4      		brsh .L25
+ 143 0084 80E0      		ldi r24,0
+ 144 0086 0E94 0000 		call cc1100_sendbyte
+ 145 008a F601      		movw r30,r12
+ 146 008c 8193      		st Z+,r24
+ 147 008e 6F01      		movw r12,r30
+ 148 0090 00C0      		rjmp .L17
+ 149               	.L25:
+ 150 0092 5E9A      		sbi 0xb,6
+ 151 0094 81E0      		ldi r24,lo8(1)
+ 152 0096 8093 0000 		sts display_channel,r24
+ 153               	.L19:
+ 154 009a 802F      		mov r24,r16
+ 155 009c 8E19      		sub r24,r14
+ 156 009e 8F15      		cp r24,r15
+ 157 00a0 00F4      		brsh .L26
+ 158 00a2 F801      		movw r30,r16
+ 159 00a4 8191      		ld r24,Z+
+ 160 00a6 8F01      		movw r16,r30
+ 161 00a8 0E94 0000 		call display_char
+ 162 00ac 00C0      		rjmp .L19
+ 163               	.L26:
+ 164 00ae 0E94 0000 		call display_nl
+ 165 00b2 8FEF      		ldi r24,lo8(-1)
+ 166 00b4 8093 0000 		sts display_channel,r24
+ 167               	.L16:
+ 168 00b8 81E0      		ldi r24,lo8(1)
+ 169 00ba 8093 0000 		sts fastrf_on,r24
+ 170               	.L12:
+ 171               	/* epilogue start */
+ 172 00be C058      		subi r28,-128
+ 173 00c0 DF4F      		sbci r29,-1
+ 174 00c2 E8E0      		ldi r30, lo8(8)
+ 175 00c4 0C94 0000 		jmp __epilogue_restores__ + ((18 - 8) * 2)
+ 177               		.local	lasttick.2055
+ 178               		.comm	lasttick.2055,1,1
+ 179               		.comm	fastrf_on,1,1
+ 180               		.ident	"GCC: (GNU) 5.4.0"
+ 181               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 fastrf.c
+     /tmp/cclRqVdg.s:2      *ABS*:0000003e __SP_H__
+     /tmp/cclRqVdg.s:3      *ABS*:0000003d __SP_L__
+     /tmp/cclRqVdg.s:4      *ABS*:0000003f __SREG__
+     /tmp/cclRqVdg.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/cclRqVdg.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/cclRqVdg.s:10     .text.fastrf_func:00000000 fastrf_func
+                            *COM*:00000001 fastrf_on
+     /tmp/cclRqVdg.s:85     .text.FastRF_Task:00000000 FastRF_Task
+                             .bss:00000000 lasttick.2055
+
+UNDEFINED SYMBOLS
+ccInitChip
+ccRX
+cc1100_sendbyte
+ccTX
+cc1100_readReg
+my_delay_ms
+__epilogue_restores__
+__prologue_saves__
+ticks
+ccStrobe
+display_channel
+display_char
+display_nl
+__do_clear_bss

@@ -1,0 +1,706 @@
+   1               		.file	"mbus_packet.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.packetSize,"ax",@progbits
+   8               	.global	packetSize
+  10               	packetSize:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 482F      		mov r20,r24
+  16 0002 50E0      		ldi r21,0
+  17 0004 8A31      		cpi r24,lo8(26)
+  18 0006 00F0      		brlo .L3
+  19 0008 9A01      		movw r18,r20
+  20 000a 2A51      		subi r18,26
+  21 000c 3109      		sbc r19,__zero_reg__
+  22 000e 84E0      		ldi r24,4
+  23               		1:
+  24 0010 3595      		asr r19
+  25 0012 2795      		ror r18
+  26 0014 8A95      		dec r24
+  27 0016 01F4      		brne 1b
+  28 0018 2D5F      		subi r18,lo8(-(3))
+  29 001a 00C0      		rjmp .L2
+  30               	.L3:
+  31 001c 22E0      		ldi r18,lo8(2)
+  32               	.L2:
+  33 001e CA01      		movw r24,r20
+  34 0020 0196      		adiw r24,1
+  35 0022 820F      		add r24,r18
+  36 0024 911D      		adc r25,__zero_reg__
+  37 0026 820F      		add r24,r18
+  38 0028 911D      		adc r25,__zero_reg__
+  39 002a 0895      		ret
+  41               		.section	.text.byteSize,"ax",@progbits
+  42               	.global	byteSize
+  44               	byteSize:
+  45               	/* prologue: function */
+  46               	/* frame size = 0 */
+  47               	/* stack size = 0 */
+  48               	.L__stack_usage = 0
+  49 0000 8823      		tst r24
+  50 0002 01F0      		breq .L6
+  51 0004 CA01      		movw r24,r20
+  52 0006 6111      		cpse r22,__zero_reg__
+  53 0008 0196      		adiw r24,1
+  54               	.L7:
+  55 000a 880F      		lsl r24
+  56 000c 991F      		rol r25
+  57 000e 0895      		ret
+  58               	.L6:
+  59 0010 CA01      		movw r24,r20
+  60 0012 880F      		lsl r24
+  61 0014 991F      		rol r25
+  62 0016 840F      		add r24,r20
+  63 0018 951F      		adc r25,r21
+  64 001a 9695      		lsr r25
+  65 001c 8795      		ror r24
+  66 001e 6111      		cpse r22,__zero_reg__
+  67 0020 00C0      		rjmp .L11
+  68 0022 40FD      		sbrc r20,0
+  69               	.L11:
+  70 0024 0196      		adiw r24,1
+  71               	.L8:
+  72 0026 0895      		ret
+  74               		.section	.text.encodeTXPacket,"ax",@progbits
+  75               	.global	encodeTXPacket
+  77               	encodeTXPacket:
+  78 0000 A0E0      		ldi r26,0
+  79 0002 B0E0      		ldi r27,0
+  80 0004 E0E0      		ldi r30,lo8(gs(1f))
+  81 0006 F0E0      		ldi r31,hi8(gs(1f))
+  82 0008 0C94 0000 		jmp __prologue_saves__+((18 - 11) * 2)
+  83               	1:
+  84               	/* prologue: function */
+  85               	/* frame size = 0 */
+  86               	/* stack size = 11 */
+  87               	.L__stack_usage = 11
+  88 000c EC01      		movw r28,r24
+  89 000e 7B01      		movw r14,r22
+  90 0010 942E      		mov r9,r20
+  91 0012 6AE0      		ldi r22,lo8(10)
+  92 0014 640F      		add r22,r20
+  93 0016 6883      		st Y,r22
+  94 0018 80E0      		ldi r24,0
+  95 001a 90E0      		ldi r25,0
+  96 001c 0E94 0000 		call crcCalc
+  97 0020 24E4      		ldi r18,lo8(68)
+  98 0022 2983      		std Y+1,r18
+  99 0024 64E4      		ldi r22,lo8(68)
+ 100 0026 0E94 0000 		call crcCalc
+ 101 002a 2EEA      		ldi r18,lo8(-82)
+ 102 002c 2A83      		std Y+2,r18
+ 103 002e 6EEA      		ldi r22,lo8(-82)
+ 104 0030 0E94 0000 		call crcCalc
+ 105 0034 2CE0      		ldi r18,lo8(12)
+ 106 0036 2B83      		std Y+3,r18
+ 107 0038 6CE0      		ldi r22,lo8(12)
+ 108 003a 0E94 0000 		call crcCalc
+ 109 003e 18E7      		ldi r17,lo8(120)
+ 110 0040 1C83      		std Y+4,r17
+ 111 0042 68E7      		ldi r22,lo8(120)
+ 112 0044 0E94 0000 		call crcCalc
+ 113 0048 26E5      		ldi r18,lo8(86)
+ 114 004a 2D83      		std Y+5,r18
+ 115 004c 66E5      		ldi r22,lo8(86)
+ 116 004e 0E94 0000 		call crcCalc
+ 117 0052 24E3      		ldi r18,lo8(52)
+ 118 0054 2E83      		std Y+6,r18
+ 119 0056 64E3      		ldi r22,lo8(52)
+ 120 0058 0E94 0000 		call crcCalc
+ 121 005c 22E1      		ldi r18,lo8(18)
+ 122 005e 2F83      		std Y+7,r18
+ 123 0060 62E1      		ldi r22,lo8(18)
+ 124 0062 0E94 0000 		call crcCalc
+ 125 0066 21E0      		ldi r18,lo8(1)
+ 126 0068 2887      		std Y+8,r18
+ 127 006a 61E0      		ldi r22,lo8(1)
+ 128 006c 0E94 0000 		call crcCalc
+ 129 0070 27E0      		ldi r18,lo8(7)
+ 130 0072 2987      		std Y+9,r18
+ 131 0074 67E0      		ldi r22,lo8(7)
+ 132 0076 0E94 0000 		call crcCalc
+ 133 007a 9C01      		movw r18,r24
+ 134 007c 2095      		com r18
+ 135 007e 3095      		com r19
+ 136 0080 3A87      		std Y+10,r19
+ 137 0082 8095      		com r24
+ 138 0084 8B87      		std Y+11,r24
+ 139 0086 1C87      		std Y+12,r17
+ 140 0088 68E7      		ldi r22,lo8(120)
+ 141 008a 80E0      		ldi r24,0
+ 142 008c 90E0      		ldi r25,0
+ 143 008e 0E94 0000 		call crcCalc
+ 144 0092 8E01      		movw r16,r28
+ 145 0094 035F      		subi r16,-13
+ 146 0096 1F4F      		sbci r17,-1
+ 147 0098 2FE0      		ldi r18,lo8(15)
+ 148 009a 2915      		cp r18,r9
+ 149 009c 00F0      		brlo .L13
+ 150 009e E701      		movw r28,r14
+ 151 00a0 7801      		movw r14,r16
+ 152 00a2 E90C      		add r14,r9
+ 153 00a4 F11C      		adc r15,__zero_reg__
+ 154               	.L14:
+ 155 00a6 0E15      		cp r16,r14
+ 156 00a8 1F05      		cpc r17,r15
+ 157 00aa 01F0      		breq .L27
+ 158 00ac 6991      		ld r22,Y+
+ 159 00ae F801      		movw r30,r16
+ 160 00b0 6193      		st Z+,r22
+ 161 00b2 8F01      		movw r16,r30
+ 162 00b4 0E94 0000 		call crcCalc
+ 163 00b8 00C0      		rjmp .L14
+ 164               	.L27:
+ 165 00ba 9C01      		movw r18,r24
+ 166 00bc 2095      		com r18
+ 167 00be 3095      		com r19
+ 168 00c0 F801      		movw r30,r16
+ 169 00c2 3083      		st Z,r19
+ 170 00c4 8095      		com r24
+ 171 00c6 8183      		std Z+1,r24
+ 172 00c8 00C0      		rjmp .L12
+ 173               	.L13:
+ 174 00ca 5701      		movw r10,r14
+ 175 00cc 6E01      		movw r12,r28
+ 176 00ce FCE1      		ldi r31,28
+ 177 00d0 CF0E      		add r12,r31
+ 178 00d2 D11C      		adc r13,__zero_reg__
+ 179               	.L17:
+ 180 00d4 F501      		movw r30,r10
+ 181 00d6 6191      		ld r22,Z+
+ 182 00d8 5F01      		movw r10,r30
+ 183 00da F801      		movw r30,r16
+ 184 00dc 6193      		st Z+,r22
+ 185 00de 8F01      		movw r16,r30
+ 186 00e0 0E94 0000 		call crcCalc
+ 187 00e4 0C15      		cp r16,r12
+ 188 00e6 1D05      		cpc r17,r13
+ 189 00e8 01F4      		brne .L17
+ 190 00ea 9C01      		movw r18,r24
+ 191 00ec 2095      		com r18
+ 192 00ee 3095      		com r19
+ 193 00f0 3C8F      		std Y+28,r19
+ 194 00f2 8095      		com r24
+ 195 00f4 8D8F      		std Y+29,r24
+ 196 00f6 8E01      		movw r16,r28
+ 197 00f8 025E      		subi r16,-30
+ 198 00fa 1F4F      		sbci r17,-1
+ 199 00fc D1EF      		ldi r29,lo8(-15)
+ 200 00fe D90D      		add r29,r9
+ 201 0100 CFE0      		ldi r28,lo8(15)
+ 202               	.L22:
+ 203 0102 D131      		cpi r29,lo8(17)
+ 204 0104 00F4      		brsh .L18
+ 205 0106 BD2E      		mov r11,r29
+ 206 0108 BC0E      		add r11,r28
+ 207 010a 6801      		movw r12,r16
+ 208 010c 80E0      		ldi r24,0
+ 209 010e 90E0      		ldi r25,0
+ 210               	.L19:
+ 211 0110 F701      		movw r30,r14
+ 212 0112 EC0F      		add r30,r28
+ 213 0114 F11D      		adc r31,__zero_reg__
+ 214 0116 6081      		ld r22,Z
+ 215 0118 F601      		movw r30,r12
+ 216 011a 6193      		st Z+,r22
+ 217 011c 6F01      		movw r12,r30
+ 218 011e 0E94 0000 		call crcCalc
+ 219 0122 CF5F      		subi r28,lo8(-(1))
+ 220 0124 BC12      		cpse r11,r28
+ 221 0126 00C0      		rjmp .L19
+ 222 0128 D150      		subi r29,lo8(-(-1))
+ 223 012a 2D2F      		mov r18,r29
+ 224 012c 30E0      		ldi r19,0
+ 225 012e 2F5F      		subi r18,-1
+ 226 0130 3F4F      		sbci r19,-1
+ 227 0132 E801      		movw r28,r16
+ 228 0134 C20F      		add r28,r18
+ 229 0136 D31F      		adc r29,r19
+ 230 0138 9C01      		movw r18,r24
+ 231 013a 2095      		com r18
+ 232 013c 3095      		com r19
+ 233 013e 3883      		st Y,r19
+ 234 0140 8095      		com r24
+ 235 0142 8983      		std Y+1,r24
+ 236 0144 00C0      		rjmp .L12
+ 237               	.L18:
+ 238 0146 80E1      		ldi r24,lo8(16)
+ 239 0148 B82E      		mov r11,r24
+ 240 014a BC0E      		add r11,r28
+ 241 014c 6801      		movw r12,r16
+ 242 014e 80E0      		ldi r24,0
+ 243 0150 90E0      		ldi r25,0
+ 244               	.L21:
+ 245 0152 F701      		movw r30,r14
+ 246 0154 EC0F      		add r30,r28
+ 247 0156 F11D      		adc r31,__zero_reg__
+ 248 0158 6081      		ld r22,Z
+ 249 015a F601      		movw r30,r12
+ 250 015c 6193      		st Z+,r22
+ 251 015e 6F01      		movw r12,r30
+ 252 0160 0E94 0000 		call crcCalc
+ 253 0164 CF5F      		subi r28,lo8(-(1))
+ 254 0166 CB11      		cpse r28,r11
+ 255 0168 00C0      		rjmp .L21
+ 256 016a 9C01      		movw r18,r24
+ 257 016c 2095      		com r18
+ 258 016e 3095      		com r19
+ 259 0170 F801      		movw r30,r16
+ 260 0172 308B      		std Z+16,r19
+ 261 0174 8095      		com r24
+ 262 0176 818B      		std Z+17,r24
+ 263 0178 0E5E      		subi r16,-18
+ 264 017a 1F4F      		sbci r17,-1
+ 265 017c D051      		subi r29,lo8(-(-16))
+ 266 017e 01F0      		breq .+2
+ 267 0180 00C0      		rjmp .L22
+ 268               	.L12:
+ 269               	/* epilogue start */
+ 270 0182 CDB7      		in r28,__SP_L__
+ 271 0184 DEB7      		in r29,__SP_H__
+ 272 0186 EBE0      		ldi r30, lo8(11)
+ 273 0188 0C94 0000 		jmp __epilogue_restores__ + ((18 - 11) * 2)
+ 275               		.section	.text.encodeTXBytesSmode,"ax",@progbits
+ 276               	.global	encodeTXBytesSmode
+ 278               	encodeTXBytesSmode:
+ 279 0000 A0E0      		ldi r26,0
+ 280 0002 B0E0      		ldi r27,0
+ 281 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 282 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 283 0008 0C94 0000 		jmp __prologue_saves__+((18 - 10) * 2)
+ 284               	1:
+ 285               	/* prologue: function */
+ 286               	/* frame size = 0 */
+ 287               	/* stack size = 10 */
+ 288               	.L__stack_usage = 10
+ 289 000c 8A01      		movw r16,r20
+ 290 000e 7C01      		movw r14,r24
+ 291 0010 86E9      		ldi r24,lo8(-106)
+ 292 0012 F701      		movw r30,r14
+ 293 0014 8193      		st Z+,r24
+ 294 0016 7F01      		movw r14,r30
+ 295 0018 EB01      		movw r28,r22
+ 296 001a 6F01      		movw r12,r30
+ 297 001c 5B01      		movw r10,r22
+ 298 001e A40E      		add r10,r20
+ 299 0020 B51E      		adc r11,r21
+ 300               	.L29:
+ 301 0022 CA15      		cp r28,r10
+ 302 0024 DB05      		cpc r29,r11
+ 303 0026 01F0      		breq .L31
+ 304 0028 B601      		movw r22,r12
+ 305 002a CE01      		movw r24,r28
+ 306 002c 0E94 0000 		call manchEncode
+ 307 0030 2196      		adiw r28,1
+ 308 0032 F2E0      		ldi r31,2
+ 309 0034 CF0E      		add r12,r31
+ 310 0036 D11C      		adc r13,__zero_reg__
+ 311 0038 00C0      		rjmp .L29
+ 312               	.L31:
+ 313 003a F801      		movw r30,r16
+ 314 003c EE0F      		lsl r30
+ 315 003e FF1F      		rol r31
+ 316 0040 EE0D      		add r30,r14
+ 317 0042 FF1D      		adc r31,r15
+ 318 0044 85E5      		ldi r24,lo8(85)
+ 319 0046 8083      		st Z,r24
+ 320               	/* epilogue start */
+ 321 0048 CDB7      		in r28,__SP_L__
+ 322 004a DEB7      		in r29,__SP_H__
+ 323 004c EAE0      		ldi r30, lo8(10)
+ 324 004e 0C94 0000 		jmp __epilogue_restores__ + ((18 - 10) * 2)
+ 326               		.section	.text.encodeTXBytesTmode,"ax",@progbits
+ 327               	.global	encodeTXBytesTmode
+ 329               	encodeTXBytesTmode:
+ 330 0000 A0E0      		ldi r26,0
+ 331 0002 B0E0      		ldi r27,0
+ 332 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 333 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 334 0008 0C94 0000 		jmp __prologue_saves__+((18 - 9) * 2)
+ 335               	1:
+ 336               	/* prologue: function */
+ 337               	/* frame size = 0 */
+ 338               	/* stack size = 9 */
+ 339               	.L__stack_usage = 9
+ 340 000c 8C01      		movw r16,r24
+ 341 000e 7B01      		movw r14,r22
+ 342 0010 EA01      		movw r28,r20
+ 343 0012 85E5      		ldi r24,lo8(85)
+ 344 0014 B82E      		mov r11,r24
+ 345               	.L33:
+ 346 0016 2097      		sbiw r28,0
+ 347 0018 01F0      		breq .L39
+ 348 001a C130      		cpi r28,1
+ 349 001c D105      		cpc r29,__zero_reg__
+ 350 001e 01F4      		brne .L34
+ 351 0020 41E0      		ldi r20,lo8(1)
+ 352 0022 B801      		movw r22,r16
+ 353 0024 C701      		movw r24,r14
+ 354 0026 0E94 0000 		call encode3outof6
+ 355 002a 00C0      		rjmp .L38
+ 356               	.L34:
+ 357 002c C801      		movw r24,r16
+ 358 002e 0396      		adiw r24,3
+ 359 0030 6C01      		movw r12,r24
+ 360 0032 40E0      		ldi r20,0
+ 361 0034 B801      		movw r22,r16
+ 362 0036 C701      		movw r24,r14
+ 363 0038 C230      		cpi r28,2
+ 364 003a D105      		cpc r29,__zero_reg__
+ 365 003c 01F4      		brne .L36
+ 366 003e 0E94 0000 		call encode3outof6
+ 367 0042 F801      		movw r30,r16
+ 368 0044 B382      		std Z+3,r11
+ 369 0046 8601      		movw r16,r12
+ 370               	.L38:
+ 371 0048 C0E0      		ldi r28,0
+ 372 004a D0E0      		ldi r29,0
+ 373 004c 00C0      		rjmp .L33
+ 374               	.L36:
+ 375 004e 0E94 0000 		call encode3outof6
+ 376 0052 8601      		movw r16,r12
+ 377 0054 F2E0      		ldi r31,2
+ 378 0056 EF0E      		add r14,r31
+ 379 0058 F11C      		adc r15,__zero_reg__
+ 380 005a 2297      		sbiw r28,2
+ 381 005c 00C0      		rjmp .L33
+ 382               	.L39:
+ 383               	/* epilogue start */
+ 384 005e CDB7      		in r28,__SP_L__
+ 385 0060 DEB7      		in r29,__SP_H__
+ 386 0062 E9E0      		ldi r30, lo8(9)
+ 387 0064 0C94 0000 		jmp __epilogue_restores__ + ((18 - 9) * 2)
+ 389               		.section	.text.decodeRXBytesSmode,"ax",@progbits
+ 390               	.global	decodeRXBytesSmode
+ 392               	decodeRXBytesSmode:
+ 393 0000 A0E0      		ldi r26,0
+ 394 0002 B0E0      		ldi r27,0
+ 395 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 396 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 397 0008 0C94 0000 		jmp __prologue_saves__+((18 - 16) * 2)
+ 398               	1:
+ 399               	/* prologue: function */
+ 400               	/* frame size = 0 */
+ 401               	/* stack size = 16 */
+ 402               	.L__stack_usage = 16
+ 403 000c 5C01      		movw r10,r24
+ 404 000e 4B01      		movw r8,r22
+ 405 0010 7A01      		movw r14,r20
+ 406 0012 C12C      		mov r12,__zero_reg__
+ 407 0014 D12C      		mov r13,__zero_reg__
+ 408 0016 00E0      		ldi r16,0
+ 409 0018 10E0      		ldi r17,0
+ 410 001a C0E0      		ldi r28,0
+ 411 001c D0E0      		ldi r29,0
+ 412 001e 612C      		mov r6,__zero_reg__
+ 413 0020 712C      		mov r7,__zero_reg__
+ 414 0022 22E1      		ldi r18,lo8(18)
+ 415 0024 422E      		mov r4,r18
+ 416 0026 512C      		mov r5,__zero_reg__
+ 417               	.L41:
+ 418 0028 E114      		cp r14,__zero_reg__
+ 419 002a F104      		cpc r15,__zero_reg__
+ 420 002c 01F4      		brne .+2
+ 421 002e 00C0      		rjmp .L60
+ 422 0030 B401      		movw r22,r8
+ 423 0032 C501      		movw r24,r10
+ 424 0034 0E94 0000 		call manchDecode
+ 425 0038 8111      		cpse r24,__zero_reg__
+ 426 003a 00C0      		rjmp .L52
+ 427 003c 82E0      		ldi r24,2
+ 428 003e E816      		cp r14,r24
+ 429 0040 F104      		cpc r15,__zero_reg__
+ 430 0042 01F0      		breq .L43
+ 431 0044 EAE0      		ldi r30,10
+ 432 0046 6E16      		cp r6,r30
+ 433 0048 7104      		cpc r7,__zero_reg__
+ 434 004a 00F0      		brlo .L44
+ 435 004c C301      		movw r24,r6
+ 436 004e 0A97      		sbiw r24,10
+ 437 0050 B201      		movw r22,r4
+ 438 0052 0E94 0000 		call __udivmodhi4
+ 439 0056 AC01      		movw r20,r24
+ 440 0058 21E0      		ldi r18,lo8(1)
+ 441 005a 90E0      		ldi r25,0
+ 442 005c 452B      		or r20,r21
+ 443 005e 01F0      		breq .L45
+ 444 0060 20E0      		ldi r18,0
+ 445               	.L45:
+ 446 0062 022F      		mov r16,r18
+ 447 0064 192F      		mov r17,r25
+ 448               	.L44:
+ 449 0066 C114      		cp r12,__zero_reg__
+ 450 0068 D104      		cpc r13,__zero_reg__
+ 451 006a 01F0      		breq .L46
+ 452 006c 00C0      		rjmp .L50
+ 453               	.L43:
+ 454 006e C114      		cp r12,__zero_reg__
+ 455 0070 D104      		cpc r13,__zero_reg__
+ 456 0072 01F0      		breq .L51
+ 457 0074 01E0      		ldi r16,lo8(1)
+ 458 0076 10E0      		ldi r17,0
+ 459               	.L50:
+ 460 0078 C095      		com r28
+ 461 007a D095      		com r29
+ 462 007c DD27      		clr r29
+ 463 007e F401      		movw r30,r8
+ 464 0080 8081      		ld r24,Z
+ 465 0082 90E0      		ldi r25,0
+ 466 0084 C817      		cp r28,r24
+ 467 0086 D907      		cpc r29,r25
+ 468 0088 01F4      		brne .L54
+ 469 008a C12C      		mov r12,__zero_reg__
+ 470 008c D12C      		mov r13,__zero_reg__
+ 471 008e C0E0      		ldi r28,0
+ 472 0090 D0E0      		ldi r29,0
+ 473 0092 00C0      		rjmp .L47
+ 474               	.L46:
+ 475 0094 0115      		cp r16,__zero_reg__
+ 476 0096 1105      		cpc r17,__zero_reg__
+ 477 0098 01F0      		breq .L48
+ 478               	.L51:
+ 479 009a 9E01      		movw r18,r28
+ 480 009c 2095      		com r18
+ 481 009e 3095      		com r19
+ 482 00a0 232F      		mov r18,r19
+ 483 00a2 3327      		clr r19
+ 484 00a4 F401      		movw r30,r8
+ 485 00a6 8081      		ld r24,Z
+ 486 00a8 90E0      		ldi r25,0
+ 487 00aa 2817      		cp r18,r24
+ 488 00ac 3907      		cpc r19,r25
+ 489 00ae 01F4      		brne .L54
+ 490 00b0 CC24      		clr r12
+ 491 00b2 C394      		inc r12
+ 492 00b4 D12C      		mov r13,__zero_reg__
+ 493 00b6 00E0      		ldi r16,0
+ 494 00b8 10E0      		ldi r17,0
+ 495 00ba 00C0      		rjmp .L47
+ 496               	.L48:
+ 497 00bc F401      		movw r30,r8
+ 498 00be 6081      		ld r22,Z
+ 499 00c0 CE01      		movw r24,r28
+ 500 00c2 0E94 0000 		call crcCalc
+ 501 00c6 EC01      		movw r28,r24
+ 502               	.L47:
+ 503 00c8 F1E0      		ldi r31,1
+ 504 00ca EF1A      		sub r14,r31
+ 505 00cc F108      		sbc r15,__zero_reg__
+ 506 00ce 8FEF      		ldi r24,-1
+ 507 00d0 681A      		sub r6,r24
+ 508 00d2 780A      		sbc r7,r24
+ 509 00d4 E2E0      		ldi r30,2
+ 510 00d6 AE0E      		add r10,r30
+ 511 00d8 B11C      		adc r11,__zero_reg__
+ 512 00da FFEF      		ldi r31,-1
+ 513 00dc 8F1A      		sub r8,r31
+ 514 00de 9F0A      		sbc r9,r31
+ 515 00e0 00C0      		rjmp .L41
+ 516               	.L60:
+ 517 00e2 80E0      		ldi r24,0
+ 518 00e4 90E0      		ldi r25,0
+ 519 00e6 00C0      		rjmp .L59
+ 520               	.L52:
+ 521 00e8 81E0      		ldi r24,lo8(1)
+ 522 00ea 90E0      		ldi r25,0
+ 523 00ec 00C0      		rjmp .L59
+ 524               	.L54:
+ 525 00ee 82E0      		ldi r24,lo8(2)
+ 526 00f0 90E0      		ldi r25,0
+ 527               	.L59:
+ 528               	/* epilogue start */
+ 529 00f2 CDB7      		in r28,__SP_L__
+ 530 00f4 DEB7      		in r29,__SP_H__
+ 531 00f6 E0E1      		ldi r30, lo8(16)
+ 532 00f8 0C94 0000 		jmp __epilogue_restores__ + ((18 - 16) * 2)
+ 534               		.section	.text.decodeRXBytesTmode,"ax",@progbits
+ 535               	.global	decodeRXBytesTmode
+ 537               	decodeRXBytesTmode:
+ 538 0000 A0E0      		ldi r26,0
+ 539 0002 B0E0      		ldi r27,0
+ 540 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 541 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 542 0008 0C94 0000 		jmp __prologue_saves__+((18 - 14) * 2)
+ 543               	1:
+ 544               	/* prologue: function */
+ 545               	/* frame size = 0 */
+ 546               	/* stack size = 14 */
+ 547               	.L__stack_usage = 14
+ 548 000c 6C01      		movw r12,r24
+ 549 000e 8B01      		movw r16,r22
+ 550 0010 4A01      		movw r8,r20
+ 551 0012 C0E0      		ldi r28,0
+ 552 0014 D0E0      		ldi r29,0
+ 553 0016 E12C      		mov r14,__zero_reg__
+ 554 0018 F12C      		mov r15,__zero_reg__
+ 555 001a 22E1      		ldi r18,lo8(18)
+ 556 001c 622E      		mov r6,r18
+ 557 001e 712C      		mov r7,__zero_reg__
+ 558               	.L62:
+ 559 0020 8114      		cp r8,__zero_reg__
+ 560 0022 9104      		cpc r9,__zero_reg__
+ 561 0024 01F4      		brne .+2
+ 562 0026 00C0      		rjmp .L78
+ 563 0028 81E0      		ldi r24,1
+ 564 002a 8816      		cp r8,r24
+ 565 002c 9104      		cpc r9,__zero_reg__
+ 566 002e 01F4      		brne .L63
+ 567 0030 41E0      		ldi r20,lo8(1)
+ 568 0032 B801      		movw r22,r16
+ 569 0034 C601      		movw r24,r12
+ 570 0036 0E94 0000 		call decode3outof6
+ 571 003a 8823      		tst r24
+ 572 003c 01F0      		breq .L64
+ 573               	.L67:
+ 574 003e 81E0      		ldi r24,lo8(1)
+ 575 0040 90E0      		ldi r25,0
+ 576 0042 00C0      		rjmp .L65
+ 577               	.L64:
+ 578 0044 5701      		movw r10,r14
+ 579 0046 EFEF      		ldi r30,-1
+ 580 0048 AE1A      		sub r10,r30
+ 581 004a BE0A      		sbc r11,r30
+ 582 004c 9E01      		movw r18,r28
+ 583 004e 2095      		com r18
+ 584 0050 3095      		com r19
+ 585 0052 3327      		clr r19
+ 586 0054 F801      		movw r30,r16
+ 587 0056 8081      		ld r24,Z
+ 588 0058 90E0      		ldi r25,0
+ 589 005a 2817      		cp r18,r24
+ 590 005c 3907      		cpc r19,r25
+ 591 005e 01F4      		brne .+2
+ 592 0060 00C0      		rjmp .L74
+ 593               	.L70:
+ 594 0062 82E0      		ldi r24,lo8(2)
+ 595 0064 90E0      		ldi r25,0
+ 596 0066 00C0      		rjmp .L65
+ 597               	.L63:
+ 598 0068 40E0      		ldi r20,0
+ 599 006a B801      		movw r22,r16
+ 600 006c C601      		movw r24,r12
+ 601 006e 0E94 0000 		call decode3outof6
+ 602 0072 8111      		cpse r24,__zero_reg__
+ 603 0074 00C0      		rjmp .L67
+ 604 0076 F2E0      		ldi r31,2
+ 605 0078 8F1A      		sub r8,r31
+ 606 007a 9108      		sbc r9,__zero_reg__
+ 607 007c 5701      		movw r10,r14
+ 608 007e 82E0      		ldi r24,2
+ 609 0080 A80E      		add r10,r24
+ 610 0082 B11C      		adc r11,__zero_reg__
+ 611 0084 8114      		cp r8,__zero_reg__
+ 612 0086 9104      		cpc r9,__zero_reg__
+ 613 0088 01F0      		breq .L68
+ 614 008a EBE0      		ldi r30,11
+ 615 008c AE16      		cp r10,r30
+ 616 008e B104      		cpc r11,__zero_reg__
+ 617 0090 00F0      		brlo .L69
+ 618 0092 C701      		movw r24,r14
+ 619 0094 0A97      		sbiw r24,10
+ 620 0096 B301      		movw r22,r6
+ 621 0098 0E94 0000 		call __udivmodhi4
+ 622 009c 892B      		or r24,r25
+ 623 009e 01F4      		brne .L69
+ 624               	.L68:
+ 625 00a0 C095      		com r28
+ 626 00a2 D095      		com r29
+ 627 00a4 9E01      		movw r18,r28
+ 628 00a6 3327      		clr r19
+ 629 00a8 F801      		movw r30,r16
+ 630 00aa 8181      		ldd r24,Z+1
+ 631 00ac 90E0      		ldi r25,0
+ 632 00ae 2817      		cp r18,r24
+ 633 00b0 3907      		cpc r19,r25
+ 634 00b2 01F4      		brne .L70
+ 635 00b4 CD2F      		mov r28,r29
+ 636 00b6 DD27      		clr r29
+ 637 00b8 8081      		ld r24,Z
+ 638 00ba 90E0      		ldi r25,0
+ 639 00bc C817      		cp r28,r24
+ 640 00be D907      		cpc r29,r25
+ 641 00c0 01F4      		brne .L70
+ 642 00c2 C0E0      		ldi r28,0
+ 643 00c4 D0E0      		ldi r29,0
+ 644 00c6 00C0      		rjmp .L71
+ 645               	.L69:
+ 646 00c8 F801      		movw r30,r16
+ 647 00ca 6081      		ld r22,Z
+ 648 00cc CE01      		movw r24,r28
+ 649 00ce F1E0      		ldi r31,1
+ 650 00d0 8F16      		cp r8,r31
+ 651 00d2 9104      		cpc r9,__zero_reg__
+ 652 00d4 01F4      		brne .L72
+ 653 00d6 0E94 0000 		call crcCalc
+ 654 00da EC01      		movw r28,r24
+ 655 00dc 9C01      		movw r18,r24
+ 656 00de 2095      		com r18
+ 657 00e0 3095      		com r19
+ 658 00e2 232F      		mov r18,r19
+ 659 00e4 3327      		clr r19
+ 660 00e6 F801      		movw r30,r16
+ 661 00e8 8181      		ldd r24,Z+1
+ 662 00ea 90E0      		ldi r25,0
+ 663 00ec 2817      		cp r18,r24
+ 664 00ee 3907      		cpc r19,r25
+ 665 00f0 01F0      		breq .L71
+ 666 00f2 00C0      		rjmp .L70
+ 667               	.L72:
+ 668 00f4 0E94 0000 		call crcCalc
+ 669 00f8 F801      		movw r30,r16
+ 670 00fa 6181      		ldd r22,Z+1
+ 671 00fc 0E94 0000 		call crcCalc
+ 672 0100 EC01      		movw r28,r24
+ 673               	.L71:
+ 674 0102 F3E0      		ldi r31,3
+ 675 0104 CF0E      		add r12,r31
+ 676 0106 D11C      		adc r13,__zero_reg__
+ 677 0108 0E5F      		subi r16,-2
+ 678 010a 1F4F      		sbci r17,-1
+ 679 010c 00C0      		rjmp .L66
+ 680               	.L74:
+ 681 010e 812C      		mov r8,__zero_reg__
+ 682 0110 912C      		mov r9,__zero_reg__
+ 683               	.L66:
+ 684 0112 7501      		movw r14,r10
+ 685 0114 00C0      		rjmp .L62
+ 686               	.L78:
+ 687 0116 80E0      		ldi r24,0
+ 688 0118 90E0      		ldi r25,0
+ 689               	.L65:
+ 690               	/* epilogue start */
+ 691 011a CDB7      		in r28,__SP_L__
+ 692 011c DEB7      		in r29,__SP_H__
+ 693 011e EEE0      		ldi r30, lo8(14)
+ 694 0120 0C94 0000 		jmp __epilogue_restores__ + ((18 - 14) * 2)
+ 696               		.ident	"GCC: (GNU) 5.4.0"
+DEFINED SYMBOLS
+                            *ABS*:00000000 mbus_packet.c
+     /tmp/cc13zAfh.s:2      *ABS*:0000003e __SP_H__
+     /tmp/cc13zAfh.s:3      *ABS*:0000003d __SP_L__
+     /tmp/cc13zAfh.s:4      *ABS*:0000003f __SREG__
+     /tmp/cc13zAfh.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/cc13zAfh.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/cc13zAfh.s:10     .text.packetSize:00000000 packetSize
+     /tmp/cc13zAfh.s:44     .text.byteSize:00000000 byteSize
+     /tmp/cc13zAfh.s:77     .text.encodeTXPacket:00000000 encodeTXPacket
+     /tmp/cc13zAfh.s:278    .text.encodeTXBytesSmode:00000000 encodeTXBytesSmode
+     /tmp/cc13zAfh.s:329    .text.encodeTXBytesTmode:00000000 encodeTXBytesTmode
+     /tmp/cc13zAfh.s:392    .text.decodeRXBytesSmode:00000000 decodeRXBytesSmode
+     /tmp/cc13zAfh.s:537    .text.decodeRXBytesTmode:00000000 decodeRXBytesTmode
+
+UNDEFINED SYMBOLS
+__prologue_saves__
+crcCalc
+__epilogue_restores__
+manchEncode
+encode3outof6
+manchDecode
+__udivmodhi4
+decode3outof6

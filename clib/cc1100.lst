@@ -1,0 +1,684 @@
+   1               		.file	"cc1100.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.cc1100_sendbyte,"ax",@progbits
+   8               	.global	cc1100_sendbyte
+  10               	cc1100_sendbyte:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 8EBD      		out 0x2e,r24
+  16               	.L2:
+  17 0002 0DB4      		in __tmp_reg__,0x2d
+  18 0004 07FE      		sbrs __tmp_reg__,7
+  19 0006 00C0      		rjmp .L2
+  20 0008 8EB5      		in r24,0x2e
+  21 000a 0895      		ret
+  23               		.section	.text.cc_set_pa,"ax",@progbits
+  24               	.global	cc_set_pa
+  26               	cc_set_pa:
+  27 0000 EF92      		push r14
+  28 0002 FF92      		push r15
+  29 0004 0F93      		push r16
+  30 0006 1F93      		push r17
+  31 0008 CF93      		push r28
+  32               	/* prologue: function */
+  33               	/* frame size = 0 */
+  34               	/* stack size = 5 */
+  35               	.L__stack_usage = 5
+  36 000a C82F      		mov r28,r24
+  37 000c 8A30      		cpi r24,lo8(10)
+  38 000e 00F0      		brlo .L6
+  39 0010 C8E0      		ldi r28,lo8(8)
+  40               	.L6:
+  41 0012 28E0      		ldi r18,lo8(8)
+  42 0014 C29F      		mul r28,r18
+  43 0016 8001      		movw r16,r0
+  44 0018 1124      		clr __zero_reg__
+  45 001a 8BE2      		ldi r24,lo8(43)
+  46 001c 90E0      		ldi r25,0
+  47 001e 0B52      		subi r16,43
+  48 0020 1109      		sbc r17,__zero_reg__
+  49               	.L7:
+  50 0022 FC01      		movw r30,r24
+  51 0024 E00F      		add r30,r16
+  52 0026 F11F      		adc r31,r17
+  53 0028 E050      		subi r30,lo8(-(CC1100_PA))
+  54 002a F040      		sbci r31,hi8(-(CC1100_PA))
+  55               	/* #APP */
+  56               	 ;  211 "../../clib/cc1100.c" 1
+  57 002c 6491      		lpm r22, Z
+  58               		
+  59               	 ;  0 "" 2
+  60               	/* #NOAPP */
+  61 002e 7C01      		movw r14,r24
+  62 0030 2FEF      		ldi r18,-1
+  63 0032 E21A      		sub r14,r18
+  64 0034 F20A      		sbc r15,r18
+  65 0036 0E94 0000 		call ewb
+  66 003a C701      		movw r24,r14
+  67 003c 8333      		cpi r24,51
+  68 003e 9105      		cpc r25,__zero_reg__
+  69 0040 01F4      		brne .L7
+  70 0042 C550      		subi r28,lo8(-(-5))
+  71 0044 C530      		cpi r28,lo8(5)
+  72 0046 00F0      		brlo .L9
+  73 0048 67E1      		ldi r22,lo8(23)
+  74 004a 00C0      		rjmp .L8
+  75               	.L9:
+  76 004c 61E1      		ldi r22,lo8(17)
+  77               	.L8:
+  78 004e 84E2      		ldi r24,lo8(36)
+  79 0050 90E0      		ldi r25,0
+  80 0052 0E94 0000 		call ewb
+  81               	/* epilogue start */
+  82 0056 CF91      		pop r28
+  83 0058 1F91      		pop r17
+  84 005a 0F91      		pop r16
+  85 005c FF90      		pop r15
+  86 005e EF90      		pop r14
+  87 0060 0895      		ret
+  89               		.section	.text.cc_factory_reset,"ax",@progbits
+  90               	.global	cc_factory_reset
+  92               	cc_factory_reset:
+  93 0000 CF93      		push r28
+  94 0002 DF93      		push r29
+  95               	/* prologue: function */
+  96               	/* frame size = 0 */
+  97               	/* stack size = 2 */
+  98               	.L__stack_usage = 2
+  99 0004 82E0      		ldi r24,lo8(2)
+ 100 0006 90E0      		ldi r25,0
+ 101               	.L12:
+ 102 0008 FC01      		movw r30,r24
+ 103 000a E050      		subi r30,lo8(-(CC1100_CFG-2))
+ 104 000c F040      		sbci r31,hi8(-(CC1100_CFG-2))
+ 105               	/* #APP */
+ 106               	 ;  233 "../../clib/cc1100.c" 1
+ 107 000e 6491      		lpm r22, Z
+ 108               		
+ 109               	 ;  0 "" 2
+ 110               	/* #NOAPP */
+ 111 0010 EC01      		movw r28,r24
+ 112 0012 2196      		adiw r28,1
+ 113 0014 0E94 0000 		call ewb
+ 114 0018 CE01      		movw r24,r28
+ 115 001a AB97      		sbiw r28,43
+ 116 001c 01F4      		brne .L12
+ 117 001e 87E3      		ldi r24,lo8(55)
+ 118 0020 90E0      		ldi r25,0
+ 119               	.L13:
+ 120 0022 FC01      		movw r30,r24
+ 121 0024 E050      		subi r30,lo8(-(FASTRF_CFG-55))
+ 122 0026 F040      		sbci r31,hi8(-(FASTRF_CFG-55))
+ 123               	/* #APP */
+ 124               	 ;  237 "../../clib/cc1100.c" 1
+ 125 0028 6491      		lpm r22, Z
+ 126               		
+ 127               	 ;  0 "" 2
+ 128               	/* #NOAPP */
+ 129 002a EC01      		movw r28,r24
+ 130 002c 2196      		adiw r28,1
+ 131 002e 0E94 0000 		call ewb
+ 132 0032 CE01      		movw r24,r28
+ 133 0034 C036      		cpi r28,96
+ 134 0036 D105      		cpc r29,__zero_reg__
+ 135 0038 01F4      		brne .L13
+ 136 003a 88E0      		ldi r24,lo8(8)
+ 137 003c 0E94 0000 		call cc_set_pa
+ 138               	/* epilogue start */
+ 139 0040 DF91      		pop r29
+ 140 0042 CF91      		pop r28
+ 141 0044 0895      		ret
+ 143               		.section	.text.cc1100_readReg,"ax",@progbits
+ 144               	.global	cc1100_readReg
+ 146               	cc1100_readReg:
+ 147               	/* prologue: function */
+ 148               	/* frame size = 0 */
+ 149               	/* stack size = 0 */
+ 150               	.L__stack_usage = 0
+ 151 0000 5E98      		cbi 0xb,6
+ 152 0002 806C      		ori r24,lo8(-64)
+ 153 0004 0E94 0000 		call cc1100_sendbyte
+ 154 0008 80E0      		ldi r24,0
+ 155 000a 0E94 0000 		call cc1100_sendbyte
+ 156 000e 5E9A      		sbi 0xb,6
+ 157 0010 0895      		ret
+ 159               		.section	.text.cc1100_writeReg,"ax",@progbits
+ 160               	.global	cc1100_writeReg
+ 162               	cc1100_writeReg:
+ 163 0000 CF93      		push r28
+ 164               	/* prologue: function */
+ 165               	/* frame size = 0 */
+ 166               	/* stack size = 1 */
+ 167               	.L__stack_usage = 1
+ 168 0002 C62F      		mov r28,r22
+ 169 0004 5E98      		cbi 0xb,6
+ 170 0006 8064      		ori r24,lo8(64)
+ 171 0008 0E94 0000 		call cc1100_sendbyte
+ 172 000c 8C2F      		mov r24,r28
+ 173 000e 0E94 0000 		call cc1100_sendbyte
+ 174 0012 5E9A      		sbi 0xb,6
+ 175               	/* epilogue start */
+ 176 0014 CF91      		pop r28
+ 177 0016 0895      		ret
+ 179               		.section	.text.ccStrobe,"ax",@progbits
+ 180               	.global	ccStrobe
+ 182               	ccStrobe:
+ 183               	/* prologue: function */
+ 184               	/* frame size = 0 */
+ 185               	/* stack size = 0 */
+ 186               	.L__stack_usage = 0
+ 187 0000 5E98      		cbi 0xb,6
+ 188 0002 0E94 0000 		call cc1100_sendbyte
+ 189 0006 5E9A      		sbi 0xb,6
+ 190 0008 0895      		ret
+ 192               		.section	.text.ccInitChip,"ax",@progbits
+ 193               	.global	ccInitChip
+ 195               	ccInitChip:
+ 196 0000 EF92      		push r14
+ 197 0002 FF92      		push r15
+ 198 0004 0F93      		push r16
+ 199 0006 1F93      		push r17
+ 200 0008 CF93      		push r28
+ 201 000a DF93      		push r29
+ 202               	/* prologue: function */
+ 203               	/* frame size = 0 */
+ 204               	/* stack size = 6 */
+ 205               	.L__stack_usage = 6
+ 206 000c EC01      		movw r28,r24
+ 207 000e EE98      		cbi 0x1d,6
+ 208 0010 569A      		sbi 0xa,6
+ 209 0012 5E9A      		sbi 0xb,6
+ 210 0014 8EE1      		ldi r24,lo8(30)
+ 211 0016 90E0      		ldi r25,0
+ 212 0018 0E94 0000 		call my_delay_us
+ 213 001c 5E98      		cbi 0xb,6
+ 214 001e 8EE1      		ldi r24,lo8(30)
+ 215 0020 90E0      		ldi r25,0
+ 216 0022 0E94 0000 		call my_delay_us
+ 217 0026 5E9A      		sbi 0xb,6
+ 218 0028 8DE2      		ldi r24,lo8(45)
+ 219 002a 90E0      		ldi r25,0
+ 220 002c 0E94 0000 		call my_delay_us
+ 221 0030 80E3      		ldi r24,lo8(48)
+ 222 0032 0E94 0000 		call ccStrobe
+ 223 0036 84E6      		ldi r24,lo8(100)
+ 224 0038 90E0      		ldi r25,0
+ 225 003a 0E94 0000 		call my_delay_us
+ 226 003e 5E98      		cbi 0xb,6
+ 227 0040 80E4      		ldi r24,lo8(64)
+ 228 0042 0E94 0000 		call cc1100_sendbyte
+ 229 0046 8E01      		movw r16,r28
+ 230 0048 075D      		subi r16,-41
+ 231 004a 1F4F      		sbci r17,-1
+ 232               	.L20:
+ 233 004c 7E01      		movw r14,r28
+ 234 004e 8FEF      		ldi r24,-1
+ 235 0050 E81A      		sub r14,r24
+ 236 0052 F80A      		sbc r15,r24
+ 237 0054 CE01      		movw r24,r28
+ 238 0056 0E94 0000 		call erb
+ 239 005a 0E94 0000 		call cc1100_sendbyte
+ 240 005e E701      		movw r28,r14
+ 241 0060 E016      		cp r14,r16
+ 242 0062 F106      		cpc r15,r17
+ 243 0064 01F4      		brne .L20
+ 244 0066 5E9A      		sbi 0xb,6
+ 245 0068 5E98      		cbi 0xb,6
+ 246 006a 8EE7      		ldi r24,lo8(126)
+ 247 006c 0E94 0000 		call cc1100_sendbyte
+ 248 0070 8BE2      		ldi r24,lo8(43)
+ 249 0072 90E0      		ldi r25,0
+ 250               	.L21:
+ 251 0074 EC01      		movw r28,r24
+ 252 0076 2196      		adiw r28,1
+ 253 0078 0E94 0000 		call erb
+ 254 007c 0E94 0000 		call cc1100_sendbyte
+ 255 0080 CE01      		movw r24,r28
+ 256 0082 E397      		sbiw r28,51
+ 257 0084 01F4      		brne .L21
+ 258 0086 5E9A      		sbi 0xb,6
+ 259 0088 83E3      		ldi r24,lo8(51)
+ 260 008a 0E94 0000 		call ccStrobe
+ 261 008e 81E0      		ldi r24,lo8(1)
+ 262 0090 0E94 0000 		call my_delay_ms
+ 263               	/* epilogue start */
+ 264 0094 CDB7      		in r28,__SP_L__
+ 265 0096 DEB7      		in r29,__SP_H__
+ 266 0098 E6E0      		ldi r30, lo8(6)
+ 267 009a 0C94 0000 		jmp __epilogue_restores__ + ((18 - 6) * 2)
+ 269               		.section	.text.ccsetpa,"ax",@progbits
+ 270               	.global	ccsetpa
+ 272               	ccsetpa:
+ 273 0000 A1E0      		ldi r26,lo8(1)
+ 274 0002 B0E0      		ldi r27,0
+ 275 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 276 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 277 0008 0C94 0000 		jmp __prologue_saves__+((18 - 2) * 2)
+ 278               	1:
+ 279               	/* prologue: function */
+ 280               	/* frame size = 1 */
+ 281               	/* stack size = 3 */
+ 282               	.L__stack_usage = 3
+ 283 000c 22E0      		ldi r18,lo8(2)
+ 284 000e 2983      		std Y+1,r18
+ 285 0010 41E0      		ldi r20,lo8(1)
+ 286 0012 BE01      		movw r22,r28
+ 287 0014 6F5F      		subi r22,-1
+ 288 0016 7F4F      		sbci r23,-1
+ 289 0018 0196      		adiw r24,1
+ 290 001a 0E94 0000 		call fromhex
+ 291 001e 8981      		ldd r24,Y+1
+ 292 0020 0E94 0000 		call cc_set_pa
+ 293 0024 82E0      		ldi r24,lo8(2)
+ 294 0026 90E0      		ldi r25,0
+ 295 0028 0E94 0000 		call ccInitChip
+ 296               	/* epilogue start */
+ 297 002c 2196      		adiw r28,1
+ 298 002e E2E0      		ldi r30, lo8(2)
+ 299 0030 0C94 0000 		jmp __epilogue_restores__ + ((18 - 2) * 2)
+ 301               		.section	.text.ccTX,"ax",@progbits
+ 302               	.global	ccTX
+ 304               	ccTX:
+ 305 0000 CF93      		push r28
+ 306               	/* prologue: function */
+ 307               	/* frame size = 0 */
+ 308               	/* stack size = 1 */
+ 309               	.L__stack_usage = 1
+ 310 0002 EE98      		cbi 0x1d,6
+ 311 0004 86E3      		ldi r24,lo8(54)
+ 312 0006 0E94 0000 		call ccStrobe
+ 313 000a CFEF      		ldi r28,lo8(-1)
+ 314               	.L26:
+ 315 000c 85E3      		ldi r24,lo8(53)
+ 316 000e 0E94 0000 		call ccStrobe
+ 317 0012 C150      		subi r28,lo8(-(-1))
+ 318 0014 8077      		andi r24,lo8(112)
+ 319 0016 8032      		cpi r24,lo8(32)
+ 320 0018 01F0      		breq .L25
+ 321 001a 8AE0      		ldi r24,lo8(10)
+ 322 001c 90E0      		ldi r25,0
+ 323 001e 0E94 0000 		call my_delay_us
+ 324 0022 C111      		cpse r28,__zero_reg__
+ 325 0024 00C0      		rjmp .L26
+ 326               	.L25:
+ 327               	/* epilogue start */
+ 328 0026 CF91      		pop r28
+ 329 0028 0895      		ret
+ 331               		.section	.text.ccRX,"ax",@progbits
+ 332               	.global	ccRX
+ 334               	ccRX:
+ 335 0000 CF93      		push r28
+ 336               	/* prologue: function */
+ 337               	/* frame size = 0 */
+ 338               	/* stack size = 1 */
+ 339               	.L__stack_usage = 1
+ 340 0002 CFEF      		ldi r28,lo8(-1)
+ 341               	.L31:
+ 342 0004 84E3      		ldi r24,lo8(52)
+ 343 0006 0E94 0000 		call ccStrobe
+ 344 000a C150      		subi r28,lo8(-(-1))
+ 345 000c 8077      		andi r24,lo8(112)
+ 346 000e 8031      		cpi r24,lo8(16)
+ 347 0010 01F0      		breq .L33
+ 348 0012 8AE0      		ldi r24,lo8(10)
+ 349 0014 90E0      		ldi r25,0
+ 350 0016 0E94 0000 		call my_delay_us
+ 351 001a C111      		cpse r28,__zero_reg__
+ 352 001c 00C0      		rjmp .L31
+ 353               	.L33:
+ 354 001e EE9A      		sbi 0x1d,6
+ 355               	/* epilogue start */
+ 356 0020 CF91      		pop r28
+ 357 0022 0895      		ret
+ 359               		.section	.text.ccreg,"ax",@progbits
+ 360               	.global	ccreg
+ 362               	ccreg:
+ 363 0000 A2E0      		ldi r26,lo8(2)
+ 364 0002 B0E0      		ldi r27,0
+ 365 0004 E0E0      		ldi r30,lo8(gs(1f))
+ 366 0006 F0E0      		ldi r31,hi8(gs(1f))
+ 367 0008 0C94 0000 		jmp __prologue_saves__+((18 - 4) * 2)
+ 368               	1:
+ 369               	/* prologue: function */
+ 370               	/* frame size = 2 */
+ 371               	/* stack size = 6 */
+ 372               	.L__stack_usage = 6
+ 373 000c 8C01      		movw r16,r24
+ 374 000e FC01      		movw r30,r24
+ 375 0010 8181      		ldd r24,Z+1
+ 376 0012 8737      		cpi r24,lo8(119)
+ 377 0014 01F4      		brne .L37
+ 378 0016 41E0      		ldi r20,lo8(1)
+ 379 0018 BE01      		movw r22,r28
+ 380 001a 6F5F      		subi r22,-1
+ 381 001c 7F4F      		sbci r23,-1
+ 382 001e C801      		movw r24,r16
+ 383 0020 0296      		adiw r24,2
+ 384 0022 0E94 0000 		call fromhex
+ 385 0026 892B      		or r24,r25
+ 386 0028 01F0      		breq .L37
+ 387 002a 41E0      		ldi r20,lo8(1)
+ 388 002c BE01      		movw r22,r28
+ 389 002e 6E5F      		subi r22,-2
+ 390 0030 7F4F      		sbci r23,-1
+ 391 0032 C801      		movw r24,r16
+ 392 0034 0496      		adiw r24,4
+ 393 0036 0E94 0000 		call fromhex
+ 394 003a 892B      		or r24,r25
+ 395 003c 01F0      		breq .L37
+ 396 003e 6A81      		ldd r22,Y+2
+ 397 0040 8981      		ldd r24,Y+1
+ 398 0042 0E94 0000 		call cc1100_writeReg
+ 399 0046 83E3      		ldi r24,lo8(51)
+ 400 0048 0E94 0000 		call ccStrobe
+ 401 004c 0E94 0000 		call ccRX
+ 402 0050 8981      		ldd r24,Y+1
+ 403 0052 0E94 0000 		call display_hex2
+ 404 0056 8A81      		ldd r24,Y+2
+ 405 0058 0E94 0000 		call display_hex2
+ 406 005c 00C0      		rjmp .L51
+ 407               	.L37:
+ 408 005e 41E0      		ldi r20,lo8(1)
+ 409 0060 BE01      		movw r22,r28
+ 410 0062 6E5F      		subi r22,-2
+ 411 0064 7F4F      		sbci r23,-1
+ 412 0066 C801      		movw r24,r16
+ 413 0068 0196      		adiw r24,1
+ 414 006a 0E94 0000 		call fromhex
+ 415 006e 892B      		or r24,r25
+ 416 0070 01F0      		breq .L36
+ 417 0072 8A81      		ldd r24,Y+2
+ 418 0074 8939      		cpi r24,lo8(-103)
+ 419 0076 01F4      		brne .L40
+ 420 0078 10E0      		ldi r17,0
+ 421               	.L42:
+ 422 007a 812F      		mov r24,r17
+ 423 007c 0E94 0000 		call cc1100_readReg
+ 424 0080 0E94 0000 		call display_hex2
+ 425 0084 812F      		mov r24,r17
+ 426 0086 8770      		andi r24,lo8(7)
+ 427 0088 8730      		cpi r24,lo8(7)
+ 428 008a 01F4      		brne .L41
+ 429 008c 0E94 0000 		call display_nl
+ 430               	.L41:
+ 431 0090 1F5F      		subi r17,lo8(-(1))
+ 432 0092 1033      		cpi r17,lo8(48)
+ 433 0094 01F4      		brne .L42
+ 434 0096 00C0      		rjmp .L36
+ 435               	.L40:
+ 436 0098 0E94 0000 		call cc1100_readReg
+ 437 009c 182F      		mov r17,r24
+ 438 009e 83E4      		ldi r24,lo8(67)
+ 439 00a0 0E94 0000 		call display_char
+ 440 00a4 8A81      		ldd r24,Y+2
+ 441 00a6 0E94 0000 		call display_hex2
+ 442 00aa 80E0      		ldi r24,lo8(__c.2346)
+ 443 00ac 90E0      		ldi r25,hi8(__c.2346)
+ 444 00ae 0E94 0000 		call display_string_P
+ 445 00b2 812F      		mov r24,r17
+ 446 00b4 0E94 0000 		call display_hex2
+ 447 00b8 80E0      		ldi r24,lo8(__c.2348)
+ 448 00ba 90E0      		ldi r25,hi8(__c.2348)
+ 449 00bc 0E94 0000 		call display_string_P
+ 450 00c0 40E2      		ldi r20,lo8(32)
+ 451 00c2 62E0      		ldi r22,lo8(2)
+ 452 00c4 812F      		mov r24,r17
+ 453 00c6 90E0      		ldi r25,0
+ 454 00c8 0E94 0000 		call display_udec
+ 455               	.L51:
+ 456 00cc 0E94 0000 		call display_nl
+ 457               	.L36:
+ 458               	/* epilogue start */
+ 459 00d0 2296      		adiw r28,2
+ 460 00d2 E4E0      		ldi r30, lo8(4)
+ 461 00d4 0C94 0000 		jmp __epilogue_restores__ + ((18 - 4) * 2)
+ 463               		.section	.text.set_ccoff,"ax",@progbits
+ 464               	.global	set_ccoff
+ 466               	set_ccoff:
+ 467               	/* prologue: function */
+ 468               	/* frame size = 0 */
+ 469               	/* stack size = 0 */
+ 470               	.L__stack_usage = 0
+ 471 0000 86E3      		ldi r24,lo8(54)
+ 472 0002 0E94 0000 		call ccStrobe
+ 473 0006 1092 0000 		sts cc_on,__zero_reg__
+ 474 000a 1092 0000 		sts asksin_on,__zero_reg__
+ 475 000e 0895      		ret
+ 477               		.section	.text.set_ccon,"ax",@progbits
+ 478               	.global	set_ccon
+ 480               	set_ccon:
+ 481               	/* prologue: function */
+ 482               	/* frame size = 0 */
+ 483               	/* stack size = 0 */
+ 484               	.L__stack_usage = 0
+ 485 0000 82E0      		ldi r24,lo8(2)
+ 486 0002 90E0      		ldi r25,0
+ 487 0004 0E94 0000 		call ccInitChip
+ 488 0008 81E0      		ldi r24,lo8(1)
+ 489 000a 8093 0000 		sts cc_on,r24
+ 490 000e 1092 0000 		sts asksin_on,__zero_reg__
+ 491 0012 0895      		ret
+ 493               		.section	.progmem.data,"a",@progbits
+ 496               	__c.2348:
+ 497 0000 202F 2000 		.string	" / "
+ 500               	__c.2346:
+ 501 0004 203D 2000 		.string	" = "
+ 502               	.global	FASTRF_CFG
+ 505               	FASTRF_CFG:
+ 506 0008 07        		.byte	7
+ 507 0009 2E        		.byte	46
+ 508 000a 05        		.byte	5
+ 509 000b 0D        		.byte	13
+ 510 000c D3        		.byte	-45
+ 511 000d 91        		.byte	-111
+ 512 000e FF        		.byte	-1
+ 513 000f 08        		.byte	8
+ 514 0010 05        		.byte	5
+ 515 0011 00        		.byte	0
+ 516 0012 00        		.byte	0
+ 517 0013 0C        		.byte	12
+ 518 0014 00        		.byte	0
+ 519 0015 21        		.byte	33
+ 520 0016 65        		.byte	101
+ 521 0017 6A        		.byte	106
+ 522 0018 2D        		.byte	45
+ 523 0019 3B        		.byte	59
+ 524 001a 13        		.byte	19
+ 525 001b 22        		.byte	34
+ 526 001c F8        		.byte	-8
+ 527 001d 62        		.byte	98
+ 528 001e 07        		.byte	7
+ 529 001f 3F        		.byte	63
+ 530 0020 18        		.byte	24
+ 531 0021 1D        		.byte	29
+ 532 0022 1C        		.byte	28
+ 533 0023 C7        		.byte	-57
+ 534 0024 00        		.byte	0
+ 535 0025 B0        		.byte	-80
+ 536 0026 87        		.byte	-121
+ 537 0027 6B        		.byte	107
+ 538 0028 F8        		.byte	-8
+ 539 0029 B6        		.byte	-74
+ 540 002a 11        		.byte	17
+ 541 002b EA        		.byte	-22
+ 542 002c 2A        		.byte	42
+ 543 002d 00        		.byte	0
+ 544 002e 1F        		.byte	31
+ 545 002f 41        		.byte	65
+ 546 0030 00        		.byte	0
+ 547               	.global	CC1100_CFG
+ 550               	CC1100_CFG:
+ 551 0031 0D        		.byte	13
+ 552 0032 2E        		.byte	46
+ 553 0033 2D        		.byte	45
+ 554 0034 07        		.byte	7
+ 555 0035 D3        		.byte	-45
+ 556 0036 91        		.byte	-111
+ 557 0037 3D        		.byte	61
+ 558 0038 04        		.byte	4
+ 559 0039 32        		.byte	50
+ 560 003a 00        		.byte	0
+ 561 003b 00        		.byte	0
+ 562 003c 06        		.byte	6
+ 563 003d 00        		.byte	0
+ 564 003e 21        		.byte	33
+ 565 003f 65        		.byte	101
+ 566 0040 6A        		.byte	106
+ 567 0041 55        		.byte	85
+ 568 0042 E4        		.byte	-28
+ 569 0043 30        		.byte	48
+ 570 0044 23        		.byte	35
+ 571 0045 B9        		.byte	-71
+ 572 0046 00        		.byte	0
+ 573 0047 07        		.byte	7
+ 574 0048 00        		.byte	0
+ 575 0049 18        		.byte	24
+ 576 004a 14        		.byte	20
+ 577 004b 6C        		.byte	108
+ 578 004c 07        		.byte	7
+ 579 004d 00        		.byte	0
+ 580 004e 90        		.byte	-112
+ 581 004f 87        		.byte	-121
+ 582 0050 6B        		.byte	107
+ 583 0051 F8        		.byte	-8
+ 584 0052 56        		.byte	86
+ 585 0053 11        		.byte	17
+ 586 0054 E9        		.byte	-23
+ 587 0055 2A        		.byte	42
+ 588 0056 00        		.byte	0
+ 589 0057 1F        		.byte	31
+ 590 0058 41        		.byte	65
+ 591 0059 00        		.byte	0
+ 592               	.global	CC1100_PA
+ 595               	CC1100_PA:
+ 596 005a 00        		.byte	0
+ 597 005b 03        		.byte	3
+ 598 005c 0F        		.byte	15
+ 599 005d 1E        		.byte	30
+ 600 005e 26        		.byte	38
+ 601 005f 27        		.byte	39
+ 602 0060 00        		.byte	0
+ 603 0061 00        		.byte	0
+ 604 0062 00        		.byte	0
+ 605 0063 03        		.byte	3
+ 606 0064 0F        		.byte	15
+ 607 0065 1E        		.byte	30
+ 608 0066 25        		.byte	37
+ 609 0067 36        		.byte	54
+ 610 0068 38        		.byte	56
+ 611 0069 67        		.byte	103
+ 612 006a 00        		.byte	0
+ 613 006b 03        		.byte	3
+ 614 006c 0F        		.byte	15
+ 615 006d 25        		.byte	37
+ 616 006e 67        		.byte	103
+ 617 006f 40        		.byte	64
+ 618 0070 60        		.byte	96
+ 619 0071 50        		.byte	80
+ 620 0072 00        		.byte	0
+ 621 0073 03        		.byte	3
+ 622 0074 0F        		.byte	15
+ 623 0075 27        		.byte	39
+ 624 0076 51        		.byte	81
+ 625 0077 88        		.byte	-120
+ 626 0078 83        		.byte	-125
+ 627 0079 81        		.byte	-127
+ 628 007a 00        		.byte	0
+ 629 007b 03        		.byte	3
+ 630 007c 0F        		.byte	15
+ 631 007d 27        		.byte	39
+ 632 007e 50        		.byte	80
+ 633 007f C8        		.byte	-56
+ 634 0080 C3        		.byte	-61
+ 635 0081 C2        		.byte	-62
+ 636 0082 00        		.byte	0
+ 637 0083 27        		.byte	39
+ 638 0084 00        		.byte	0
+ 639 0085 00        		.byte	0
+ 640 0086 00        		.byte	0
+ 641 0087 00        		.byte	0
+ 642 0088 00        		.byte	0
+ 643 0089 00        		.byte	0
+ 644 008a 00        		.byte	0
+ 645 008b 67        		.byte	103
+ 646 008c 00        		.byte	0
+ 647 008d 00        		.byte	0
+ 648 008e 00        		.byte	0
+ 649 008f 00        		.byte	0
+ 650 0090 00        		.byte	0
+ 651 0091 00        		.byte	0
+ 652 0092 00        		.byte	0
+ 653 0093 50        		.byte	80
+ 654 0094 00        		.byte	0
+ 655 0095 00        		.byte	0
+ 656 0096 00        		.byte	0
+ 657 0097 00        		.byte	0
+ 658 0098 00        		.byte	0
+ 659 0099 00        		.byte	0
+ 660 009a 00        		.byte	0
+ 661 009b 81        		.byte	-127
+ 662 009c 00        		.byte	0
+ 663 009d 00        		.byte	0
+ 664 009e 00        		.byte	0
+ 665 009f 00        		.byte	0
+ 666 00a0 00        		.byte	0
+ 667 00a1 00        		.byte	0
+ 668 00a2 00        		.byte	0
+ 669 00a3 C2        		.byte	-62
+ 670 00a4 00        		.byte	0
+ 671 00a5 00        		.byte	0
+ 672 00a6 00        		.byte	0
+ 673 00a7 00        		.byte	0
+ 674 00a8 00        		.byte	0
+ 675 00a9 00        		.byte	0
+ 676               		.comm	cc_on,1,1
+ 677               		.ident	"GCC: (GNU) 5.4.0"
+ 678               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 cc1100.c
+     /tmp/ccEMZEyf.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccEMZEyf.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccEMZEyf.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccEMZEyf.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccEMZEyf.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccEMZEyf.s:10     .text.cc1100_sendbyte:00000000 cc1100_sendbyte
+     /tmp/ccEMZEyf.s:26     .text.cc_set_pa:00000000 cc_set_pa
+     /tmp/ccEMZEyf.s:595    .progmem.data:0000005a CC1100_PA
+     /tmp/ccEMZEyf.s:92     .text.cc_factory_reset:00000000 cc_factory_reset
+     /tmp/ccEMZEyf.s:550    .progmem.data:00000031 CC1100_CFG
+     /tmp/ccEMZEyf.s:505    .progmem.data:00000008 FASTRF_CFG
+     /tmp/ccEMZEyf.s:146    .text.cc1100_readReg:00000000 cc1100_readReg
+     /tmp/ccEMZEyf.s:162    .text.cc1100_writeReg:00000000 cc1100_writeReg
+     /tmp/ccEMZEyf.s:182    .text.ccStrobe:00000000 ccStrobe
+     /tmp/ccEMZEyf.s:195    .text.ccInitChip:00000000 ccInitChip
+     /tmp/ccEMZEyf.s:272    .text.ccsetpa:00000000 ccsetpa
+     /tmp/ccEMZEyf.s:304    .text.ccTX:00000000 ccTX
+     /tmp/ccEMZEyf.s:334    .text.ccRX:00000000 ccRX
+     /tmp/ccEMZEyf.s:362    .text.ccreg:00000000 ccreg
+     /tmp/ccEMZEyf.s:500    .progmem.data:00000004 __c.2346
+     /tmp/ccEMZEyf.s:496    .progmem.data:00000000 __c.2348
+     /tmp/ccEMZEyf.s:466    .text.set_ccoff:00000000 set_ccoff
+                            *COM*:00000001 cc_on
+     /tmp/ccEMZEyf.s:480    .text.set_ccon:00000000 set_ccon
+
+UNDEFINED SYMBOLS
+ewb
+my_delay_us
+erb
+my_delay_ms
+__epilogue_restores__
+__prologue_saves__
+fromhex
+display_hex2
+display_nl
+display_char
+display_string_P
+display_udec
+asksin_on
+__do_clear_bss

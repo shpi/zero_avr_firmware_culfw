@@ -1,0 +1,223 @@
+   1               		.file	"memory.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.freeMem,"ax",@progbits
+   8               	.global	freeMem
+  10               	freeMem:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 2091 0000 		lds r18,__brkval
+  16 0004 3091 0000 		lds r19,__brkval+1
+  17 0008 2115      		cp r18,__zero_reg__
+  18 000a 3105      		cpc r19,__zero_reg__
+  19 000c 01F4      		brne .L2
+  20 000e 2091 0000 		lds r18,__malloc_heap_start
+  21 0012 3091 0000 		lds r19,__malloc_heap_start+1
+  22               	.L2:
+  23 0016 8091 0000 		lds r24,__malloc_heap_end
+  24 001a 9091 0000 		lds r25,__malloc_heap_end+1
+  25 001e 0097      		sbiw r24,0
+  26 0020 01F4      		brne .L3
+  27 0022 8DB7      		in r24,__SP_L__
+  28 0024 9EB7      		in r25,__SP_L__+1
+  29 0026 4091 0000 		lds r20,__malloc_margin
+  30 002a 5091 0000 		lds r21,__malloc_margin+1
+  31 002e 841B      		sub r24,r20
+  32 0030 950B      		sbc r25,r21
+  33               	.L3:
+  34 0032 2817      		cp r18,r24
+  35 0034 3907      		cpc r19,r25
+  36 0036 00F4      		brsh .L5
+  37 0038 821B      		sub r24,r18
+  38 003a 930B      		sbc r25,r19
+  39 003c 0895      		ret
+  40               	.L5:
+  41 003e 80E0      		ldi r24,0
+  42 0040 90E0      		ldi r25,0
+  43 0042 0895      		ret
+  45               		.section	.text.getfreemem,"ax",@progbits
+  46               	.global	getfreemem
+  48               	getfreemem:
+  49               	/* prologue: function */
+  50               	/* frame size = 0 */
+  51               	/* stack size = 0 */
+  52               	.L__stack_usage = 0
+  53 0000 82E4      		ldi r24,lo8(66)
+  54 0002 0E94 0000 		call display_char
+  55 0006 40E2      		ldi r20,lo8(32)
+  56 0008 65E0      		ldi r22,lo8(5)
+  57 000a 8091 0000 		lds r24,__brkval
+  58 000e 9091 0000 		lds r25,__brkval+1
+  59 0012 0E94 0000 		call display_udec
+  60 0016 0E94 0000 		call display_nl
+  61 001a 83E5      		ldi r24,lo8(83)
+  62 001c 0E94 0000 		call display_char
+  63 0020 40E2      		ldi r20,lo8(32)
+  64 0022 65E0      		ldi r22,lo8(5)
+  65 0024 8091 0000 		lds r24,__malloc_heap_start
+  66 0028 9091 0000 		lds r25,__malloc_heap_start+1
+  67 002c 0E94 0000 		call display_udec
+  68 0030 0E94 0000 		call display_nl
+  69 0034 85E4      		ldi r24,lo8(69)
+  70 0036 0E94 0000 		call display_char
+  71 003a 40E2      		ldi r20,lo8(32)
+  72 003c 65E0      		ldi r22,lo8(5)
+  73 003e 8091 0000 		lds r24,__malloc_heap_end
+  74 0042 9091 0000 		lds r25,__malloc_heap_end+1
+  75 0046 0E94 0000 		call display_udec
+  76 004a 0E94 0000 		call display_nl
+  77 004e 86E4      		ldi r24,lo8(70)
+  78 0050 0E94 0000 		call display_char
+  79 0054 0E94 0000 		call freeMem
+  80 0058 40E2      		ldi r20,lo8(32)
+  81 005a 65E0      		ldi r22,lo8(5)
+  82 005c 0E94 0000 		call display_udec
+  83 0060 0E94 0000 		call display_nl
+  84 0064 0895      		ret
+  86               		.section	.text.testmem,"ax",@progbits
+  87               	.global	testmem
+  89               	testmem:
+  90 0000 0F93      		push r16
+  91 0002 1F93      		push r17
+  92 0004 CF93      		push r28
+  93 0006 DF93      		push r29
+  94               	/* prologue: function */
+  95               	/* frame size = 0 */
+  96               	/* stack size = 4 */
+  97               	.L__stack_usage = 4
+  98 0008 80E0      		ldi r24,lo8(__c.2098)
+  99 000a 90E0      		ldi r25,hi8(__c.2098)
+ 100 000c 0E94 0000 		call display_string_P
+ 101 0010 40E2      		ldi r20,lo8(32)
+ 102 0012 65E0      		ldi r22,lo8(5)
+ 103 0014 8DEF      		ldi r24,lo8(-3)
+ 104 0016 9FE7      		ldi r25,lo8(127)
+ 105 0018 0E94 0000 		call display_udec
+ 106 001c 80E0      		ldi r24,lo8(__c.2100)
+ 107 001e 90E0      		ldi r25,hi8(__c.2100)
+ 108 0020 0E94 0000 		call display_string_P
+ 109 0024 8DEF      		ldi r24,lo8(-3)
+ 110 0026 9FE7      		ldi r25,lo8(127)
+ 111 0028 0E94 0000 		call malloc
+ 112 002c EC01      		movw r28,r24
+ 113 002e 0097      		sbiw r24,0
+ 114 0030 01F0      		breq .L9
+ 115 0032 4DEF      		ldi r20,lo8(-3)
+ 116 0034 5FE7      		ldi r21,lo8(127)
+ 117 0036 67E7      		ldi r22,lo8(119)
+ 118 0038 70E0      		ldi r23,0
+ 119 003a 0E94 0000 		call memset
+ 120 003e FE01      		movw r30,r28
+ 121 0040 DE01      		movw r26,r28
+ 122 0042 80E0      		ldi r24,0
+ 123 0044 90E0      		ldi r25,0
+ 124               	.L10:
+ 125 0046 8D93      		st X+,r24
+ 126 0048 0196      		adiw r24,1
+ 127 004a 8D3F      		cpi r24,-3
+ 128 004c 2FE7      		ldi r18,127
+ 129 004e 9207      		cpc r25,r18
+ 130 0050 01F4      		brne .L10
+ 131 0052 00E0      		ldi r16,0
+ 132 0054 10E0      		ldi r17,0
+ 133               	.L13:
+ 134 0056 8191      		ld r24,Z+
+ 135 0058 90E0      		ldi r25,0
+ 136 005a 9801      		movw r18,r16
+ 137 005c 3327      		clr r19
+ 138 005e 8217      		cp r24,r18
+ 139 0060 9307      		cpc r25,r19
+ 140 0062 01F0      		breq .L11
+ 141 0064 80E0      		ldi r24,lo8(__c.2107)
+ 142 0066 90E0      		ldi r25,hi8(__c.2107)
+ 143 0068 0E94 0000 		call display_string_P
+ 144 006c 40E2      		ldi r20,lo8(32)
+ 145 006e 65E0      		ldi r22,lo8(5)
+ 146 0070 C801      		movw r24,r16
+ 147 0072 0E94 0000 		call display_udec
+ 148 0076 0E94 0000 		call display_nl
+ 149 007a CE01      		movw r24,r28
+ 150 007c 0E94 0000 		call free
+ 151 0080 00C0      		rjmp .L8
+ 152               	.L11:
+ 153 0082 0F5F      		subi r16,-1
+ 154 0084 1F4F      		sbci r17,-1
+ 155 0086 0D3F      		cpi r16,-3
+ 156 0088 8FE7      		ldi r24,127
+ 157 008a 1807      		cpc r17,r24
+ 158 008c 01F4      		brne .L13
+ 159 008e CE01      		movw r24,r28
+ 160 0090 0E94 0000 		call free
+ 161 0094 80E0      		ldi r24,lo8(__c.2112)
+ 162 0096 90E0      		ldi r25,hi8(__c.2112)
+ 163 0098 00C0      		rjmp .L17
+ 164               	.L9:
+ 165 009a 80E0      		ldi r24,lo8(__c.2114)
+ 166 009c 90E0      		ldi r25,hi8(__c.2114)
+ 167               	.L17:
+ 168 009e 0E94 0000 		call display_string_P
+ 169 00a2 0E94 0000 		call display_nl
+ 170               	.L8:
+ 171               	/* epilogue start */
+ 172 00a6 DF91      		pop r29
+ 173 00a8 CF91      		pop r28
+ 174 00aa 1F91      		pop r17
+ 175 00ac 0F91      		pop r16
+ 176 00ae 0895      		ret
+ 178               		.section	.progmem.data,"a",@progbits
+ 181               	__c.2114:
+ 182 0000 416C 6C6F 		.string	"Alloc failed"
+ 182      6320 6661 
+ 182      696C 6564 
+ 182      00
+ 185               	__c.2112:
+ 186 000d 4F4B 00   		.string	"OK"
+ 189               	__c.2107:
+ 190 0010 5072 6F62 		.string	"Problmes at "
+ 190      6C6D 6573 
+ 190      2061 7420 
+ 190      00
+ 193               	__c.2100:
+ 194 001d 2062 7974 		.string	" bytes of RAM - "
+ 194      6573 206F 
+ 194      6620 5241 
+ 194      4D20 2D20 
+ 194      00
+ 197               	__c.2098:
+ 198 002e 7465 7374 		.string	"testing "
+ 198      696E 6720 
+ 198      00
+ 199               		.ident	"GCC: (GNU) 5.4.0"
+DEFINED SYMBOLS
+                            *ABS*:00000000 memory.c
+     /tmp/ccpfIa9p.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccpfIa9p.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccpfIa9p.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccpfIa9p.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccpfIa9p.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccpfIa9p.s:10     .text.freeMem:00000000 freeMem
+     /tmp/ccpfIa9p.s:48     .text.getfreemem:00000000 getfreemem
+     /tmp/ccpfIa9p.s:89     .text.testmem:00000000 testmem
+     /tmp/ccpfIa9p.s:197    .progmem.data:0000002e __c.2098
+     /tmp/ccpfIa9p.s:193    .progmem.data:0000001d __c.2100
+     /tmp/ccpfIa9p.s:189    .progmem.data:00000010 __c.2107
+     /tmp/ccpfIa9p.s:185    .progmem.data:0000000d __c.2112
+     /tmp/ccpfIa9p.s:181    .progmem.data:00000000 __c.2114
+
+UNDEFINED SYMBOLS
+__brkval
+__malloc_heap_start
+__malloc_heap_end
+__malloc_margin
+display_char
+display_udec
+display_nl
+display_string_P
+malloc
+memset
+free

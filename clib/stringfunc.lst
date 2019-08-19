@@ -1,0 +1,207 @@
+   1               		.file	"stringfunc.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.fromhex,"ax",@progbits
+   8               	.global	fromhex
+  10               	fromhex:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 DC01      		movw r26,r24
+  16 0002 FB01      		movw r30,r22
+  17               	.L20:
+  18 0004 30E0      		ldi r19,0
+  19 0006 20E0      		ldi r18,0
+  20               	.L2:
+  21 0008 9D91      		ld r25,X+
+  22 000a 9923      		tst r25
+  23 000c 01F0      		breq .L11
+  24 000e 9136      		cpi r25,lo8(97)
+  25 0010 00F0      		brlo .L3
+  26 0012 9052      		subi r25,lo8(-(-32))
+  27               	.L3:
+  28 0014 80ED      		ldi r24,lo8(-48)
+  29 0016 890F      		add r24,r25
+  30 0018 8A30      		cpi r24,lo8(10)
+  31 001a 00F4      		brsh .L4
+  32 001c 982F      		mov r25,r24
+  33 001e 00C0      		rjmp .L19
+  34               	.L4:
+  35 0020 8FEB      		ldi r24,lo8(-65)
+  36 0022 890F      		add r24,r25
+  37 0024 8630      		cpi r24,lo8(6)
+  38 0026 00F4      		brsh .L6
+  39 0028 9753      		subi r25,lo8(-(-55))
+  40               	.L19:
+  41 002a 922B      		or r25,r18
+  42 002c 3323      		tst r19
+  43 002e 01F0      		breq .L9
+  44 0030 00C0      		rjmp .L23
+  45               	.L6:
+  46 0032 9032      		cpi r25,lo8(32)
+  47 0034 01F0      		breq .L2
+  48 0036 9A33      		cpi r25,lo8(58)
+  49 0038 01F0      		breq .L2
+  50               	.L11:
+  51 003a CF01      		movw r24,r30
+  52 003c 00C0      		rjmp .L21
+  53               	.L23:
+  54 003e 9F01      		movw r18,r30
+  55 0040 2F5F      		subi r18,-1
+  56 0042 3F4F      		sbci r19,-1
+  57 0044 9083      		st Z,r25
+  58 0046 4150      		subi r20,lo8(-(-1))
+  59 0048 01F4      		brne .L12
+  60 004a C901      		movw r24,r18
+  61               	.L21:
+  62 004c 861B      		sub r24,r22
+  63 004e 970B      		sbc r25,r23
+  64 0050 0895      		ret
+  65               	.L9:
+  66 0052 292F      		mov r18,r25
+  67 0054 2295      		swap r18
+  68 0056 207F      		andi r18,lo8(-16)
+  69 0058 31E0      		ldi r19,lo8(1)
+  70 005a 00C0      		rjmp .L2
+  71               	.L12:
+  72 005c F901      		movw r30,r18
+  73 005e 00C0      		rjmp .L20
+  75               		.section	.text.fromip,"ax",@progbits
+  76               	.global	fromip
+  78               	fromip:
+  79               	/* prologue: function */
+  80               	/* frame size = 0 */
+  81               	/* stack size = 0 */
+  82               	.L__stack_usage = 0
+  83 0000 DC01      		movw r26,r24
+  84 0002 FB01      		movw r30,r22
+  85               	.L41:
+  86 0004 30E0      		ldi r19,0
+  87 0006 90E0      		ldi r25,0
+  88               	.L25:
+  89 0008 2D91      		ld r18,X+
+  90 000a 2223      		tst r18
+  91 000c 01F0      		breq .L42
+  92 000e 80ED      		ldi r24,lo8(-48)
+  93 0010 820F      		add r24,r18
+  94 0012 8A30      		cpi r24,lo8(10)
+  95 0014 00F4      		brsh .L26
+  96 0016 990F      		lsl r25
+  97 0018 392F      		mov r19,r25
+  98 001a 330F      		lsl r19
+  99 001c 330F      		lsl r19
+ 100 001e 930F      		add r25,r19
+ 101 0020 9053      		subi r25,lo8(-(-48))
+ 102 0022 920F      		add r25,r18
+ 103 0024 31E0      		ldi r19,lo8(1)
+ 104 0026 00C0      		rjmp .L25
+ 105               	.L26:
+ 106 0028 2032      		cpi r18,lo8(32)
+ 107 002a 01F0      		breq .L28
+ 108 002c 2E32      		cpi r18,lo8(46)
+ 109 002e 01F4      		brne .L29
+ 110               	.L28:
+ 111 0030 4423      		tst r20
+ 112 0032 01F0      		breq .L31
+ 113 0034 9083      		st Z,r25
+ 114 0036 4150      		subi r20,lo8(-(-1))
+ 115 0038 3196      		adiw r30,1
+ 116 003a 00C0      		rjmp .L41
+ 117               	.L31:
+ 118 003c 30E0      		ldi r19,0
+ 119 003e 00C0      		rjmp .L25
+ 120               	.L42:
+ 121 0040 3323      		tst r19
+ 122 0042 01F0      		breq .L29
+ 123 0044 4423      		tst r20
+ 124 0046 01F0      		breq .L29
+ 125 0048 9083      		st Z,r25
+ 126 004a 3196      		adiw r30,1
+ 127               	.L29:
+ 128 004c CF01      		movw r24,r30
+ 129 004e 861B      		sub r24,r22
+ 130 0050 970B      		sbc r25,r23
+ 131 0052 0895      		ret
+ 133               		.section	.text.fromdec,"ax",@progbits
+ 134               	.global	fromdec
+ 136               	fromdec:
+ 137               	/* prologue: function */
+ 138               	/* frame size = 0 */
+ 139               	/* stack size = 0 */
+ 140               	.L__stack_usage = 0
+ 141 0000 FC01      		movw r30,r24
+ 142 0002 20E0      		ldi r18,0
+ 143 0004 30E0      		ldi r19,0
+ 144 0006 8AE0      		ldi r24,lo8(10)
+ 145               	.L44:
+ 146 0008 9191      		ld r25,Z+
+ 147 000a 9923      		tst r25
+ 148 000c 01F0      		breq .L47
+ 149 000e 40ED      		ldi r20,lo8(-48)
+ 150 0010 490F      		add r20,r25
+ 151 0012 4A30      		cpi r20,lo8(10)
+ 152 0014 00F4      		brsh .L44
+ 153 0016 829F      		mul r24,r18
+ 154 0018 A001      		movw r20,r0
+ 155 001a 839F      		mul r24,r19
+ 156 001c 500D      		add r21,r0
+ 157 001e 1124      		clr __zero_reg__
+ 158 0020 9A01      		movw r18,r20
+ 159 0022 2053      		subi r18,48
+ 160 0024 3109      		sbc r19,__zero_reg__
+ 161 0026 290F      		add r18,r25
+ 162 0028 311D      		adc r19,__zero_reg__
+ 163 002a 00C0      		rjmp .L44
+ 164               	.L47:
+ 165 002c FB01      		movw r30,r22
+ 166 002e 3183      		std Z+1,r19
+ 167 0030 2083      		st Z,r18
+ 168 0032 0895      		ret
+ 170               		.section	.text.tohex,"ax",@progbits
+ 171               	.global	tohex
+ 173               	tohex:
+ 174               	/* prologue: function */
+ 175               	/* frame size = 0 */
+ 176               	/* stack size = 0 */
+ 177               	.L__stack_usage = 0
+ 178 0000 982F      		mov r25,r24
+ 179 0002 9295      		swap r25
+ 180 0004 9F70      		andi r25,lo8(15)
+ 181 0006 9A30      		cpi r25,lo8(10)
+ 182 0008 00F4      		brsh .L49
+ 183 000a 905D      		subi r25,lo8(-(48))
+ 184 000c 00C0      		rjmp .L50
+ 185               	.L49:
+ 186 000e 995C      		subi r25,lo8(-(55))
+ 187               	.L50:
+ 188 0010 FB01      		movw r30,r22
+ 189 0012 9083      		st Z,r25
+ 190 0014 8F70      		andi r24,lo8(15)
+ 191 0016 8A30      		cpi r24,lo8(10)
+ 192 0018 00F4      		brsh .L51
+ 193 001a 805D      		subi r24,lo8(-(48))
+ 194 001c 00C0      		rjmp .L52
+ 195               	.L51:
+ 196 001e 895C      		subi r24,lo8(-(55))
+ 197               	.L52:
+ 198 0020 FB01      		movw r30,r22
+ 199 0022 8183      		std Z+1,r24
+ 200 0024 0895      		ret
+ 202               		.ident	"GCC: (GNU) 5.4.0"
+DEFINED SYMBOLS
+                            *ABS*:00000000 stringfunc.c
+     /tmp/ccmtBCP1.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccmtBCP1.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccmtBCP1.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccmtBCP1.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccmtBCP1.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccmtBCP1.s:10     .text.fromhex:00000000 fromhex
+     /tmp/ccmtBCP1.s:78     .text.fromip:00000000 fromip
+     /tmp/ccmtBCP1.s:136    .text.fromdec:00000000 fromdec
+     /tmp/ccmtBCP1.s:173    .text.tohex:00000000 tohex
+
+NO UNDEFINED SYMBOLS

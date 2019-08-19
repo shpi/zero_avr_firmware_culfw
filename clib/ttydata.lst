@@ -1,0 +1,195 @@
+   1               		.file	"ttydata.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.callfn,"ax",@progbits
+   8               	.global	callfn
+  10               	callfn:
+  11 0000 0F93      		push r16
+  12 0002 1F93      		push r17
+  13 0004 CF93      		push r28
+  14 0006 DF93      		push r29
+  15               	/* prologue: function */
+  16               	/* frame size = 0 */
+  17               	/* stack size = 4 */
+  18               	.L__stack_usage = 4
+  19 0008 EC01      		movw r28,r24
+  20 000a 00E0      		ldi r16,0
+  21               	.L5:
+  22 000c 802F      		mov r24,r16
+  23 000e 90E0      		ldi r25,0
+  24 0010 9C01      		movw r18,r24
+  25 0012 220F      		lsl r18
+  26 0014 331F      		rol r19
+  27 0016 280F      		add r18,r24
+  28 0018 391F      		adc r19,r25
+  29 001a F901      		movw r30,r18
+  30 001c E050      		subi r30,lo8(-(fntab))
+  31 001e F040      		sbci r31,hi8(-(fntab))
+  32               	/* #APP */
+  33               	 ;  17 "../../clib/ttydata.c" 1
+  34 0020 1491      		lpm r17, Z
+  35               		
+  36               	 ;  0 "" 2
+  37               	/* #NOAPP */
+  38 0022 F901      		movw r30,r18
+  39 0024 E050      		subi r30,lo8(-(fntab+1))
+  40 0026 F040      		sbci r31,hi8(-(fntab+1))
+  41               	/* #APP */
+  42               	 ;  18 "../../clib/ttydata.c" 1
+  43 0028 2591      		lpm r18, Z+
+  44 002a 3491      		lpm r19, Z
+  45               		
+  46               	 ;  0 "" 2
+  47               	/* #NOAPP */
+  48 002c 1123      		tst r17
+  49 002e 01F0      		breq .L6
+  50 0030 2097      		sbiw r28,0
+  51 0032 01F4      		brne .L3
+  52 0034 80E2      		ldi r24,lo8(32)
+  53 0036 0E94 0000 		call display_char
+  54 003a 812F      		mov r24,r17
+  55 003c 0E94 0000 		call display_char
+  56 0040 00C0      		rjmp .L4
+  57               	.L3:
+  58 0042 8881      		ld r24,Y
+  59 0044 1813      		cpse r17,r24
+  60 0046 00C0      		rjmp .L4
+  61 0048 CE01      		movw r24,r28
+  62 004a F901      		movw r30,r18
+  63 004c 0995      		icall
+  64 004e 81E0      		ldi r24,lo8(1)
+  65 0050 00C0      		rjmp .L2
+  66               	.L4:
+  67 0052 0F5F      		subi r16,lo8(-(1))
+  68 0054 00C0      		rjmp .L5
+  69               	.L6:
+  70 0056 80E0      		ldi r24,0
+  71               	.L2:
+  72               	/* epilogue start */
+  73 0058 DF91      		pop r29
+  74 005a CF91      		pop r28
+  75 005c 1F91      		pop r17
+  76 005e 0F91      		pop r16
+  77 0060 0895      		ret
+  79               		.section	.text.analyze_ttydata,"ax",@progbits
+  80               	.global	analyze_ttydata
+  82               	analyze_ttydata:
+  83 0000 CF93      		push r28
+  84               	/* prologue: function */
+  85               	/* frame size = 0 */
+  86               	/* stack size = 1 */
+  87               	.L__stack_usage = 1
+  88 0002 C091 0000 		lds r28,display_channel
+  89 0006 8093 0000 		sts display_channel,r24
+  90               	.L9:
+  91 000a 8091 0000 		lds r24,TTY_Rx_Buffer+2
+  92 000e 8823      		tst r24
+  93 0010 01F4      		brne .+2
+  94 0012 00C0      		rjmp .L21
+  95 0014 80E0      		ldi r24,lo8(TTY_Rx_Buffer)
+  96 0016 90E0      		ldi r25,hi8(TTY_Rx_Buffer)
+  97 0018 0E94 0000 		call rb_get
+  98 001c 2091 0000 		lds r18,cmdlen.1868
+  99 0020 3091 0000 		lds r19,cmdlen.1868+1
+ 100 0024 8A30      		cpi r24,lo8(10)
+ 101 0026 01F0      		breq .L10
+ 102 0028 8D30      		cpi r24,lo8(13)
+ 103 002a 01F4      		brne .L11
+ 104               	.L10:
+ 105 002c 2115      		cp r18,__zero_reg__
+ 106 002e 3105      		cpc r19,__zero_reg__
+ 107 0030 01F0      		breq .L9
+ 108 0032 F901      		movw r30,r18
+ 109 0034 E050      		subi r30,lo8(-(cmdbuf))
+ 110 0036 F040      		sbci r31,hi8(-(cmdbuf))
+ 111 0038 1082      		st Z,__zero_reg__
+ 112 003a 80E0      		ldi r24,lo8(cmdbuf)
+ 113 003c 90E0      		ldi r25,hi8(cmdbuf)
+ 114 003e 0E94 0000 		call callfn
+ 115 0042 8111      		cpse r24,__zero_reg__
+ 116 0044 00C0      		rjmp .L13
+ 117 0046 80E0      		ldi r24,lo8(__c.1872)
+ 118 0048 90E0      		ldi r25,hi8(__c.1872)
+ 119 004a 0E94 0000 		call display_string_P
+ 120 004e 80E0      		ldi r24,lo8(cmdbuf)
+ 121 0050 90E0      		ldi r25,hi8(cmdbuf)
+ 122 0052 0E94 0000 		call display_string
+ 123 0056 80E0      		ldi r24,lo8(__c.1874)
+ 124 0058 90E0      		ldi r25,hi8(__c.1874)
+ 125 005a 0E94 0000 		call display_string_P
+ 126 005e 80E0      		ldi r24,0
+ 127 0060 90E0      		ldi r25,0
+ 128 0062 0E94 0000 		call callfn
+ 129 0066 0E94 0000 		call display_nl
+ 130               	.L13:
+ 131 006a 1092 0000 		sts cmdlen.1868+1,__zero_reg__
+ 132 006e 1092 0000 		sts cmdlen.1868,__zero_reg__
+ 133 0072 00C0      		rjmp .L9
+ 134               	.L11:
+ 135 0074 2038      		cpi r18,-128
+ 136 0076 3105      		cpc r19,__zero_reg__
+ 137 0078 00F4      		brsh .L9
+ 138 007a A901      		movw r20,r18
+ 139 007c 4F5F      		subi r20,-1
+ 140 007e 5F4F      		sbci r21,-1
+ 141 0080 5093 0000 		sts cmdlen.1868+1,r21
+ 142 0084 4093 0000 		sts cmdlen.1868,r20
+ 143 0088 F901      		movw r30,r18
+ 144 008a E050      		subi r30,lo8(-(cmdbuf))
+ 145 008c F040      		sbci r31,hi8(-(cmdbuf))
+ 146 008e 8083      		st Z,r24
+ 147 0090 00C0      		rjmp .L9
+ 148               	.L21:
+ 149 0092 C093 0000 		sts display_channel,r28
+ 150               	/* epilogue start */
+ 151 0096 CF91      		pop r28
+ 152 0098 0895      		ret
+ 154               		.section	.progmem.data,"a",@progbits
+ 157               	__c.1874:
+ 158 0000 2069 7320 		.string	" is unknown) Use one of"
+ 158      756E 6B6E 
+ 158      6F77 6E29 
+ 158      2055 7365 
+ 158      206F 6E65 
+ 161               	__c.1872:
+ 162 0018 3F20 2800 		.string	"? ("
+ 163               		.local	cmdlen.1868
+ 164               		.comm	cmdlen.1868,2,1
+ 165               		.local	cmdbuf
+ 166               		.comm	cmdbuf,129,1
+ 167               		.comm	TTY_Rx_Buffer,131,1
+ 168               		.comm	TTY_Tx_Buffer,131,1
+ 169               		.comm	output_flush_func,2,1
+ 170               		.comm	input_handle_func,2,1
+ 171               		.ident	"GCC: (GNU) 5.4.0"
+ 172               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 ttydata.c
+     /tmp/cc6ivrOM.s:2      *ABS*:0000003e __SP_H__
+     /tmp/cc6ivrOM.s:3      *ABS*:0000003d __SP_L__
+     /tmp/cc6ivrOM.s:4      *ABS*:0000003f __SREG__
+     /tmp/cc6ivrOM.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/cc6ivrOM.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/cc6ivrOM.s:10     .text.callfn:00000000 callfn
+     /tmp/cc6ivrOM.s:82     .text.analyze_ttydata:00000000 analyze_ttydata
+                            *COM*:00000083 TTY_Rx_Buffer
+                             .bss:00000000 cmdlen.1868
+     /tmp/cc6ivrOM.s:164    .bss:00000002 cmdbuf
+     /tmp/cc6ivrOM.s:161    .progmem.data:00000018 __c.1872
+     /tmp/cc6ivrOM.s:157    .progmem.data:00000000 __c.1874
+                            *COM*:00000083 TTY_Tx_Buffer
+                            *COM*:00000002 output_flush_func
+                            *COM*:00000002 input_handle_func
+
+UNDEFINED SYMBOLS
+fntab
+display_char
+display_channel
+rb_get
+display_string_P
+display_string
+display_nl
+__do_clear_bss

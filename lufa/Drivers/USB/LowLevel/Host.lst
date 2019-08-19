@@ -1,0 +1,16 @@
+   1               		.file	"Host.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.ident	"GCC: (GNU) 5.4.0"
+DEFINED SYMBOLS
+                            *ABS*:00000000 Host.c
+     /tmp/ccZjBLiL.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccZjBLiL.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccZjBLiL.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccZjBLiL.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccZjBLiL.s:6      *ABS*:00000001 __zero_reg__
+
+NO UNDEFINED SYMBOLS

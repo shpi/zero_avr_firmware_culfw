@@ -1,0 +1,49 @@
+   1               		.file	"USBTask.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.USB_USBTask,"ax",@progbits
+   8               	.global	USB_USBTask
+  10               	USB_USBTask:
+  11 0000 CF93      		push r28
+  12               	/* prologue: function */
+  13               	/* frame size = 0 */
+  14               	/* stack size = 1 */
+  15               	.L__stack_usage = 1
+  16 0002 8091 0000 		lds r24,USB_DeviceState
+  17 0006 8823      		tst r24
+  18 0008 01F0      		breq .L1
+  19 000a C091 E900 		lds r28,233
+  20 000e C770      		andi r28,lo8(7)
+  21 0010 1092 E900 		sts 233,__zero_reg__
+  22 0014 8091 E800 		lds r24,232
+  23 0018 83FD      		sbrc r24,3
+  24 001a 0E94 0000 		call USB_Device_ProcessControlRequest
+  25               	.L3:
+  26 001e C093 E900 		sts 233,r28
+  27               	.L1:
+  28               	/* epilogue start */
+  29 0022 CF91      		pop r28
+  30 0024 0895      		ret
+  32               		.comm	USB_DeviceState,1,1
+  33               		.comm	USB_ControlRequest,8,1
+  34               		.comm	USB_IsInitialized,1,1
+  35               		.ident	"GCC: (GNU) 5.4.0"
+  36               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 USBTask.c
+     /tmp/ccfiD3Lj.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccfiD3Lj.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccfiD3Lj.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccfiD3Lj.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccfiD3Lj.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccfiD3Lj.s:10     .text.USB_USBTask:00000000 USB_USBTask
+                            *COM*:00000001 USB_DeviceState
+                            *COM*:00000008 USB_ControlRequest
+                            *COM*:00000001 USB_IsInitialized
+
+UNDEFINED SYMBOLS
+USB_Device_ProcessControlRequest
+__do_clear_bss

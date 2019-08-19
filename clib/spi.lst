@@ -1,0 +1,56 @@
+   1               		.file	"spi.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.spi_init,"ax",@progbits
+   8               	.global	spi_init
+  10               	spi_init:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 E4E6      		ldi r30,lo8(100)
+  16 0002 F0E0      		ldi r31,0
+  17 0004 8081      		ld r24,Z
+  18 0006 8B7F      		andi r24,lo8(-5)
+  19 0008 8083      		st Z,r24
+  20 000a 299A      		sbi 0x5,1
+  21 000c 84B1      		in r24,0x4
+  22 000e 8660      		ori r24,lo8(6)
+  23 0010 84B9      		out 0x4,r24
+  24 0012 569A      		sbi 0xa,6
+  25 0014 2398      		cbi 0x4,3
+  26 0016 80E5      		ldi r24,lo8(80)
+  27 0018 8CBD      		out 0x2c,r24
+  28 001a 8DB5      		in r24,0x2d
+  29 001c 8160      		ori r24,lo8(1)
+  30 001e 8DBD      		out 0x2d,r24
+  31 0020 0895      		ret
+  33               		.section	.text.spi_send,"ax",@progbits
+  34               	.global	spi_send
+  36               	spi_send:
+  37               	/* prologue: function */
+  38               	/* frame size = 0 */
+  39               	/* stack size = 0 */
+  40               	.L__stack_usage = 0
+  41 0000 8EBD      		out 0x2e,r24
+  42               	.L3:
+  43 0002 0DB4      		in __tmp_reg__,0x2d
+  44 0004 07FE      		sbrs __tmp_reg__,7
+  45 0006 00C0      		rjmp .L3
+  46 0008 8EB5      		in r24,0x2e
+  47 000a 0895      		ret
+  49               		.ident	"GCC: (GNU) 5.4.0"
+DEFINED SYMBOLS
+                            *ABS*:00000000 spi.c
+     /tmp/ccLrGONe.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccLrGONe.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccLrGONe.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccLrGONe.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccLrGONe.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccLrGONe.s:10     .text.spi_init:00000000 spi_init
+     /tmp/ccLrGONe.s:36     .text.spi_send:00000000 spi_send
+
+NO UNDEFINED SYMBOLS

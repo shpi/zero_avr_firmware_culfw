@@ -1,0 +1,255 @@
+   1               		.file	"cdcLUFA.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.CDC_Task,"ax",@progbits
+   8               	.global	CDC_Task
+  10               	CDC_Task:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 8091 0000 		lds r24,USB_DeviceState
+  16 0004 8430      		cpi r24,lo8(4)
+  17 0006 01F0      		breq .+2
+  18 0008 00C0      		rjmp .L1
+  19 000a 8093 E900 		sts 233,r24
+  20 000e 8091 0000 		lds r24,inCDC_TASK.2762
+  21 0012 8111      		cpse r24,__zero_reg__
+  22 0014 00C0      		rjmp .L4
+  23 0016 8091 E800 		lds r24,232
+  24 001a 85FF      		sbrs r24,5
+  25 001c 00C0      		rjmp .L4
+  26               	.L17:
+  27 001e 8091 F200 		lds r24,242
+  28 0022 9091 F300 		lds r25,242+1
+  29 0026 892B      		or r24,r25
+  30 0028 01F0      		breq .L22
+  31 002a 6091 F100 		lds r22,241
+  32 002e 80E0      		ldi r24,lo8(TTY_Rx_Buffer)
+  33 0030 90E0      		ldi r25,hi8(TTY_Rx_Buffer)
+  34 0032 0E94 0000 		call rb_put
+  35 0036 00C0      		rjmp .L17
+  36               	.L22:
+  37 0038 8091 E800 		lds r24,232
+  38 003c 982F      		mov r25,r24
+  39 003e 9B7F      		andi r25,lo8(-5)
+  40 0040 9093 E800 		sts 232,r25
+  41 0044 8F77      		andi r24,lo8(127)
+  42 0046 8093 E800 		sts 232,r24
+  43 004a 81E0      		ldi r24,lo8(1)
+  44 004c 8093 0000 		sts inCDC_TASK.2762,r24
+  45 0050 80E0      		ldi r24,lo8(gs(CDC_Task))
+  46 0052 90E0      		ldi r25,hi8(gs(CDC_Task))
+  47 0054 9093 0000 		sts output_flush_func+1,r25
+  48 0058 8093 0000 		sts output_flush_func,r24
+  49 005c E091 0000 		lds r30,input_handle_func
+  50 0060 F091 0000 		lds r31,input_handle_func+1
+  51 0064 81E0      		ldi r24,lo8(1)
+  52 0066 0995      		icall
+  53 0068 1092 0000 		sts inCDC_TASK.2762,__zero_reg__
+  54               	.L4:
+  55 006c 83E0      		ldi r24,lo8(3)
+  56 006e 8093 E900 		sts 233,r24
+  57 0072 8091 0000 		lds r24,TTY_Tx_Buffer+2
+  58 0076 8823      		tst r24
+  59 0078 01F0      		breq .L1
+  60 007a 8091 E800 		lds r24,232
+  61 007e 85FF      		sbrs r24,5
+  62 0080 00C0      		rjmp .L1
+  63               	/* #APP */
+  64               	 ;  97 "../../clib/cdcLUFA.c" 1
+  65 0082 F894      		cli
+  66               	 ;  0 "" 2
+  67               	/* #NOAPP */
+  68               	.L8:
+  69 0084 8091 0000 		lds r24,TTY_Tx_Buffer+2
+  70 0088 8823      		tst r24
+  71 008a 01F0      		breq .L9
+  72 008c 8091 F200 		lds r24,242
+  73 0090 9091 F300 		lds r25,242+1
+  74 0094 8034      		cpi r24,64
+  75 0096 9105      		cpc r25,__zero_reg__
+  76 0098 00F4      		brsh .L9
+  77 009a 80E0      		ldi r24,lo8(TTY_Tx_Buffer)
+  78 009c 90E0      		ldi r25,hi8(TTY_Tx_Buffer)
+  79 009e 0E94 0000 		call rb_get
+  80 00a2 8093 F100 		sts 241,r24
+  81 00a6 00C0      		rjmp .L8
+  82               	.L9:
+  83               	/* #APP */
+  84               	 ;  101 "../../clib/cdcLUFA.c" 1
+  85 00a8 7894      		sei
+  86               	 ;  0 "" 2
+  87               	/* #NOAPP */
+  88 00aa 2091 F200 		lds r18,242
+  89 00ae 3091 F300 		lds r19,242+1
+  90 00b2 8091 E800 		lds r24,232
+  91 00b6 982F      		mov r25,r24
+  92 00b8 9E7F      		andi r25,lo8(-2)
+  93 00ba 9093 E800 		sts 232,r25
+  94 00be 8F77      		andi r24,lo8(127)
+  95 00c0 8093 E800 		sts 232,r24
+  96 00c4 2034      		cpi r18,64
+  97 00c6 3105      		cpc r19,__zero_reg__
+  98 00c8 01F4      		brne .L1
+  99 00ca 0E94 0000 		call Endpoint_WaitUntilReady
+ 100 00ce 8091 E800 		lds r24,232
+ 101 00d2 982F      		mov r25,r24
+ 102 00d4 9E7F      		andi r25,lo8(-2)
+ 103 00d6 9093 E800 		sts 232,r25
+ 104 00da 8F77      		andi r24,lo8(127)
+ 105 00dc 8093 E800 		sts 232,r24
+ 106               	.L1:
+ 107 00e0 0895      		ret
+ 109               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 110               	.global	EVENT_USB_Device_ConfigurationChanged
+ 112               	EVENT_USB_Device_ConfigurationChanged:
+ 113               	/* prologue: function */
+ 114               	/* frame size = 0 */
+ 115               	/* stack size = 0 */
+ 116               	.L__stack_usage = 0
+ 117 0000 42E0      		ldi r20,lo8(2)
+ 118 0002 61EC      		ldi r22,lo8(-63)
+ 119 0004 82E0      		ldi r24,lo8(2)
+ 120 0006 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
+ 121 000a 42E3      		ldi r20,lo8(50)
+ 122 000c 61E8      		ldi r22,lo8(-127)
+ 123 000e 83E0      		ldi r24,lo8(3)
+ 124 0010 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
+ 125 0014 42E3      		ldi r20,lo8(50)
+ 126 0016 60E8      		ldi r22,lo8(-128)
+ 127 0018 84E0      		ldi r24,lo8(4)
+ 128 001a 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
+ 129 001e 1092 0000 		sts LineCoding,__zero_reg__
+ 130 0022 1092 0000 		sts LineCoding+1,__zero_reg__
+ 131 0026 1092 0000 		sts LineCoding+2,__zero_reg__
+ 132 002a 1092 0000 		sts LineCoding+3,__zero_reg__
+ 133 002e 0895      		ret
+ 135               		.section	.text.EVENT_USB_Device_UnhandledControlRequest,"ax",@progbits
+ 136               	.global	EVENT_USB_Device_UnhandledControlRequest
+ 138               	EVENT_USB_Device_UnhandledControlRequest:
+ 139               	/* prologue: function */
+ 140               	/* frame size = 0 */
+ 141               	/* stack size = 0 */
+ 142               	.L__stack_usage = 0
+ 143 0000 8091 0000 		lds r24,USB_ControlRequest
+ 144 0004 9091 0000 		lds r25,USB_ControlRequest+1
+ 145 0008 9132      		cpi r25,lo8(33)
+ 146 000a 01F0      		breq .L26
+ 147 000c 9232      		cpi r25,lo8(34)
+ 148 000e 01F0      		breq .L27
+ 149 0010 9032      		cpi r25,lo8(32)
+ 150 0012 01F4      		brne .L24
+ 151 0014 00C0      		rjmp .L30
+ 152               	.L26:
+ 153 0016 813A      		cpi r24,lo8(-95)
+ 154 0018 01F4      		brne .L24
+ 155 001a 8091 E800 		lds r24,232
+ 156 001e 877F      		andi r24,lo8(-9)
+ 157 0020 8093 E800 		sts 232,r24
+ 158 0024 67E0      		ldi r22,lo8(7)
+ 159 0026 70E0      		ldi r23,0
+ 160 0028 80E0      		ldi r24,lo8(LineCoding)
+ 161 002a 90E0      		ldi r25,hi8(LineCoding)
+ 162 002c 0E94 0000 		call Endpoint_Write_Control_Stream_LE
+ 163 0030 8091 E800 		lds r24,232
+ 164 0034 982F      		mov r25,r24
+ 165 0036 9B7F      		andi r25,lo8(-5)
+ 166 0038 00C0      		rjmp .L29
+ 167               	.L30:
+ 168 003a 8132      		cpi r24,lo8(33)
+ 169 003c 01F4      		brne .L24
+ 170 003e 8091 E800 		lds r24,232
+ 171 0042 877F      		andi r24,lo8(-9)
+ 172 0044 8093 E800 		sts 232,r24
+ 173 0048 67E0      		ldi r22,lo8(7)
+ 174 004a 70E0      		ldi r23,0
+ 175 004c 80E0      		ldi r24,lo8(LineCoding)
+ 176 004e 90E0      		ldi r25,hi8(LineCoding)
+ 177 0050 0E94 0000 		call Endpoint_Read_Control_Stream_LE
+ 178 0054 8091 E800 		lds r24,232
+ 179 0058 982F      		mov r25,r24
+ 180 005a 9E7F      		andi r25,lo8(-2)
+ 181               	.L29:
+ 182 005c 9093 E800 		sts 232,r25
+ 183 0060 8F77      		andi r24,lo8(127)
+ 184 0062 8093 E800 		sts 232,r24
+ 185 0066 0895      		ret
+ 186               	.L27:
+ 187 0068 8132      		cpi r24,lo8(33)
+ 188 006a 01F4      		brne .L24
+ 189 006c 8091 E800 		lds r24,232
+ 190 0070 877F      		andi r24,lo8(-9)
+ 191 0072 8093 E800 		sts 232,r24
+ 192 0076 0E94 0000 		call Endpoint_ClearStatusStage
+ 193               	.L24:
+ 194 007a 0895      		ret
+ 196               		.section	.text.cdc_flush,"ax",@progbits
+ 197               	.global	cdc_flush
+ 199               	cdc_flush:
+ 200               	/* prologue: function */
+ 201               	/* frame size = 0 */
+ 202               	/* stack size = 0 */
+ 203               	.L__stack_usage = 0
+ 204 0000 83E0      		ldi r24,lo8(3)
+ 205 0002 8093 E900 		sts 233,r24
+ 206 0006 0E94 0000 		call Endpoint_WaitUntilReady
+ 207 000a E8EE      		ldi r30,lo8(-24)
+ 208 000c F0E0      		ldi r31,0
+ 209 000e 8081      		ld r24,Z
+ 210 0010 982F      		mov r25,r24
+ 211 0012 9E7F      		andi r25,lo8(-2)
+ 212 0014 9083      		st Z,r25
+ 213 0016 8F77      		andi r24,lo8(127)
+ 214 0018 8083      		st Z,r24
+ 215 001a 0895      		ret
+ 217               		.local	inCDC_TASK.2762
+ 218               		.comm	inCDC_TASK.2762,1,1
+ 219               	.global	LineCoding
+ 220               		.data
+ 223               	LineCoding:
+ 224 0000 80        		.byte	-128
+ 225 0001 25        		.byte	37
+ 226 0002 00        		.byte	0
+ 227 0003 00        		.byte	0
+ 228 0004 00        		.byte	0
+ 229 0005 00        		.byte	0
+ 230 0006 08        		.byte	8
+ 231               		.comm	output_flush_func,2,1
+ 232               		.comm	input_handle_func,2,1
+ 233               		.ident	"GCC: (GNU) 5.4.0"
+ 234               	.global __do_copy_data
+ 235               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:00000000 cdcLUFA.c
+     /tmp/ccvWmOvw.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccvWmOvw.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccvWmOvw.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccvWmOvw.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccvWmOvw.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccvWmOvw.s:10     .text.CDC_Task:00000000 CDC_Task
+                             .bss:00000000 inCDC_TASK.2762
+                            *COM*:00000002 output_flush_func
+                            *COM*:00000002 input_handle_func
+     /tmp/ccvWmOvw.s:112    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+     /tmp/ccvWmOvw.s:223    .data:00000000 LineCoding
+     /tmp/ccvWmOvw.s:138    .text.EVENT_USB_Device_UnhandledControlRequest:00000000 EVENT_USB_Device_UnhandledControlRequest
+     /tmp/ccvWmOvw.s:199    .text.cdc_flush:00000000 cdc_flush
+
+UNDEFINED SYMBOLS
+USB_DeviceState
+TTY_Rx_Buffer
+rb_put
+TTY_Tx_Buffer
+rb_get
+Endpoint_WaitUntilReady
+Endpoint_ConfigureEndpoint_Prv
+USB_ControlRequest
+Endpoint_Write_Control_Stream_LE
+Endpoint_Read_Control_Stream_LE
+Endpoint_ClearStatusStage
+__do_copy_data
+__do_clear_bss
