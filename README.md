@@ -25,6 +25,7 @@ cd zero_avr_firmware_culfw/
 gpio -g mode 11 out
 sleep 1
 gpio -g mode 11 in
+sleep 1
 sudo dfu-programmer atmega32u4 erase
 sudo dfu-programmer atmega32u4 flash Devices/CUL/CUL_V3.hex
 sudo dfu-programmer atmega32u4 start
