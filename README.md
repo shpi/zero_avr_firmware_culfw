@@ -46,4 +46,27 @@ best use with homegear or raw - serialport
 
 ## KNOWN BUG
 
-This firmware deactivates PB0 vent signal for now.
+This firmware deactivates PB0. PB0 is used on SHPI for VENT_RPM Signal. Pulling it low on vent turn will make ATmega32u4 go haywire and act as SPI Slave. It should be possible to set ATmega32u4 back as master, but my following code did not work yet. Maybe u have an idea?
+
+My plan is to use CC1100 Slave Select functions and set PB0 only as output, when SPI transfer is going on.
+
+#define CC1100_DEASSERT {\
+                 SET_BIT( CC1100_CS_PORT, CC1100_CS_PIN );\
+                 CLEAR_BIT(DDRB,PB0);\
+                }
+
+
+
+#define CC1100_ASSERT {\
+                 CLEAR_BIT( CC1100_CS_PORT, CC1100_CS_PIN );\
+                 SET_BIT(DDRB,PB0);\
+                 SPI_PORT |= _BV(SPI_SCLK);\
+                 SPI_DDR  |= (_BV(SPI_MOSI) | _BV(SPI_SCLK));\
+                 SPI_DDR  &= ~_BV(SPI_MISO);\
+                 SPCR  = _BV(MSTR);\
+                }
+
+
+
+
+
