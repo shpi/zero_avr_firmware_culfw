@@ -1,10 +1,6 @@
 # zero_avr_firmware_culfw
 CULFW V1.67 modified for SHPI
 
-## KNOWN BUG
-
-This firmware deactivates PB0 vent signal for now.
-
 
 ## 	Dependencies
 You need an CC1101 radio module connected to SHPI. 
@@ -48,4 +44,6 @@ compile only for atmega32u4 - potential risk of breaking dfu-firmware
 best use with homegear or raw - serialport
 
 
+## KNOWN BUG
 
+This firmware deactivates PB0 vent signal for now.
