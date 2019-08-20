@@ -60,13 +60,19 @@ My plan is to use CC1100 Slave Select functions and set PB0 only as output, when
 #define CC1100_ASSERT {\
                  CLEAR_BIT( CC1100_CS_PORT, CC1100_CS_PIN );\
                  SET_BIT(DDRB,PB0);\
-                 SPI_PORT |= _BV(SPI_SCLK);\
-                 SPI_DDR  |= (_BV(SPI_MOSI) | _BV(SPI_SCLK));\
-                 SPI_DDR  &= ~_BV(SPI_MISO);\
                  SPCR  = _BV(MSTR);\
                 }
 
 
+DATASHEET AVR151 say:
 
+In cases where the AVR is configured for master mode and it can not be ensured that the SS pin
+will stay high between two transmissions, the status of the MSTR bit has to be checked before a new byte
+is written. After the MSTR bit has been cleared by a low level on the SS line, it must be set by the
+application to re-enable SPI master mode.
+In slave mode the SS pin is always an input. When SS is held low, the SPI is activated and MISO
+becomes output if configured so by the user. All other pins are inputs. When SS is driven high, all pins are
+inputs, and the SPI is passive, which means that it will not receive incoming data. The following table
+shows an overview of the SS Pin Functionality
 
 
