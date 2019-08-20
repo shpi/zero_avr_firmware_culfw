@@ -58,9 +58,9 @@ My plan is to use CC1100 Slave Select functions and set PB0 only as output, when
 
 
 #define CC1100_ASSERT {\
-                 CLEAR_BIT( CC1100_CS_PORT, CC1100_CS_PIN );\
                  SET_BIT(DDRB,PB0);\
                  SPCR  = _BV(MSTR);\
+                 CLEAR_BIT( CC1100_CS_PORT, CC1100_CS_PIN );\
                 }
 
 
