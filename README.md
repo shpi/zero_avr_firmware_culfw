@@ -1,9 +1,9 @@
 # zero_avr_firmware_culfw
 CULFW V1.67 modified for SHPI
 
-## WARNING
+## KNOWN BUG
 
-please add adhesive under CC1101 radio module, to avoid shorts or interference
+This firmware works only with removed yellow cable from fan (vent signal, PB0). 
 
 
 ## 	Dependencies
