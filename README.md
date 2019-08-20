@@ -3,7 +3,7 @@ CULFW V1.67 modified for SHPI
 
 ## KNOWN BUG
 
-This firmware works only with removed yellow cable from fan (vent signal, PB0). 
+This firmware deactivates PB0 vent signal for now.
 
 
 ## 	Dependencies
