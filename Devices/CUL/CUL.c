@@ -468,7 +468,8 @@ main(void)
    DDRF = 0b00000000;
    DDRD = 0b01111000;
    DDRE = 0b00000000; // DDRE |= (1<<2);   be carefull with hwb, check if its connected to GND via 10k (prototypes!)
-   DDRB = 0b11110110;
+   DDRB = 0b11110111;
+   PORTB &= ~_BV(PB0);
    DDRC = 0b11000000;
    OCR0A = 190;      //    start value for FAN  190 / 255  (-> p-channel so inverted)       0x00 is ON  0xFF is OFF
    TCCR0B  =  0b00000001;
