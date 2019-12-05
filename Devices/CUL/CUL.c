@@ -32,7 +32,7 @@
 #include "../../clib/fastrf.h"		// fastrf_func
 #include "../../clib/rf_router.h"	// rf_router_func
 
-
+#include <util/crc16.h>
 #include <stdlib.h>
 #define DELAY 100
 #define WAIT 120
@@ -46,10 +46,11 @@
 #include "light_ws2812.h"
 struct cRGB led[1];
 #define I2C_ADDR 0x2A
+#define SDA_LINE  (PIND & (1<<PD1))
 
-uint8_t commandbyte, buffer_address,a7count = 0,count,bllevel = 31,newbllevel = 31,changeled;  
-uint16_t a0,a1,a2,a3,a4,a5,a7,a7avg,a7max,a7min,vcc,temp,rpm,fanspin;
-uint8_t adcselect = 0;
+uint8_t commandbyte = 0xFF,twdrbuffer, buffer_address,a7count = 0,count,bllevel = 31,newbllevel = 31,changeled,crc,i2cerror = 0;  
+uint16_t a0,a1,a2,a3,a4,a5,a7,a7avg,a7max,a7min,vcc,temp,rpm,fanspin,isrtimer,i2cbuffer = 0;
+uint8_t fanlevel = 254;
 
 
 uint16_t commands[] =  {0x0080, 0x01F8,  0x0246, 0x0305, 0x0440,  0x0540, 0x0640,0x0740, 0x0840,  0x0940, 0x0A03};            // only for  A035VW01 
@@ -63,54 +64,53 @@ uint16_t commands2[]=  {0x0011,0x0000,0x0001,0x0000,0x00C1,0x01A8,0x01B1,0x0145,
 
 
 
-
-
-void writebl(uint8_t data) {            // set single wire brightness  AL3050 
-    uint8_t count = 8;
-    do {  
+void writebl(uint8_t data) { // set single wire brightness  AL3050 
+  uint8_t count = 8;
+  do {
     PORTD &= ~_BV(PD4);
     _delay_us(100);
-    if (!(data & (1 << (count-1)))) { _delay_us(100);  }
+    if (!(data & (1 << (count - 1)))) {
+      _delay_us(100);
+    }
     PORTD |= _BV(PD4);
     _delay_us(100);
-     if ((data & (1 << (count-1))) != 0) { _delay_us(100);  }
-    count --;
-    } while (count) ;      
-    
-    PORTD &= ~_BV(PD4);
-    _delay_us(100);
-    PORTD |= _BV(PD4);
-    _delay_us(100);
+    if ((data & (1 << (count - 1))) != 0) {
+      _delay_us(100);
+    }
+    count--;
+  } while (count);
+
+  PORTD &= ~_BV(PD4);
+  _delay_us(100);
+  PORTD |= _BV(PD4);
+  _delay_us(100);
+}
+
+void initbl() { // init AL3050 single wire dimming
+  PORTD &= ~_BV(PD4);
+  _delay_us(3000);
+  PORTD |= _BV(PD4);
+  _delay_us(120);
+  PORTD &= ~_BV(PD4);
+  _delay_us(500);
+  PORTD |= _BV(PD4);
+  _delay_us(5);
 }
 
 
-
-void initbl(void){              // init AL3050 single wire dimming
-PORTD &= ~_BV(PD4);
-_delay_us(4000);
-PORTD |= _BV(PD4);
-_delay_us(120);
-PORTD &= ~_BV(PD4);
-_delay_us(500);
-PORTD |= _BV(PD4);
-_delay_us(5);
-}
-
-
-
-void write(uint16_t data, uint8_t count){                                   //  write routine for LCD setup
-    PORTD &= ~_BV(PD4);
-    do {
-        PORTB &= ~_BV(PB2);
-        PORTB |= (((data & (1 << (count-1))) != 0) << 2);       // BITWISE AND -> PB2           
-        PORTB &= ~_BV(PB1);
-        _delay_us(DELAY);
-        PORTB |= _BV(PB1);
-        _delay_us(DELAY);
-        count--;
-    }  while (count);
+void write(uint16_t data, uint8_t count) { //  write routine for LCD setup
+  PORTD &= ~_BV(PD4);
+  do {
     PORTB &= ~_BV(PB2);
-    PORTD |= _BV(PD4);
+    PORTB |= (((data & (1 << (count - 1))) != 0) << 2); // BITWISE AND -> PB2           
+    PORTB &= ~_BV(PB1);
+    _delay_us(DELAY);
+    PORTB |= _BV(PB1);
+    _delay_us(DELAY);
+    count--;
+  } while (count);
+  PORTB &= ~_BV(PB2);
+  PORTD |= _BV(PD4);
 }
 
 void setup_lcd(void){
@@ -317,113 +317,200 @@ ISR(PCINT0_vect) {if (bit_is_clear(PINB,PB0)) fanspin++; }  // counting VENT_RPM
 
 
 
+ISR(TWI_vect) {
 
-ISR(TWI_vect)
-{
-  switch(TW_STATUS)
-  {
+  switch (TW_STATUS) {
 
-     case TW_SR_SLA_ACK: //  slave adressed
-	    TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
-	    buffer_address=0xFF; // set buffer pos undefined
-      break;
-	
+  case TW_SR_SLA_ACK:
 
-    case TW_SR_DATA_ACK:
-      // received data from master
-      if (buffer_address == 0xFF) {
-      commandbyte  = TWDR;   buffer_address = 0;  count = 0;} 
-      else {
-      buffer_address++; 
-           if ((commandbyte == 0x8C ) & (buffer_address == 1)) {led[0].r = TWDR;           }             // set RGB values for LED
-      else if ((commandbyte == 0x8C ) & (buffer_address == 2)) {led[0].g = TWDR;           }
-      else if ((commandbyte == 0x8C ) & (buffer_address == 3)) {led[0].b = TWDR; changeled = 1;} 
-                                                                                                        
-    
-      
-      else if ((commandbyte == 0x87 ) & (buffer_address == 1)) {newbllevel = TWDR; }  
-      else if ((commandbyte == 0x8D ) & (buffer_address == 1)) {if (TWDR == 0xFF) {PORTC |= _BV(PC6);} else {PORTC &= ~_BV(PC6);} }  //set Relais 1
-      else if ((commandbyte == 0x8E ) & (buffer_address == 1)) {if (TWDR == 0xFF) {PORTB |= _BV(PB4);} else {PORTB &= ~_BV(PB4);} }  //set Relais 2
-      else if ((commandbyte == 0x8F ) & (buffer_address == 1)) {if (TWDR == 0xFF) {PORTB |= _BV(PB6);} else {PORTB &= ~_BV(PB6);} }  //set Relais 3
-      else if ((commandbyte == 0x90 ) & (buffer_address == 1)) {if (TWDR == 0xFF) {PORTC |= _BV(PC7);} else {PORTC &= ~_BV(PC7);} }  //set D13
-      else if ((commandbyte == 0x91 ) & (buffer_address == 1)) {if (TWDR == 0xFF) {PORTE |=  (1<<2);} else {PORTE &= ~(1<<2);} }  //set HWB ->Gasheater      (D13 on prototypes)
-      else if ((commandbyte == 0x92 ) & (buffer_address == 1)) {if (TWDR == 0xFF) {PORTB |= _BV(PB5);} else if (TWDR ==0x01) {PORTB |= _BV(PB5);} else {PORTB &= ~_BV(PB5);} }  //set Buzzer
-      else if ((commandbyte == 0x93 ) & (buffer_address == 1)) {OCR0A = TWDR;}  //set Vent
-      
-      
-      
-      } 
-      TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
-      if ((commandbyte == 0x92) & (buffer_address == 1) & (TWDR == 0x01)) {;_delay_us(30); PORTB &= ~_BV(PB5);}
-      break;
-    case TW_ST_SLA_ACK:
-
-           if ((commandbyte == 0x00) & (count == 0))  {TWDR = a0 & 0xFF;}               // write A0 to master
-      else if ((commandbyte == 0x00) & (count == 1))  {TWDR = a0 >> 8;}
- 
-      else if ((commandbyte == 0x01) & (count == 0))  {TWDR = a1 & 0xFF;}               // write A1 to master
-      else if ((commandbyte == 0x01) & (count == 1))  {TWDR = a1 >> 8;}
- 
-      else if ((commandbyte == 0x02) & (count == 0))  {TWDR = a2 & 0xFF;}               // write A2 to master
-      else if ((commandbyte == 0x02) & (count == 1))  {TWDR = a2 >> 8;}
- 
-      else if ((commandbyte == 0x03) & (count == 0))  {TWDR = a3 & 0xFF;}               // write A3 to master
-      else if ((commandbyte == 0x03) & (count == 1))  {TWDR = a3 >> 8;}
-      
-      else if ((commandbyte == 0x04) & (count == 0))  {TWDR = a4 & 0xFF;}              // write A4 to master , standard Winsen MP135
-      else if ((commandbyte == 0x04) & (count == 1))  {TWDR = a4 >> 8;}
-      
-      else if ((commandbyte == 0x05) & (count == 0))  {TWDR = a5 & 0xFF;}              // write A5 to master
-      else if ((commandbyte == 0x05) & (count == 1))  {TWDR = a5 >> 8;}
-      
-      else if ((commandbyte == 0x06) & (count == 0))  {TWDR = a7 & 0xFF;}             // write A7 to master
-      else if ((commandbyte == 0x06) & (count == 1))  {TWDR = a7 >> 8;}
-      
-      else if ((commandbyte == 0x07) & (count == 0))  {TWDR = bllevel;}                // actual backlight level
-
-      else if ((commandbyte == 0x08) & (count == 0))  {TWDR = (rpm & 0xFF);}             // Vent RPM
-      else if ((commandbyte == 0x08) & (count == 1))  {TWDR = (rpm >> 8);}
-
-      else if ((commandbyte == 0x09) & (count == 0))  {TWDR = vcc & 0xFF;}           //ATmega32u4 internal vcc
-      else if ((commandbyte == 0x09) & (count == 1))  {TWDR = vcc >> 8;}
-
-      else if ((commandbyte == 0x0A) & (count == 0))  {TWDR = temp & 0xFF;}         // ATmega32u4 temp internal
-      else if ((commandbyte == 0x0A) & (count == 1))  {TWDR = temp >> 8;}
-     
-      else if ((commandbyte == 0x0B) & (count == 0))  {TWDR = freeRam() & 0xFF;}   //get available free Ram
-      else if ((commandbyte == 0x0B) & (count == 1))  {TWDR = freeRam() >> 8;}
- 
-      else if ((commandbyte == 0x0C) & (count == 0))  {TWDR = led[0].r;}  //RGB LED    value
-      else if ((commandbyte == 0x0C) & (count == 1))  {TWDR = led[0].g;}
-      else if ((commandbyte == 0x0C) & (count == 2))  {TWDR = led[0].b;}
-  
-      else if ((commandbyte == 0x0D) & (count == 0)) {if (bit_is_set(PINC,PC6)) {TWDR = 0xFF;} else {TWDR = 0x00;}}   //read Relais 1 status
-      else if ((commandbyte == 0x0E) & (count == 0)) {if (bit_is_set(PINB,PB4)) {TWDR = 0xFF;} else {TWDR = 0x00;}}   //read Relais 2 status
-      else if ((commandbyte == 0x0F) & (count == 0)) {if (bit_is_set(PINB,PB6)) {TWDR = 0xFF;} else {TWDR = 0x00;}}   //read Relais 3 status
-      else if ((commandbyte == 0x10) & (count == 0)) {if (bit_is_set(PINC,PC7)) {TWDR = 0xFF;} else {TWDR = 0x00;}}   //read D13
-      else if ((commandbyte == 0x11) & (count == 0)) {if (bit_is_set(PINE,PE2)) {TWDR = 0xFF;} else {TWDR = 0x00;}}   //read HWB
-      else if ((commandbyte == 0x12) & (count == 0)) {if (bit_is_set(PINB,PB5)) {TWDR = 0xFF;} else {TWDR = 0x00;}}   //read buzzer
-      else if ((commandbyte == 0x13) & (count == 0))  {TWDR = OCR0A;}   //read vent pwm
+    TWCR = (1 << TWIE) | (1 << TWINT) | (1 << TWEA) | (1 << TWEN);
+    buffer_address = 0xFF; // set buffer pos undefined
+    break;
    
-      else if ((commandbyte == 0x14) & (count == 0))  {TWDR = a7avg & 0xFF;}   //get available free Ram
-      else if ((commandbyte == 0x14) & (count == 1))  {TWDR = a7avg >> 8;}
+  case TW_SR_DATA_ACK: // received data from master
+    
+    if (buffer_address == 0xFF) {
+
+      commandbyte = TWDR;
+      crc = _crc8_ccitt_update(0, commandbyte);
+      buffer_address = 0;
+      i2cerror = 0;
+
+
+      switch (commandbyte) {		 
+
+		  case 0x00: i2cbuffer = a0; break;
+		  case 0x01: i2cbuffer = a1; break;
+		  case 0x02: i2cbuffer = a2; break;
+		  case 0x03: i2cbuffer = a3; break;
+		  case 0x04: i2cbuffer = a4; break;
+		  case 0x05: i2cbuffer = a5; break;
+		  case 0x06: i2cbuffer = a7; break;
+		  case 0x08: i2cbuffer = rpm;break;
+		  case 0x09: i2cbuffer = vcc; break;
+		  case 0x0A: i2cbuffer = temp;break;
+		  case 0x0B: i2cbuffer = freeRam(); break;
+		  case 0x14: i2cbuffer = a7avg; break;
+
+
+	    }
+      } 
+      else { 
+
+      
  
-      else TWDR = 0x00;
-      count++;
-      _delay_us(1);  //debugging wait, sometimes raspberry dont see first bit
+      if (buffer_address == 0) {twdrbuffer = TWDR; crc = _crc8_ccitt_update(crc,TWDR);}
+
+      else  if ((buffer_address == 1) & (TWDR == crc)) {
+
+           if (commandbyte == 0x87 ) {newbllevel = twdrbuffer;}
+      else if (commandbyte == 0x8D ) {if (twdrbuffer == 0xFF) {PORTC |= _BV(PC6);} else {PORTC &= ~_BV(PC6); }}  //set Relais 1
+      else if (commandbyte == 0x8E ) {if (twdrbuffer == 0xFF) {PORTB |= _BV(PB4);} else {PORTB &= ~_BV(PB4); }}  //set Relais 2
+      else if (commandbyte == 0x8F ) {if (twdrbuffer == 0xFF) {PORTB |= _BV(PB6);} else {PORTB &= ~_BV(PB6); }} //set Relais 3
+      else if (commandbyte == 0x90 ) {if (twdrbuffer == 0xFF) {PORTC |= _BV(PC7);} else {PORTC &= ~_BV(PC7); }} //set D13
+      else if (commandbyte == 0x91 ) {if (twdrbuffer == 0xFF) {PORTE |=  (1<<2);}  else {PORTE &= ~(1<<2);   }}     //set HWB ->Gasheater      (D13 on prototypes)
+      else if (commandbyte == 0x92 ) {if (twdrbuffer == 0xFF) {PORTB |= _BV(PB5);} else if (twdrbuffer == 0x01) {PORTB |= _BV(PB5); twdrbuffer = 0x02;} else {PORTB &= ~_BV(PB5);twdrbuffer = 0x00;}}   //set Buzzer
+      else if (commandbyte == 0x93 ) {OCR0A = twdrbuffer;fanlevel = twdrbuffer;}  //set Vent
+      else if (commandbyte == 0x94 ) {led[0].r = twdrbuffer;changeled = 1;}  //set r color
+      else if (commandbyte == 0x95 ) {led[0].g = twdrbuffer;changeled = 1;}  //set g color
+      else if (commandbyte == 0x96 ) {led[0].b = twdrbuffer;changeled = 1;}  //set b color
+
+      else {i2cerror++;} 
+      } 
+      else {i2cerror++;}
+
+      buffer_address++;
+
+      }
       TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
+      if ((commandbyte == 0x92) & (twdrbuffer == 0x02)) {_delay_us(25); PORTB &= ~_BV(PB5);}
       break;
-  
-    case TW_BUS_ERROR:
-      // I2C Bus error
-      TWCR = 0;
-      TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN); 
-      break;
-    default:
-      TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
-      break;
+
+    case TW_ST_SLA_ACK: //  slave adressed
+    case TW_ST_DATA_ACK:
+      
+      _delay_us(0.3); 
+
+	     switch(commandbyte)  {		 
+
+                 case 0x87:
+                 case 0x8D:
+                 case 0x8E:
+                 case 0x8F:
+                 case 0x90:
+                 case 0x91:
+                 case 0x92:
+                 case 0x93:
+                 case 0x94:
+                 case 0x95:
+                 case 0x96:  { TWDR = crc;  crc = 0xFF;} break;
+                 case 0x00:
+                 case 0x01:
+                 case 0x02:
+                 case 0x03:
+                 case 0x04:
+                 case 0x05:
+                 case 0x06:
+                 case 0x08: 
+                 case 0x09: 
+                 case 0x0A: 
+                 case 0x0B: 
+                 case 0x14:      
+                                 if (buffer_address == 0) {TWDR = i2cbuffer & 0xFF; crc = _crc8_ccitt_update(crc,TWDR);}
+                            else if (buffer_address == 1) {TWDR = i2cbuffer >> 8;   crc = _crc8_ccitt_update(crc,TWDR);}
+                            else if (buffer_address == 2) {TWDR = crc;}
+                            else                          {TWDR = 0xFF; i2cerror++;}
+                            break; 
+                           
+                 case 0x0C:     
+                                if (buffer_address == 0)  {TWDR = led[0].r; crc = _crc8_ccitt_update(crc,TWDR);}  
+                           else if (buffer_address == 1)  {TWDR = led[0].g; crc = _crc8_ccitt_update(crc,TWDR);}
+                           else if (buffer_address == 2)  {TWDR = led[0].b; crc = _crc8_ccitt_update(crc,TWDR);}
+                           else if (buffer_address == 3)  {TWDR = crc;}
+                           else                           {TWDR = 0xFF;  i2cerror++;}
+                           break; 
+
+                 case 0x07:          
+                                     if (buffer_address == 0) {TWDR = bllevel; crc = _crc8_ccitt_update(crc,TWDR);}
+                                else if (buffer_address == 1) {TWDR = crc;}
+                                else                         {TWDR = 0xFF; i2cerror++;}
+                                break;
+
+
+                 case 0x0D:      
+                                 if (buffer_address == 0) {if (bit_is_set(PINC,PC6)) {TWDR = 0xFF;} else {TWDR = 0x00;} crc = _crc8_ccitt_update(crc,TWDR);}
+                            else if (buffer_address == 1) {TWDR = crc;}
+                            else {TWDR = 0xFF; i2cerror++;}
+                            break;
+
+                 case 0x0E:     
+                                 if (buffer_address == 0) {if (bit_is_set(PINB,PB4)) {TWDR = 0xFF;} else {TWDR = 0x00;} crc = _crc8_ccitt_update(crc,TWDR);}
+                            else if (buffer_address == 1) {TWDR = crc;}
+                            else                          {TWDR = 0xFF; i2cerror++;}
+                            break;
+
+
+                 case 0x0F:     
+                                 if (buffer_address == 0) {if (bit_is_set(PINB,PB6)) {TWDR = 0xFF;} else {TWDR = 0x00;} crc = _crc8_ccitt_update(crc,TWDR);}
+                            else if (buffer_address == 1) { TWDR = crc;}
+                            else                          {TWDR = 0xFF; i2cerror++;}
+                            break;
+
+                 case 0x10:  
+                                 if (buffer_address == 0) {if (bit_is_set(PINC,PC7)) {TWDR = 0xFF;} else {TWDR = 0x00;} crc = _crc8_ccitt_update(crc,TWDR);}
+                            else if (buffer_address == 1) {TWDR = crc;}
+                            else                          {TWDR = 0xFF; i2cerror++;}
+                            break;
+
+
+                 case 0x11:  
+                                 if (buffer_address == 0) {if (bit_is_set(PINE,PE2)) {TWDR = 0xFF;} else {TWDR = 0x00;} crc = _crc8_ccitt_update(crc,TWDR);}
+                            else if (buffer_address == 1) {TWDR = crc;}
+                            else                          {TWDR = 0xFF; buffer_address = 0xFE; i2cerror++;}
+                            break;
+
+
+                 case 0x12:  
+                                 if (buffer_address == 0)  {if (bit_is_set(PINB,PB5)) {TWDR = 0xFF;} else {TWDR = 0x00;} crc = _crc8_ccitt_update(crc,TWDR);}
+                            else if (buffer_address == 1) {TWDR = crc;}
+                            else                          {TWDR = 0xFF; i2cerror++;}
+                            break;
+
+
+                 case 0x13:  
+                                 if (buffer_address == 0) {TWDR = OCR0A; crc = _crc8_ccitt_update(crc,TWDR);}
+                            else if (buffer_address == 1) {TWDR = crc;}
+                            else                          {TWDR = 0xFF; i2cerror++;}
+                            break;
+
+
+                 default: TWDR = 0xFF; 
+
+		 }	 
+
+
+
+      
+      buffer_address++;
+      TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);        
+      break;                                 
+   
+    case TW_BUS_ERROR:   
+     TWCR =   (1<<TWSTO)|(1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
+     break;
+
+
+    //case TW_SR_STOP:  TWCR |= (1<<TWINT)|(1<<TWEA)|(1<<TWEN);  break;
+
+    default:         
+      TWCR = (1<<TWEN)|(1<<TWIE)|(1<<TWINT)| (1<<TWEA)|(0<<TWSTA)|(0<<TWSTO)|  (0<<TWWC);   
+                                                                                                    
+      
   }
-} 
+
+
+
+}
 
 
 
@@ -445,6 +532,7 @@ start_bootloader(void)
 int
 main(void)
 {
+  uint8_t adcselect = 0;
   wdt_enable(WDTO_2S);
   clock_prescale_set(clock_div_1);
 
@@ -515,9 +603,20 @@ main(void)
   {rpm = fanspin * 15; // 2 signals each turn, double time but 60seconds        
   fanspin = 0;
   isrtimer = 0;
-
+  if (fanlevel == 254) { //fan minimal auto
+  if (rpm > 4400) {OCR0A++;}
+  if (rpm < 3600) {OCR0A--;}
+  }
   } 
 
+if (!SDA_LINE) {i2cerror++;}
+  
+  if (i2cerror > 50) {
+  TWCR =   (1<<TWSTO)|(1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (0<<TWEN); 
+  I2C_init(I2C_ADDR); 
+  i2cerror = 0;
+  sei();
+  }                    
 
   
   if (changeled)  {
