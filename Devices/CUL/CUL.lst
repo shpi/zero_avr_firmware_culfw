@@ -1586,7 +1586,7 @@
  1630 009c 030A      		.word	2563
  1631               	.global	fanlevel
  1634               	fanlevel:
- 1635 009e FE        		.byte	-2
+ 1635 009e D2        		.byte	-46
  1636               	.global	i2cbuffer
  1637               		.section .bss
  1640               	i2cbuffer:
@@ -1636,37 +1636,37 @@
  1694               	.global __do_clear_bss
 DEFINED SYMBOLS
                             *ABS*:00000000 CUL.c
-     /tmp/cckUpzwb.s:2      *ABS*:0000003e __SP_H__
-     /tmp/cckUpzwb.s:3      *ABS*:0000003d __SP_L__
-     /tmp/cckUpzwb.s:4      *ABS*:0000003f __SREG__
-     /tmp/cckUpzwb.s:5      *ABS*:00000000 __tmp_reg__
-     /tmp/cckUpzwb.s:6      *ABS*:00000001 __zero_reg__
-     /tmp/cckUpzwb.s:9      .text._crc8_ccitt_update:00000000 _crc8_ccitt_update
-     /tmp/cckUpzwb.s:32     .text.ws2812_sendarray_mask:00000000 ws2812_sendarray_mask
-     /tmp/cckUpzwb.s:63     .text.ws2812_sendarray_mask:00000026 loop34
-     /tmp/cckUpzwb.s:96     .text.ws2812_setleds_pin:00000000 ws2812_setleds_pin
-     /tmp/cckUpzwb.s:118    .text.ws2812_setleds:00000000 ws2812_setleds
-     /tmp/cckUpzwb.s:130    .text.ws2812_setleds_rgbw:00000000 ws2812_setleds_rgbw
-     /tmp/cckUpzwb.s:152    .text.ws2812_sendarray:00000000 ws2812_sendarray
-     /tmp/cckUpzwb.s:164    .text.writebl:00000000 writebl
-     /tmp/cckUpzwb.s:239    .text.initbl:00000000 initbl
-     /tmp/cckUpzwb.s:275    .text.write:00000000 write
-     /tmp/cckUpzwb.s:331    .text.setup_lcd:00000000 setup_lcd
-     /tmp/cckUpzwb.s:1619   .data:00000088 commands
-     /tmp/cckUpzwb.s:1547   .data:00000000 commands2
-     /tmp/cckUpzwb.s:383    .text.readAna:00000000 readAna
-     /tmp/cckUpzwb.s:434    .text.readVcc:00000000 readVcc
-     /tmp/cckUpzwb.s:486    .text.GetTemp:00000000 GetTemp
-     /tmp/cckUpzwb.s:530    .text.freeRam:00000000 freeRam
-     /tmp/cckUpzwb.s:561    .text.I2C_init:00000000 I2C_init
+     /tmp/ccTdESp2.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccTdESp2.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccTdESp2.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccTdESp2.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccTdESp2.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccTdESp2.s:9      .text._crc8_ccitt_update:00000000 _crc8_ccitt_update
+     /tmp/ccTdESp2.s:32     .text.ws2812_sendarray_mask:00000000 ws2812_sendarray_mask
+     /tmp/ccTdESp2.s:63     .text.ws2812_sendarray_mask:00000026 loop34
+     /tmp/ccTdESp2.s:96     .text.ws2812_setleds_pin:00000000 ws2812_setleds_pin
+     /tmp/ccTdESp2.s:118    .text.ws2812_setleds:00000000 ws2812_setleds
+     /tmp/ccTdESp2.s:130    .text.ws2812_setleds_rgbw:00000000 ws2812_setleds_rgbw
+     /tmp/ccTdESp2.s:152    .text.ws2812_sendarray:00000000 ws2812_sendarray
+     /tmp/ccTdESp2.s:164    .text.writebl:00000000 writebl
+     /tmp/ccTdESp2.s:239    .text.initbl:00000000 initbl
+     /tmp/ccTdESp2.s:275    .text.write:00000000 write
+     /tmp/ccTdESp2.s:331    .text.setup_lcd:00000000 setup_lcd
+     /tmp/ccTdESp2.s:1619   .data:00000088 commands
+     /tmp/ccTdESp2.s:1547   .data:00000000 commands2
+     /tmp/ccTdESp2.s:383    .text.readAna:00000000 readAna
+     /tmp/ccTdESp2.s:434    .text.readVcc:00000000 readVcc
+     /tmp/ccTdESp2.s:486    .text.GetTemp:00000000 GetTemp
+     /tmp/ccTdESp2.s:530    .text.freeRam:00000000 freeRam
+     /tmp/ccTdESp2.s:561    .text.I2C_init:00000000 I2C_init
                             *COM*:00000001 buffer_address
                             *COM*:00000001 count
-     /tmp/cckUpzwb.s:583    .text.__vector_9:00000000 __vector_9
+     /tmp/ccTdESp2.s:583    .text.__vector_9:00000000 __vector_9
                             *COM*:00000002 fanspin
-     /tmp/cckUpzwb.s:615    .text.__vector_36:00000000 __vector_36
-     /tmp/cckUpzwb.s:1687   .data:000000a1 commandbyte
+     /tmp/ccTdESp2.s:615    .text.__vector_36:00000000 __vector_36
+     /tmp/ccTdESp2.s:1687   .data:000000a1 commandbyte
                             *COM*:00000001 crc
-     /tmp/cckUpzwb.s:1659   .bss:00000002 i2cerror
+     /tmp/ccTdESp2.s:1659   .bss:00000002 i2cerror
                             *COM*:00000002 a0
                             *COM*:00000002 a1
                             *COM*:00000002 a2
@@ -1678,20 +1678,20 @@ DEFINED SYMBOLS
                             *COM*:00000002 vcc
                             *COM*:00000002 temp
                             *COM*:00000002 a7avg
-     /tmp/cckUpzwb.s:1640   .bss:00000000 i2cbuffer
+     /tmp/ccTdESp2.s:1640   .bss:00000000 i2cbuffer
                             *COM*:00000001 twdrbuffer
-     /tmp/cckUpzwb.s:1667   .data:0000009f newbllevel
-     /tmp/cckUpzwb.s:1634   .data:0000009e fanlevel
+     /tmp/ccTdESp2.s:1667   .data:0000009f newbllevel
+     /tmp/ccTdESp2.s:1634   .data:0000009e fanlevel
                             *COM*:00000003 led
                             *COM*:00000001 changeled
-     /tmp/cckUpzwb.s:1672   .data:000000a0 bllevel
-     /tmp/cckUpzwb.s:1126   .text.start_bootloader:00000000 start_bootloader
-     /tmp/cckUpzwb.s:1151   .text.startup.main:00000000 main
+     /tmp/ccTdESp2.s:1672   .data:000000a0 bllevel
+     /tmp/ccTdESp2.s:1126   .text.start_bootloader:00000000 start_bootloader
+     /tmp/ccTdESp2.s:1151   .text.startup.main:00000000 main
                             *COM*:00000002 input_handle_func
                             *COM*:00000002 a7max
                             *COM*:00000002 a7min
-     /tmp/cckUpzwb.s:1679   .bss:00000003 a7count
-     /tmp/cckUpzwb.s:1500   .progmem.data:00000000 fntab
+     /tmp/ccTdESp2.s:1679   .bss:00000003 a7count
+     /tmp/ccTdESp2.s:1500   .progmem.data:00000000 fntab
                             *COM*:00000002 output_flush_func
 
 UNDEFINED SYMBOLS
