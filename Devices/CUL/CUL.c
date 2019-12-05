@@ -49,7 +49,7 @@ struct cRGB led[1];
 #define SDA_LINE  (PIND & (1<<PD1))
 
 uint8_t commandbyte = 0xFF,twdrbuffer, buffer_address,a7count = 0,count,bllevel = 31,newbllevel = 31,changeled,crc,i2cerror = 0;  
-uint16_t a0,a1,a2,a3,a4,a5,a7,a7avg,a7max,a7min,vcc,temp,rpm,fanspin,isrtimer,i2cbuffer = 0;
+uint16_t a0,a1,a2,a3,a4,a5,a7,a7avg,a7max,a7min,vcc,temp,rpm,fanspin,i2cbuffer = 0;
 uint8_t fanlevel = 254;
 
 

@@ -73,10 +73,12 @@ a3                  0x2               CUL.o
 __brkval            0x2               /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
 buffer_address      0x1               CUL.o
 zwave_sLen          0x1               ../../clib/rf_zwave.o
+crc                 0x1               CUL.o
 led                 0x3               CUL.o
 credit_10ms         0x2               ../../clib/rf_send.o
 fastrf_on           0x1               ../../clib/fastrf.o
 fanspin             0x2               CUL.o
+twdrbuffer          0x1               CUL.o
 packetCheckValues   0x1               ../../clib/rf_receive.o
 rpm                 0x2               CUL.o
 a7                  0x2               CUL.o
@@ -85,7 +87,6 @@ a7max               0x2               CUL.o
 a5                  0x2               CUL.o
 a7min               0x2               CUL.o
 a2                  0x2               CUL.o
-commandbyte         0x1               CUL.o
 TTY_Tx_Buffer       0x83              ../../clib/ttydata.o
 USB_ControlRequest  0x8               ../../lufa/Drivers/USB/HighLevel/USBTask.o
 USB_ConfigurationNumber
@@ -702,83 +703,85 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x4d6a
+.text           0x00000000     0x4d6e
  *(.vectors)
  .vectors       0x00000000       0xac /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
                 0x00000000                __vectors
                 0x00000000                __vector_default
  *(.vectors)
  *(.progmem.gcc*)
+ .progmem.gcc_sw_table.__vector_36
+                0x000000ac       0x2a CUL.o
  .progmem.gcc_sw_table.main
-                0x000000ac       0x16 CUL.o
+                0x000000d6       0x14 CUL.o
  .progmem.gcc_sw_table.USB_Device_ProcessControlRequest
-                0x000000c2       0x14 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
-                0x000000d6                . = ALIGN (0x2)
-                0x000000d6                __trampolines_start = .
+                0x000000ea       0x14 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                0x000000fe                . = ALIGN (0x2)
+                0x000000fe                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x000000d6        0x0 linker stubs
+ .trampolines   0x000000fe        0x0 linker stubs
  *(.trampolines*)
-                0x000000d6                __trampolines_end = .
+                0x000000fe                __trampolines_end = .
  *libprintf_flt.a:*(.progmem.data)
  *libc.a:*(.progmem.data)
  *(.progmem*)
- .progmem.data  0x000000d6       0x3f CUL.o
-                0x000000d6                fntab
- .progmem.data  0x00000115       0x81 ../../clib/Descriptors.o
-                0x00000115                ProductString
-                0x00000125                ManufacturerString
-                0x0000013d                LanguageString
-                0x00000141                ConfigurationDescriptor
-                0x00000184                DeviceDescriptor
- .progmem.data  0x00000196       0xaa ../../clib/cc1100.o
-                0x0000019e                FASTRF_CFG
-                0x000001c7                CC1100_CFG
-                0x000001f0                CC1100_PA
- .progmem.data  0x00000240       0x1d ../../clib/fncollection.o
- .progmem.data  0x0000025d        0x7 ../../clib/rf_send.o
- .progmem.data  0x00000264        0x7 ../../clib/rf_receive.o
- .progmem.data  0x0000026b       0x52 ../../clib/rf_asksin.o
-                0x00000275                ASKSIN_UPDATE_CFG
-                0x0000028b                ASKSIN_CFG
- .progmem.data  0x000002bd       0x96 ../../clib/rf_zwave.o
-                0x000002bd                ZWAVE_CFG_100k
-                0x000002ef                ZWAVE_CFG_40k
-                0x00000321                ZWAVE_CFG_9600
- .progmem.data  0x00000353       0x29 ../../clib/intertechno.o
-                0x00000353                CC1100_ITCFG
- .progmem.data  0x0000037c       0x29 ../../clib/somfy_rts.o
-                0x0000037c                CC1100_SOMFY_RTS_CFG
- .progmem.data  0x000003a5       0x1c ../../clib/ttydata.o
-                0x000003c2                . = ALIGN (0x2)
- *fill*         0x000003c1        0x1 
+ .progmem.data  0x000000fe       0x3f CUL.o
+                0x000000fe                fntab
+ .progmem.data  0x0000013d       0x81 ../../clib/Descriptors.o
+                0x0000013d                ProductString
+                0x0000014d                ManufacturerString
+                0x00000165                LanguageString
+                0x00000169                ConfigurationDescriptor
+                0x000001ac                DeviceDescriptor
+ .progmem.data  0x000001be       0xaa ../../clib/cc1100.o
+                0x000001c6                FASTRF_CFG
+                0x000001ef                CC1100_CFG
+                0x00000218                CC1100_PA
+ .progmem.data  0x00000268       0x1d ../../clib/fncollection.o
+ .progmem.data  0x00000285        0x7 ../../clib/rf_send.o
+ .progmem.data  0x0000028c        0x7 ../../clib/rf_receive.o
+ .progmem.data  0x00000293       0x52 ../../clib/rf_asksin.o
+                0x0000029d                ASKSIN_UPDATE_CFG
+                0x000002b3                ASKSIN_CFG
+ .progmem.data  0x000002e5       0x96 ../../clib/rf_zwave.o
+                0x000002e5                ZWAVE_CFG_100k
+                0x00000317                ZWAVE_CFG_40k
+                0x00000349                ZWAVE_CFG_9600
+ .progmem.data  0x0000037b       0x29 ../../clib/intertechno.o
+                0x0000037b                CC1100_ITCFG
+ .progmem.data  0x000003a4       0x29 ../../clib/somfy_rts.o
+                0x000003a4                CC1100_SOMFY_RTS_CFG
+ .progmem.data  0x000003cd       0x1c ../../clib/ttydata.o
+                0x000003ea                . = ALIGN (0x2)
+ *fill*         0x000003e9        0x1 
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x000003c2                __ctors_start = .
+                0x000003ea                __ctors_start = .
  *(.ctors)
-                0x000003c2                __ctors_end = .
-                0x000003c2                __dtors_start = .
+                0x000003ea                __ctors_end = .
+                0x000003ea                __dtors_start = .
  *(.dtors)
-                0x000003c2                __dtors_end = .
+                0x000003ea                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x000003c2        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
-                0x000003c2                __init
+ .init0         0x000003ea        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+                0x000003ea                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x000003c2        0xc /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+ .init2         0x000003ea        0xc /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x000003ce       0x16 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
-                0x000003ce                __do_copy_data
- .init4         0x000003e4       0x10 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
-                0x000003e4                __do_clear_bss
+ .init4         0x000003f6       0x16 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
+                0x000003f6                __do_copy_data
+ .init4         0x0000040c       0x10 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_clear_bss.o)
+                0x0000040c                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -789,453 +792,455 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x000003f4        0x6 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+ .init9         0x0000041c        0x6 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
  *(.init9)
  *(.text)
- .text          0x000003fa        0x2 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
-                0x000003fa                __vector_38
-                0x000003fa                __vector_22
-                0x000003fa                __vector_28
-                0x000003fa                __vector_1
-                0x000003fa                __vector_32
-                0x000003fa                __vector_34
-                0x000003fa                __vector_24
-                0x000003fa                __vector_12
-                0x000003fa                __bad_interrupt
-                0x000003fa                __vector_6
-                0x000003fa                __vector_31
-                0x000003fa                __vector_35
-                0x000003fa                __vector_39
-                0x000003fa                __vector_3
-                0x000003fa                __vector_30
-                0x000003fa                __vector_25
-                0x000003fa                __vector_11
-                0x000003fa                __vector_13
-                0x000003fa                __vector_19
-                0x000003fa                __vector_41
-                0x000003fa                __vector_27
-                0x000003fa                __vector_5
-                0x000003fa                __vector_33
-                0x000003fa                __vector_37
-                0x000003fa                __vector_4
-                0x000003fa                __vector_2
-                0x000003fa                __vector_21
-                0x000003fa                __vector_15
-                0x000003fa                __vector_29
-                0x000003fa                __vector_40
-                0x000003fa                __vector_8
-                0x000003fa                __vector_26
-                0x000003fa                __vector_14
-                0x000003fa                __vector_16
-                0x000003fa                __vector_18
-                0x000003fa                __vector_20
-                0x000003fa                __vector_42
-                0x000003fc                . = ALIGN (0x2)
+ .text          0x00000422        0x2 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+                0x00000422                __vector_38
+                0x00000422                __vector_22
+                0x00000422                __vector_28
+                0x00000422                __vector_1
+                0x00000422                __vector_32
+                0x00000422                __vector_34
+                0x00000422                __vector_24
+                0x00000422                __vector_12
+                0x00000422                __bad_interrupt
+                0x00000422                __vector_6
+                0x00000422                __vector_31
+                0x00000422                __vector_35
+                0x00000422                __vector_39
+                0x00000422                __vector_3
+                0x00000422                __vector_30
+                0x00000422                __vector_25
+                0x00000422                __vector_11
+                0x00000422                __vector_13
+                0x00000422                __vector_19
+                0x00000422                __vector_41
+                0x00000422                __vector_27
+                0x00000422                __vector_5
+                0x00000422                __vector_33
+                0x00000422                __vector_37
+                0x00000422                __vector_4
+                0x00000422                __vector_2
+                0x00000422                __vector_21
+                0x00000422                __vector_15
+                0x00000422                __vector_29
+                0x00000422                __vector_40
+                0x00000422                __vector_8
+                0x00000422                __vector_26
+                0x00000422                __vector_14
+                0x00000422                __vector_16
+                0x00000422                __vector_18
+                0x00000422                __vector_20
+                0x00000422                __vector_42
+                0x00000424                . = ALIGN (0x2)
  *(.text.*)
+ .text._crc8_ccitt_update
+                0x00000424       0x12 CUL.o
  .text.ws2812_sendarray_mask
-                0x000003fc       0x56 CUL.o
-                0x000003fc                ws2812_sendarray_mask
+                0x00000436       0x56 CUL.o
+                0x00000436                ws2812_sendarray_mask
  .text.ws2812_setleds_pin
-                0x00000452       0x1a CUL.o
-                0x00000452                ws2812_setleds_pin
+                0x0000048c       0x1a CUL.o
+                0x0000048c                ws2812_setleds_pin
  .text.ws2812_setleds
-                0x0000046c        0x4 CUL.o
-                0x0000046c                ws2812_setleds
- .text.writebl  0x00000470       0x7a CUL.o
-                0x00000470                writebl
- .text.initbl   0x000004ea       0x36 CUL.o
-                0x000004ea                initbl
- .text.write    0x00000520       0x54 CUL.o
-                0x00000520                write
+                0x000004a6        0x4 CUL.o
+                0x000004a6                ws2812_setleds
+ .text.writebl  0x000004aa       0x7a CUL.o
+                0x000004aa                writebl
+ .text.initbl   0x00000524       0x36 CUL.o
+                0x00000524                initbl
+ .text.write    0x0000055a       0x54 CUL.o
+                0x0000055a                write
  .text.setup_lcd
-                0x00000574       0x4c CUL.o
-                0x00000574                setup_lcd
- .text.readAna  0x000005c0       0x6e CUL.o
-                0x000005c0                readAna
- .text.readVcc  0x0000062e       0x6e CUL.o
-                0x0000062e                readVcc
- .text.GetTemp  0x0000069c       0x5e CUL.o
-                0x0000069c                GetTemp
- .text.freeRam  0x000006fa       0x2e CUL.o
-                0x000006fa                freeRam
+                0x000005ae       0x4c CUL.o
+                0x000005ae                setup_lcd
+ .text.readAna  0x000005fa       0x6e CUL.o
+                0x000005fa                readAna
+ .text.readVcc  0x00000668       0x6e CUL.o
+                0x00000668                readVcc
+ .text.GetTemp  0x000006d6       0x5e CUL.o
+                0x000006d6                GetTemp
+ .text.freeRam  0x00000734       0x2e CUL.o
+                0x00000734                freeRam
  .text.I2C_init
-                0x00000728       0x1a CUL.o
-                0x00000728                I2C_init
+                0x00000762       0x1a CUL.o
+                0x00000762                I2C_init
  .text.__vector_9
-                0x00000742       0x32 CUL.o
-                0x00000742                __vector_9
+                0x0000077c       0x32 CUL.o
+                0x0000077c                __vector_9
  .text.__vector_36
-                0x00000774      0x460 CUL.o
-                0x00000774                __vector_36
+                0x000007ae      0x3e4 CUL.o
+                0x000007ae                __vector_36
  .text.start_bootloader
-                0x00000bd4       0x12 CUL.o
-                0x00000bd4                start_bootloader
+                0x00000b92       0x12 CUL.o
+                0x00000b92                start_bootloader
  .text.startup.main
-                0x00000be6      0x2c2 CUL.o
-                0x00000be6                main
+                0x00000ba4      0x308 CUL.o
+                0x00000ba4                main
  .text.CALLBACK_USB_GetDescriptor
-                0x00000ea8       0x60 ../../clib/Descriptors.o
-                0x00000ea8                CALLBACK_USB_GetDescriptor
+                0x00000eac       0x60 ../../clib/Descriptors.o
+                0x00000eac                CALLBACK_USB_GetDescriptor
  .text.cc1100_sendbyte
-                0x00000f08        0xc ../../clib/cc1100.o
-                0x00000f08                cc1100_sendbyte
+                0x00000f0c        0xc ../../clib/cc1100.o
+                0x00000f0c                cc1100_sendbyte
  .text.cc_set_pa
-                0x00000f14       0x5e ../../clib/cc1100.o
-                0x00000f14                cc_set_pa
+                0x00000f18       0x5e ../../clib/cc1100.o
+                0x00000f18                cc_set_pa
  .text.cc_factory_reset
-                0x00000f72       0x40 ../../clib/cc1100.o
-                0x00000f72                cc_factory_reset
+                0x00000f76       0x40 ../../clib/cc1100.o
+                0x00000f76                cc_factory_reset
  .text.cc1100_readReg
-                0x00000fb2        0xe ../../clib/cc1100.o
-                0x00000fb2                cc1100_readReg
+                0x00000fb6        0xe ../../clib/cc1100.o
+                0x00000fb6                cc1100_readReg
  .text.cc1100_writeReg
-                0x00000fc0       0x14 ../../clib/cc1100.o
-                0x00000fc0                cc1100_writeReg
+                0x00000fc4       0x14 ../../clib/cc1100.o
+                0x00000fc4                cc1100_writeReg
  .text.ccStrobe
-                0x00000fd4        0x8 ../../clib/cc1100.o
-                0x00000fd4                ccStrobe
+                0x00000fd8        0x8 ../../clib/cc1100.o
+                0x00000fd8                ccStrobe
  .text.ccInitChip
-                0x00000fdc       0x84 ../../clib/cc1100.o
-                0x00000fdc                ccInitChip
- .text.ccsetpa  0x00001060       0x2e ../../clib/cc1100.o
-                0x00001060                ccsetpa
- .text.ccTX     0x0000108e       0x24 ../../clib/cc1100.o
-                0x0000108e                ccTX
- .text.ccRX     0x000010b2       0x20 ../../clib/cc1100.o
-                0x000010b2                ccRX
- .text.ccreg    0x000010d2       0xb2 ../../clib/cc1100.o
-                0x000010d2                ccreg
+                0x00000fe0       0x84 ../../clib/cc1100.o
+                0x00000fe0                ccInitChip
+ .text.ccsetpa  0x00001064       0x2e ../../clib/cc1100.o
+                0x00001064                ccsetpa
+ .text.ccTX     0x00001092       0x24 ../../clib/cc1100.o
+                0x00001092                ccTX
+ .text.ccRX     0x000010b6       0x20 ../../clib/cc1100.o
+                0x000010b6                ccRX
+ .text.ccreg    0x000010d6       0xb2 ../../clib/cc1100.o
+                0x000010d6                ccreg
  .text.set_ccoff
-                0x00001184        0xe ../../clib/cc1100.o
-                0x00001184                set_ccoff
+                0x00001188        0xe ../../clib/cc1100.o
+                0x00001188                set_ccoff
  .text.set_ccon
-                0x00001192       0x12 ../../clib/cc1100.o
-                0x00001192                set_ccon
+                0x00001196       0x12 ../../clib/cc1100.o
+                0x00001196                set_ccon
  .text.CDC_Task
-                0x000011a4       0xde ../../clib/cdcLUFA.o
-                0x000011a4                CDC_Task
+                0x000011a8       0xde ../../clib/cdcLUFA.o
+                0x000011a8                CDC_Task
  .text.EVENT_USB_Device_ConfigurationChanged
-                0x00001282       0x30 ../../clib/cdcLUFA.o
-                0x00001282                EVENT_USB_Device_ConfigurationChanged
+                0x00001286       0x30 ../../clib/cdcLUFA.o
+                0x00001286                EVENT_USB_Device_ConfigurationChanged
  .text.EVENT_USB_Device_UnhandledControlRequest
-                0x000012b2       0x7c ../../clib/cdcLUFA.o
-                0x000012b2                EVENT_USB_Device_UnhandledControlRequest
+                0x000012b6       0x7c ../../clib/cdcLUFA.o
+                0x000012b6                EVENT_USB_Device_UnhandledControlRequest
  .text.__vector_23
-                0x0000132e       0x7a ../../clib/clock.o
-                0x0000132e                __vector_23
+                0x00001332       0x7a ../../clib/clock.o
+                0x00001332                __vector_23
  .text.get_timestamp
-                0x000013a8       0x22 ../../clib/clock.o
-                0x000013a8                get_timestamp
- .text.gettime  0x000013ca       0x2c ../../clib/clock.o
-                0x000013ca                gettime
+                0x000013ac       0x22 ../../clib/clock.o
+                0x000013ac                get_timestamp
+ .text.gettime  0x000013ce       0x2c ../../clib/clock.o
+                0x000013ce                gettime
  .text.Minute_Task
-                0x000013f6       0x6a ../../clib/clock.o
-                0x000013f6                Minute_Task
+                0x000013fa       0x6a ../../clib/clock.o
+                0x000013fa                Minute_Task
  .text.my_delay_us
-                0x00001460        0xa ../../clib/delay.o
-                0x00001460                my_delay_us
+                0x00001464        0xa ../../clib/delay.o
+                0x00001464                my_delay_us
  .text.my_delay_ms
-                0x0000146a       0x12 ../../clib/delay.o
-                0x0000146a                my_delay_ms
+                0x0000146e       0x12 ../../clib/delay.o
+                0x0000146e                my_delay_ms
  .text.display_char
-                0x0000147c       0x2e ../../clib/display.o
-                0x0000147c                display_char
+                0x00001480       0x2e ../../clib/display.o
+                0x00001480                display_char
  .text.display_string
-                0x000014aa       0x16 ../../clib/display.o
-                0x000014aa                display_string
+                0x000014ae       0x16 ../../clib/display.o
+                0x000014ae                display_string
  .text.display_string_P
-                0x000014c0       0x1a ../../clib/display.o
-                0x000014c0                display_string_P
+                0x000014c4       0x1a ../../clib/display.o
+                0x000014c4                display_string_P
  .text.display_nl
-                0x000014da        0x8 ../../clib/display.o
-                0x000014da                display_nl
+                0x000014de        0x8 ../../clib/display.o
+                0x000014de                display_nl
  .text.display_udec
-                0x000014e2       0x6e ../../clib/display.o
-                0x000014e2                display_udec
+                0x000014e6       0x6e ../../clib/display.o
+                0x000014e6                display_udec
  .text.display_hex
-                0x00001550       0x78 ../../clib/display.o
-                0x00001550                display_hex
+                0x00001554       0x78 ../../clib/display.o
+                0x00001554                display_hex
  .text.display_hex2
-                0x000015c8        0x8 ../../clib/display.o
-                0x000015c8                display_hex2
- .text.fromhex  0x000015d0       0x60 ../../clib/stringfunc.o
-                0x000015d0                fromhex
- .text.fromdec  0x00001630       0x34 ../../clib/stringfunc.o
-                0x00001630                fromdec
- .text.ewb      0x00001664        0xa ../../clib/fncollection.o
-                0x00001664                ewb
- .text.erb      0x0000166e        0x6 ../../clib/fncollection.o
-                0x0000166e                erb
+                0x000015cc        0x8 ../../clib/display.o
+                0x000015cc                display_hex2
+ .text.fromhex  0x000015d4       0x60 ../../clib/stringfunc.o
+                0x000015d4                fromhex
+ .text.fromdec  0x00001634       0x34 ../../clib/stringfunc.o
+                0x00001634                fromdec
+ .text.ewb      0x00001668        0xa ../../clib/fncollection.o
+                0x00001668                ewb
+ .text.erb      0x00001672        0x6 ../../clib/fncollection.o
+                0x00001672                erb
  .text.display_ee_bytes
-                0x00001674       0x2e ../../clib/fncollection.o
+                0x00001678       0x2e ../../clib/fncollection.o
  .text.read_eeprom
-                0x000016a2       0x84 ../../clib/fncollection.o
-                0x000016a2                read_eeprom
+                0x000016a6       0x84 ../../clib/fncollection.o
+                0x000016a6                read_eeprom
  .text.write_eeprom
-                0x00001726       0x82 ../../clib/fncollection.o
-                0x00001726                write_eeprom
+                0x0000172a       0x82 ../../clib/fncollection.o
+                0x0000172a                write_eeprom
  .text.prepare_boot
-                0x000017a8       0x52 ../../clib/fncollection.o
-                0x000017a8                prepare_boot
+                0x000017ac       0x52 ../../clib/fncollection.o
+                0x000017ac                prepare_boot
  .text.eeprom_factory_reset
-                0x000017fa       0x4a ../../clib/fncollection.o
-                0x000017fa                eeprom_factory_reset
+                0x000017fe       0x4a ../../clib/fncollection.o
+                0x000017fe                eeprom_factory_reset
  .text.eeprom_init
-                0x00001844       0x1c ../../clib/fncollection.o
-                0x00001844                eeprom_init
- .text.version  0x00001860       0x16 ../../clib/fncollection.o
-                0x00001860                version
- .text.rb_put   0x00001876       0x2c ../../clib/ringbuffer.o
-                0x00001876                rb_put
- .text.rb_get   0x000018a2       0x34 ../../clib/ringbuffer.o
-                0x000018a2                rb_get
- .text.abit     0x000018d6       0x46 ../../clib/rf_send.o
+                0x00001848       0x1c ../../clib/fncollection.o
+                0x00001848                eeprom_init
+ .text.version  0x00001864       0x16 ../../clib/fncollection.o
+                0x00001864                version
+ .text.rb_put   0x0000187a       0x2c ../../clib/ringbuffer.o
+                0x0000187a                rb_put
+ .text.rb_get   0x000018a6       0x34 ../../clib/ringbuffer.o
+                0x000018a6                rb_get
+ .text.abit     0x000018da       0x46 ../../clib/rf_send.o
  .text.send_bit
-                0x0000191c       0x3c ../../clib/rf_send.o
- .text.sendraw  0x00001958      0x160 ../../clib/rf_send.o
+                0x00001920       0x3c ../../clib/rf_send.o
+ .text.sendraw  0x0000195c      0x160 ../../clib/rf_send.o
  .text.addParityAndSendData
-                0x00001ab8       0xda ../../clib/rf_send.o
-                0x00001ab8                addParityAndSendData
+                0x00001abc       0xda ../../clib/rf_send.o
+                0x00001abc                addParityAndSendData
  .text.addParityAndSend
-                0x00001b92       0x30 ../../clib/rf_send.o
-                0x00001b92                addParityAndSend
+                0x00001b96       0x30 ../../clib/rf_send.o
+                0x00001b96                addParityAndSend
  .text.fs20send
-                0x00001bc2        0x6 ../../clib/rf_send.o
-                0x00001bc2                fs20send
- .text.rawsend  0x00001bc8       0x7c ../../clib/rf_send.o
-                0x00001bc8                rawsend
- .text.em_send  0x00001c44       0xd6 ../../clib/rf_send.o
-                0x00001c44                em_send
- .text.ks_send  0x00001d1a      0x102 ../../clib/rf_send.o
-                0x00001d1a                ks_send
- .text.hm_send  0x00001e1c       0x76 ../../clib/rf_send.o
-                0x00001e1c                hm_send
- .text.analyze  0x00001e92      0x188 ../../clib/rf_receive.o
+                0x00001bc6        0x6 ../../clib/rf_send.o
+                0x00001bc6                fs20send
+ .text.rawsend  0x00001bcc       0x7c ../../clib/rf_send.o
+                0x00001bcc                rawsend
+ .text.em_send  0x00001c48       0xd6 ../../clib/rf_send.o
+                0x00001c48                em_send
+ .text.ks_send  0x00001d1e      0x102 ../../clib/rf_send.o
+                0x00001d1e                ks_send
+ .text.hm_send  0x00001e20       0x76 ../../clib/rf_send.o
+                0x00001e20                hm_send
+ .text.analyze  0x00001e96      0x188 ../../clib/rf_receive.o
  .text.reset_input
-                0x0000201a       0x18 ../../clib/rf_receive.o
- .text.addbit   0x00002032       0x4c ../../clib/rf_receive.o
+                0x0000201e       0x18 ../../clib/rf_receive.o
+ .text.addbit   0x00002036       0x4c ../../clib/rf_receive.o
  .text.wave_equals.isra.0
-                0x0000207e       0x58 ../../clib/rf_receive.o
- .text.tx_init  0x000020d6       0x2c ../../clib/rf_receive.o
-                0x000020d6                tx_init
+                0x00002082       0x58 ../../clib/rf_receive.o
+ .text.tx_init  0x000020da       0x2c ../../clib/rf_receive.o
+                0x000020da                tx_init
  .text.set_txrestore
-                0x00002102       0x10 ../../clib/rf_receive.o
-                0x00002102                set_txrestore
+                0x00002106       0x10 ../../clib/rf_receive.o
+                0x00002106                set_txrestore
  .text.set_txreport
-                0x00002112       0x2a ../../clib/rf_receive.o
-                0x00002112                set_txreport
- .text.cksum1   0x0000213c       0x14 ../../clib/rf_receive.o
-                0x0000213c                cksum1
- .text.cksum2   0x00002150       0x18 ../../clib/rf_receive.o
-                0x00002150                cksum2
- .text.cksum3   0x00002168       0x44 ../../clib/rf_receive.o
-                0x00002168                cksum3
- .text.getbit   0x000021ac       0x36 ../../clib/rf_receive.o
-                0x000021ac                getbit
- .text.getbits  0x000021e2       0x6a ../../clib/rf_receive.o
-                0x000021e2                getbits
+                0x00002116       0x2a ../../clib/rf_receive.o
+                0x00002116                set_txreport
+ .text.cksum1   0x00002140       0x14 ../../clib/rf_receive.o
+                0x00002140                cksum1
+ .text.cksum2   0x00002154       0x18 ../../clib/rf_receive.o
+                0x00002154                cksum2
+ .text.cksum3   0x0000216c       0x44 ../../clib/rf_receive.o
+                0x0000216c                cksum3
+ .text.getbit   0x000021b0       0x36 ../../clib/rf_receive.o
+                0x000021b0                getbit
+ .text.getbits  0x000021e6       0x6a ../../clib/rf_receive.o
+                0x000021e6                getbits
  .text.analyze_hms
-                0x0000224c       0xe8 ../../clib/rf_receive.o
-                0x0000224c                analyze_hms
+                0x00002250       0xe8 ../../clib/rf_receive.o
+                0x00002250                analyze_hms
  .text.checkForRepeatedPackage
-                0x00002334       0x10 ../../clib/rf_receive.o
-                0x00002334                checkForRepeatedPackage
+                0x00002338       0x10 ../../clib/rf_receive.o
+                0x00002338                checkForRepeatedPackage
  .text.RfAnalyze_Task
-                0x00002344      0x498 ../../clib/rf_receive.o
-                0x00002344                RfAnalyze_Task
+                0x00002348      0x498 ../../clib/rf_receive.o
+                0x00002348                RfAnalyze_Task
  .text.__vector_17
-                0x000027dc       0xa6 ../../clib/rf_receive.o
-                0x000027dc                __vector_17
+                0x000027e0       0xa6 ../../clib/rf_receive.o
+                0x000027e0                __vector_17
  .text.__vector_7
-                0x00002882      0x242 ../../clib/rf_receive.o
-                0x00002882                __vector_7
+                0x00002886      0x242 ../../clib/rf_receive.o
+                0x00002886                __vector_7
  .text.rf_asksin_init
-                0x00002ac4       0xa4 ../../clib/rf_asksin.o
-                0x00002ac4                rf_asksin_init
+                0x00002ac8       0xa4 ../../clib/rf_asksin.o
+                0x00002ac8                rf_asksin_init
  .text.rf_asksin_task
-                0x00002b68      0x144 ../../clib/rf_asksin.o
-                0x00002b68                rf_asksin_task
+                0x00002b6c      0x144 ../../clib/rf_asksin.o
+                0x00002b6c                rf_asksin_task
  .text.asksin_send
-                0x00002cac      0x17e ../../clib/rf_asksin.o
-                0x00002cac                asksin_send
+                0x00002cb0      0x17e ../../clib/rf_asksin.o
+                0x00002cb0                asksin_send
  .text.asksin_func
-                0x00002e2a       0x32 ../../clib/rf_asksin.o
-                0x00002e2a                asksin_func
- .text.zccRX    0x00002e5c        0x8 ../../clib/rf_zwave.o
-                0x00002e5c                zccRX
+                0x00002e2e       0x32 ../../clib/rf_asksin.o
+                0x00002e2e                asksin_func
+ .text.zccRX    0x00002e60        0x8 ../../clib/rf_zwave.o
+                0x00002e60                zccRX
  .text.rf_zwave_init
-                0x00002e64       0xb8 ../../clib/rf_zwave.o
-                0x00002e64                rf_zwave_init
+                0x00002e68       0xb8 ../../clib/rf_zwave.o
+                0x00002e68                rf_zwave_init
  .text.zwave_forMe
-                0x00002f1c       0x42 ../../clib/rf_zwave.o
-                0x00002f1c                zwave_forMe
+                0x00002f20       0x42 ../../clib/rf_zwave.o
+                0x00002f20                zwave_forMe
  .text.zwave_ckSum_8bit
-                0x00002f5e       0x18 ../../clib/rf_zwave.o
-                0x00002f5e                zwave_ckSum_8bit
+                0x00002f62       0x18 ../../clib/rf_zwave.o
+                0x00002f62                zwave_ckSum_8bit
  .text.zwave_ckSum_16bit
-                0x00002f76       0x5a ../../clib/rf_zwave.o
-                0x00002f76                zwave_ckSum_16bit
+                0x00002f7a       0x5a ../../clib/rf_zwave.o
+                0x00002f7a                zwave_ckSum_16bit
  .text.zwave_doSend
-                0x00002fd0      0x190 ../../clib/rf_zwave.o
-                0x00002fd0                zwave_doSend
+                0x00002fd4      0x190 ../../clib/rf_zwave.o
+                0x00002fd4                zwave_doSend
  .text.rf_zwave_task
-                0x00003160      0x25c ../../clib/rf_zwave.o
-                0x00003160                rf_zwave_task
+                0x00003164      0x25c ../../clib/rf_zwave.o
+                0x00003164                rf_zwave_task
  .text.zwave_func
-                0x000033bc       0xa6 ../../clib/rf_zwave.o
-                0x000033bc                zwave_func
+                0x000033c0       0xa6 ../../clib/rf_zwave.o
+                0x000033c0                zwave_func
  .text.it_tunein
-                0x00003462       0xbc ../../clib/intertechno.o
- .text.it_func  0x0000351e      0x408 ../../clib/intertechno.o
-                0x0000351e                it_func
+                0x00003466       0xbc ../../clib/intertechno.o
+ .text.it_func  0x00003522      0x408 ../../clib/intertechno.o
+                0x00003522                it_func
  .text.somfy_rts_func
-                0x00003926      0x404 ../../clib/somfy_rts.o
-                0x00003926                somfy_rts_func
+                0x0000392a      0x404 ../../clib/somfy_rts.o
+                0x0000392a                somfy_rts_func
  .text.fht_init
-                0x00003d2a       0x1a ../../clib/fht.o
-                0x00003d2a                fht_init
- .text.fhtsend  0x00003d44       0x58 ../../clib/fht.o
-                0x00003d44                fhtsend
+                0x00003d2e       0x1a ../../clib/fht.o
+                0x00003d2e                fht_init
+ .text.fhtsend  0x00003d48       0x58 ../../clib/fht.o
+                0x00003d48                fhtsend
  .text.fastrf_func
-                0x00003d9c       0x88 ../../clib/fastrf.o
-                0x00003d9c                fastrf_func
+                0x00003da0       0x88 ../../clib/fastrf.o
+                0x00003da0                fastrf_func
  .text.FastRF_Task
-                0x00003e24       0xc4 ../../clib/fastrf.o
-                0x00003e24                FastRF_Task
- .text.callfn   0x00003ee8       0x62 ../../clib/ttydata.o
-                0x00003ee8                callfn
+                0x00003e28       0xc4 ../../clib/fastrf.o
+                0x00003e28                FastRF_Task
+ .text.callfn   0x00003eec       0x62 ../../clib/ttydata.o
+                0x00003eec                callfn
  .text.analyze_ttydata
-                0x00003f4a       0x96 ../../clib/ttydata.o
-                0x00003f4a                analyze_ttydata
+                0x00003f4e       0x96 ../../clib/ttydata.o
+                0x00003f4e                analyze_ttydata
  .text.spi_init
-                0x00003fe0       0x22 ../../clib/spi.o
-                0x00003fe0                spi_init
+                0x00003fe4       0x22 ../../clib/spi.o
+                0x00003fe4                spi_init
  .text.USB_Device_ProcessControlRequest
-                0x00004002      0x280 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
-                0x00004002                USB_Device_ProcessControlRequest
+                0x00004006      0x280 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                0x00004006                USB_Device_ProcessControlRequest
  .text.Endpoint_ConfigureEndpoint_Prv
-                0x00004282       0x26 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
-                0x00004282                Endpoint_ConfigureEndpoint_Prv
+                0x00004286       0x26 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x00004286                Endpoint_ConfigureEndpoint_Prv
  .text.Endpoint_ClearEndpoints
-                0x000042a8       0x2e ../../lufa/Drivers/USB/LowLevel/Endpoint.o
-                0x000042a8                Endpoint_ClearEndpoints
+                0x000042ac       0x2e ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x000042ac                Endpoint_ClearEndpoints
  .text.Endpoint_ClearStatusStage
-                0x000042d6       0x48 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
-                0x000042d6                Endpoint_ClearStatusStage
+                0x000042da       0x48 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x000042da                Endpoint_ClearStatusStage
  .text.Endpoint_WaitUntilReady
-                0x0000431e       0x56 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
-                0x0000431e                Endpoint_WaitUntilReady
+                0x00004322       0x56 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x00004322                Endpoint_WaitUntilReady
  .text.Endpoint_Write_Control_Stream_LE
-                0x00004374       0xa4 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
-                0x00004374                Endpoint_Write_Control_Stream_LE
+                0x00004378       0xa4 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x00004378                Endpoint_Write_Control_Stream_LE
  .text.Endpoint_Write_Control_PStream_LE
-                0x00004418       0xa6 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
-                0x00004418                Endpoint_Write_Control_PStream_LE
+                0x0000441c       0xa6 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x0000441c                Endpoint_Write_Control_PStream_LE
  .text.Endpoint_Read_Control_Stream_LE
-                0x000044be       0x70 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
-                0x000044be                Endpoint_Read_Control_Stream_LE
+                0x000044c2       0x70 ../../lufa/Drivers/USB/LowLevel/Endpoint.o
+                0x000044c2                Endpoint_Read_Control_Stream_LE
  .text.USB_ResetInterface
-                0x0000452e       0x96 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
-                0x0000452e                USB_ResetInterface
+                0x00004532       0x96 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+                0x00004532                USB_ResetInterface
  .text.USB_Init
-                0x000045c4       0x16 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
-                0x000045c4                USB_Init
+                0x000045c8       0x16 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+                0x000045c8                USB_Init
  .text.USB_ShutDown
-                0x000045da       0x24 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
-                0x000045da                USB_ShutDown
+                0x000045de       0x24 ../../lufa/Drivers/USB/LowLevel/LowLevel.o
+                0x000045de                USB_ShutDown
  .text.USB_Event_Stub
-                0x000045fe        0x2 ../../lufa/Drivers/USB/HighLevel/Events.o
-                0x000045fe                EVENT_USB_Device_Connect
-                0x000045fe                EVENT_USB_Device_WakeUp
-                0x000045fe                USB_Event_Stub
-                0x000045fe                EVENT_USB_Device_Suspend
-                0x000045fe                EVENT_USB_Device_Disconnect
-                0x000045fe                EVENT_USB_Device_Reset
+                0x00004602        0x2 ../../lufa/Drivers/USB/HighLevel/Events.o
+                0x00004602                EVENT_USB_Device_Connect
+                0x00004602                EVENT_USB_Device_WakeUp
+                0x00004602                USB_Event_Stub
+                0x00004602                EVENT_USB_Device_Suspend
+                0x00004602                EVENT_USB_Device_Disconnect
+                0x00004602                EVENT_USB_Device_Reset
  .text.USB_INT_DisableAllInterrupts
-                0x00004600       0x10 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
-                0x00004600                USB_INT_DisableAllInterrupts
+                0x00004604       0x10 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                0x00004604                USB_INT_DisableAllInterrupts
  .text.USB_INT_ClearAllInterrupts
-                0x00004610        0xa ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
-                0x00004610                USB_INT_ClearAllInterrupts
+                0x00004614        0xa ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                0x00004614                USB_INT_ClearAllInterrupts
  .text.__vector_10
-                0x0000461a      0x162 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
-                0x0000461a                __vector_10
+                0x0000461e      0x162 ../../lufa/Drivers/USB/HighLevel/USBInterrupt.o
+                0x0000461e                __vector_10
  .text.USB_USBTask
-                0x0000477c       0x24 ../../lufa/Drivers/USB/HighLevel/USBTask.o
-                0x0000477c                USB_USBTask
+                0x00004780       0x24 ../../lufa/Drivers/USB/HighLevel/USBTask.o
+                0x00004780                USB_USBTask
  .text.libgcc.div
-                0x000047a0       0x28 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
-                0x000047a0                __udivmodhi4
+                0x000047a4       0x28 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodhi4.o)
+                0x000047a4                __udivmodhi4
  .text.libgcc.div
-                0x000047c8       0x28 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
-                0x000047c8                __divmodsi4
+                0x000047cc       0x28 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
+                0x000047cc                __divmodsi4
  .text.libgcc.div
-                0x000047f0       0x10 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
-                0x000047f0                __negsi2
- .text.libgcc   0x00004800        0xc /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
-                0x00004800                __tablejump2__
+                0x000047f4       0x10 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_negsi2.o)
+                0x000047f4                __negsi2
+ .text.libgcc   0x00004804        0xc /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_tablejump2.o)
+                0x00004804                __tablejump2__
  .text.libgcc.prologue
-                0x0000480c       0x38 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
-                0x0000480c                __prologue_saves__
+                0x00004810       0x38 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_prologue.o)
+                0x00004810                __prologue_saves__
  .text.libgcc.prologue
-                0x00004844       0x36 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
-                0x00004844                __epilogue_restores__
+                0x00004848       0x36 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_epilogue.o)
+                0x00004848                __epilogue_restores__
  .text.libgcc.div
-                0x0000487a       0x44 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
-                0x0000487a                __udivmodsi4
+                0x0000487e       0x44 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_udivmodsi4.o)
+                0x0000487e                __udivmodsi4
  .text.avr-libc.fplib
-                0x000048be       0x58 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
-                0x000048be                __fixunssfsi
+                0x000048c2       0x58 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fixunssfsi.o)
+                0x000048c2                __fixunssfsi
  .text.avr-libc.fplib
-                0x00004916       0x7a /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(floatsisf.o)
-                0x00004916                __floatunsisf
-                0x0000491a                __floatsisf
+                0x0000491a       0x7a /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(floatsisf.o)
+                0x0000491a                __floatunsisf
+                0x0000491e                __floatsisf
  .text.avr-libc.fplib
-                0x00004990       0x44 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_split3.o)
-                0x00004990                __fp_split3
-                0x000049a0                __fp_splitA
+                0x00004994       0x44 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_split3.o)
+                0x00004994                __fp_split3
+                0x000049a4                __fp_splitA
  .text.avr-libc.fplib
-                0x000049d4        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_zero.o)
-                0x000049d4                __fp_zero
-                0x000049d6                __fp_szero
+                0x000049d8        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_zero.o)
+                0x000049d8                __fp_zero
+                0x000049da                __fp_szero
  .text.avr-libc.fplib
-                0x000049e2        0x4 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
-                0x000049e2                __mulsf3
+                0x000049e6        0x4 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3.o)
+                0x000049e6                __mulsf3
  .text.avr-libc.fplib
-                0x000049e6       0xc2 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
-                0x000049fa                __mulsf3x
-                0x000049fe                __mulsf3_pse
+                0x000049ea       0xc2 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(mulsf3x.o)
+                0x000049fe                __mulsf3x
+                0x00004a02                __mulsf3_pse
  .text.avr-libc.fplib
-                0x00004aa8        0xc /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_inf.o)
-                0x00004aa8                __fp_inf
+                0x00004aac        0xc /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_inf.o)
+                0x00004aac                __fp_inf
  .text.avr-libc.fplib
-                0x00004ab4        0x6 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_nan.o)
-                0x00004ab4                __fp_nan
+                0x00004ab8        0x6 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_nan.o)
+                0x00004ab8                __fp_nan
  .text.avr-libc.fplib
-                0x00004aba        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscA.o)
-                0x00004aba                __fp_pscA
+                0x00004abe        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscA.o)
+                0x00004abe                __fp_pscA
  .text.avr-libc.fplib
-                0x00004ac8        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscB.o)
-                0x00004ac8                __fp_pscB
+                0x00004acc        0xe /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_pscB.o)
+                0x00004acc                __fp_pscB
  .text.avr-libc.fplib
-                0x00004ad6       0x22 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_round.o)
-                0x00004ad6                __fp_round
+                0x00004ada       0x22 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(fp_round.o)
+                0x00004ada                __fp_round
  .text.avr-libc
-                0x00004af8      0x242 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
-                0x00004af8                malloc
-                0x00004c28                free
+                0x00004afc      0x242 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x00004afc                malloc
+                0x00004c2c                free
  .text.avr-libc
-                0x00004d3a       0x10 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eerd_byte.o)
-                0x00004d3a                eeprom_read_byte
+                0x00004d3e       0x10 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eerd_byte.o)
+                0x00004d3e                eeprom_read_byte
  .text.avr-libc
-                0x00004d4a       0x1c /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eewr_byte.o)
-                0x00004d4a                eeprom_write_byte
-                0x00004d4c                eeprom_write_r18
-                0x00004d66                . = ALIGN (0x2)
+                0x00004d4e       0x1c /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libatmega32u4.a(eewr_byte.o)
+                0x00004d4e                eeprom_write_byte
+                0x00004d50                eeprom_write_r18
+                0x00004d6a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00004d66        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
-                0x00004d66                exit
-                0x00004d66                _exit
+ .fini9         0x00004d6a        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x00004d6a                exit
+                0x00004d6a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1254,140 +1259,144 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00004d66        0x4 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .fini0         0x00004d6a        0x4 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x00004d6a                _etext = .
+                0x00004d6e                _etext = .
 
-.data           0x00800100       0xbc load address 0x00004d6a
+.data           0x00800100       0xbe load address 0x00004d6e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
- .data          0x00800100       0xa0 CUL.o
+ .data          0x00800100       0xa2 CUL.o
                 0x00800100                commands2
                 0x00800188                commands
-                0x0080019e                newbllevel
-                0x0080019f                bllevel
- .data          0x008001a0        0x7 ../../clib/cdcLUFA.o
-                0x008001a0                LineCoding
- .data          0x008001a7        0x9 ../../clib/intertechno.o
-                0x008001a7                it_frequency
-                0x008001aa                it_repetition
-                0x008001ac                it_interval_v3
-                0x008001ae                it_interval
- .data          0x008001b0        0x5 ../../clib/somfy_rts.o
-                0x008001b0                somfy_rts_interval_half
-                0x008001b2                somfy_rts_interval
-                0x008001b4                somfy_rts_repetition
- .data          0x008001b5        0x6 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
-                0x008001b5                __malloc_heap_end
-                0x008001b7                __malloc_heap_start
-                0x008001b9                __malloc_margin
+                0x0080019e                fanlevel
+                0x0080019f                newbllevel
+                0x008001a0                bllevel
+                0x008001a1                commandbyte
+ .data          0x008001a2        0x7 ../../clib/cdcLUFA.o
+                0x008001a2                LineCoding
+ .data          0x008001a9        0x9 ../../clib/intertechno.o
+                0x008001a9                it_frequency
+                0x008001ac                it_repetition
+                0x008001ae                it_interval_v3
+                0x008001b0                it_interval
+ .data          0x008001b2        0x5 ../../clib/somfy_rts.o
+                0x008001b2                somfy_rts_interval_half
+                0x008001b4                somfy_rts_interval
+                0x008001b6                somfy_rts_repetition
+ .data          0x008001b7        0x6 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x008001b7                __malloc_heap_end
+                0x008001b9                __malloc_heap_start
+                0x008001bb                __malloc_margin
  *(.data*)
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.r*)
-                0x008001bc                . = ALIGN (0x2)
- *fill*         0x008001bb        0x1 
-                0x008001bc                _edata = .
-                0x008001bc                PROVIDE (__data_end, .)
+                0x008001be                . = ALIGN (0x2)
+ *fill*         0x008001bd        0x1 
+                0x008001be                _edata = .
+                0x008001be                PROVIDE (__data_end, .)
 
-.bss            0x008001bc      0x30e
-                0x008001bc                PROVIDE (__bss_start, .)
+.bss            0x008001be      0x311
+                0x008001be                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x008001bc        0x2 CUL.o
-                0x008001bc                adcselect
-                0x008001bd                a7count
- .bss           0x008001be        0x1 ../../clib/cdcLUFA.o
- .bss           0x008001bf        0x3 ../../clib/clock.o
-                0x008001bf                ir_ticks
- .bss           0x008001c2        0x2 ../../clib/display.o
-                0x008001c2                display_channel
-                0x008001c3                log_enabled
- .bss           0x008001c4        0x4 ../../clib/rf_send.o
- .bss           0x008001c8       0x74 ../../clib/rf_receive.o
- .bss           0x0080023c        0x2 ../../clib/rf_asksin.o
-                0x0080023c                asksin_on
- .bss           0x0080023e        0x2 ../../clib/rf_zwave.o
-                0x0080023e                zwave_ackState
-                0x0080023f                zwave_on
- .bss           0x00800240        0x3 ../../clib/intertechno.o
-                0x00800240                restore_moritz
-                0x00800241                restore_asksin
- .bss           0x00800243        0x3 ../../clib/somfy_rts.o
-                0x00800243                somfy_restore_moritz
-                0x00800244                somfy_restore_asksin
- .bss           0x00800246        0x1 ../../clib/fastrf.o
- .bss           0x00800247       0x83 ../../clib/ttydata.o
+ .bss           0x008001be        0x4 CUL.o
+                0x008001be                i2cbuffer
+                0x008001c0                i2cerror
+                0x008001c1                a7count
+ .bss           0x008001c2        0x1 ../../clib/cdcLUFA.o
+ .bss           0x008001c3        0x3 ../../clib/clock.o
+                0x008001c3                ir_ticks
+ .bss           0x008001c6        0x2 ../../clib/display.o
+                0x008001c6                display_channel
+                0x008001c7                log_enabled
+ .bss           0x008001c8        0x4 ../../clib/rf_send.o
+ .bss           0x008001cc       0x74 ../../clib/rf_receive.o
+ .bss           0x00800240        0x2 ../../clib/rf_asksin.o
+                0x00800240                asksin_on
+ .bss           0x00800242        0x2 ../../clib/rf_zwave.o
+                0x00800242                zwave_ackState
+                0x00800243                zwave_on
+ .bss           0x00800244        0x3 ../../clib/intertechno.o
+                0x00800244                restore_moritz
+                0x00800245                restore_asksin
+ .bss           0x00800247        0x3 ../../clib/somfy_rts.o
+                0x00800247                somfy_restore_moritz
+                0x00800248                somfy_restore_asksin
+ .bss           0x0080024a        0x1 ../../clib/fastrf.o
+ .bss           0x0080024b       0x83 ../../clib/ttydata.o
  *(.bss*)
  *(COMMON)
- COMMON         0x008002ca       0x27 CUL.o
-                0x008002ca                output_flush_func
-                0x008002cc                vcc
-                0x008002ce                a1
-                0x008002d0                changeled
-                0x008002d1                temp
-                0x008002d3                a3
-                0x008002d5                buffer_address
-                0x008002d6                led
-                0x008002d9                fanspin
-                0x008002db                rpm
-                0x008002dd                a7
-                0x008002df                a7avg
-                0x008002e1                a7max
-                0x008002e3                a5
-                0x008002e5                a7min
-                0x008002e7                a2
-                0x008002e9                commandbyte
-                0x008002ea                count
-                0x008002eb                input_handle_func
-                0x008002ed                a0
-                0x008002ef                a4
- COMMON         0x008002f1        0x1 ../../clib/cc1100.o
-                0x008002f1                cc_on
- COMMON         0x008002f2        0x7 ../../clib/clock.o
-                0x008002f2                clock_hsec
-                0x008002f3                ticks
-                0x008002f7                isrtimer
- COMMON         0x008002f9        0x2 ../../clib/rf_send.o
-                0x008002f9                credit_10ms
- COMMON         0x008002fb        0x2 ../../clib/rf_receive.o
-                0x008002fb                packetCheckValues
-                0x008002fc                tx_report
- COMMON         0x008002fd       0xb3 ../../clib/rf_zwave.o
-                0x008002fd                zwave_sMsg
-                0x008003a5                zwave_sLen
-                0x008003a6                zwave_drate
-                0x008003a7                zwave_sStamp
-                0x008003ab                zwave_hcid
- COMMON         0x008003b0        0x2 ../../clib/fht.o
-                0x008003b0                fht_hc0
-                0x008003b1                fht_hc1
- COMMON         0x008003b2        0x1 ../../clib/fastrf.o
-                0x008003b2                fastrf_on
- COMMON         0x008003b3      0x106 ../../clib/ttydata.o
-                0x008003b3                TTY_Tx_Buffer
-                0x00800436                TTY_Rx_Buffer
- COMMON         0x008004b9        0x3 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
-                0x008004b9                USB_CurrentlySelfPowered
-                0x008004ba                USB_RemoteWakeupEnabled
-                0x008004bb                USB_ConfigurationNumber
- COMMON         0x008004bc        0xa ../../lufa/Drivers/USB/HighLevel/USBTask.o
-                0x008004bc                USB_IsInitialized
-                0x008004bd                USB_DeviceState
-                0x008004be                USB_ControlRequest
- COMMON         0x008004c6        0x4 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
-                0x008004c6                __brkval
-                0x008004c8                __flp
-                0x008004ca                PROVIDE (__bss_end, .)
-                0x00004d6a                __data_load_start = LOADADDR (.data)
-                0x00004e26                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008002ce       0x28 CUL.o
+                0x008002ce                output_flush_func
+                0x008002d0                vcc
+                0x008002d2                a1
+                0x008002d4                changeled
+                0x008002d5                temp
+                0x008002d7                a3
+                0x008002d9                buffer_address
+                0x008002da                crc
+                0x008002db                led
+                0x008002de                fanspin
+                0x008002e0                twdrbuffer
+                0x008002e1                rpm
+                0x008002e3                a7
+                0x008002e5                a7avg
+                0x008002e7                a7max
+                0x008002e9                a5
+                0x008002eb                a7min
+                0x008002ed                a2
+                0x008002ef                count
+                0x008002f0                input_handle_func
+                0x008002f2                a0
+                0x008002f4                a4
+ COMMON         0x008002f6        0x1 ../../clib/cc1100.o
+                0x008002f6                cc_on
+ COMMON         0x008002f7        0x7 ../../clib/clock.o
+                0x008002f7                clock_hsec
+                0x008002f8                ticks
+                0x008002fc                isrtimer
+ COMMON         0x008002fe        0x2 ../../clib/rf_send.o
+                0x008002fe                credit_10ms
+ COMMON         0x00800300        0x2 ../../clib/rf_receive.o
+                0x00800300                packetCheckValues
+                0x00800301                tx_report
+ COMMON         0x00800302       0xb3 ../../clib/rf_zwave.o
+                0x00800302                zwave_sMsg
+                0x008003aa                zwave_sLen
+                0x008003ab                zwave_drate
+                0x008003ac                zwave_sStamp
+                0x008003b0                zwave_hcid
+ COMMON         0x008003b5        0x2 ../../clib/fht.o
+                0x008003b5                fht_hc0
+                0x008003b6                fht_hc1
+ COMMON         0x008003b7        0x1 ../../clib/fastrf.o
+                0x008003b7                fastrf_on
+ COMMON         0x008003b8      0x106 ../../clib/ttydata.o
+                0x008003b8                TTY_Tx_Buffer
+                0x0080043b                TTY_Rx_Buffer
+ COMMON         0x008004be        0x3 ../../lufa/Drivers/USB/LowLevel/DevChapter9.o
+                0x008004be                USB_CurrentlySelfPowered
+                0x008004bf                USB_RemoteWakeupEnabled
+                0x008004c0                USB_ConfigurationNumber
+ COMMON         0x008004c1        0xa ../../lufa/Drivers/USB/HighLevel/USBTask.o
+                0x008004c1                USB_IsInitialized
+                0x008004c2                USB_DeviceState
+                0x008004c3                USB_ControlRequest
+ COMMON         0x008004cb        0x4 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x008004cb                __brkval
+                0x008004cd                __flp
+                0x008004cf                PROVIDE (__bss_end, .)
+                0x00004d6e                __data_load_start = LOADADDR (.data)
+                0x00004e2c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008004ca        0x0
+.noinit         0x008004cf        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008004ca                _end = .
-                0x008004ca                PROVIDE (__heap_start, .)
+                0x008004cf                _end = .
+                0x008004cf                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -1841,7 +1850,6 @@ a7avg                                             CUL.o
 a7count                                           CUL.o
 a7max                                             CUL.o
 a7min                                             CUL.o
-adcselect                                         CUL.o
 addParityAndSend                                  ../../clib/rf_send.o
 addParityAndSendData                              ../../clib/rf_send.o
 analyze_hms                                       ../../clib/rf_receive.o
@@ -1923,6 +1931,7 @@ commandbyte                                       CUL.o
 commands                                          CUL.o
 commands2                                         CUL.o
 count                                             CUL.o
+crc                                               CUL.o
 crcCalc                                           ../../clib/mbus/crc.o
                                                   ../../clib/mbus/mbus_packet.o
 credit_10ms                                       ../../clib/rf_send.o
@@ -2022,6 +2031,7 @@ ewb                                               ../../clib/fncollection.o
                                                   CUL.o
 exit                                              /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
                                                   /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega32u4.o
+fanlevel                                          CUL.o
 fanspin                                           CUL.o
 fastrf_func                                       ../../clib/fastrf.o
                                                   CUL.o
@@ -2066,6 +2076,8 @@ gettime                                           ../../clib/clock.o
                                                   CUL.o
 hm_send                                           ../../clib/rf_send.o
                                                   CUL.o
+i2cbuffer                                         CUL.o
+i2cerror                                          CUL.o
 initbl                                            CUL.o
 input_handle_func                                 ../../clib/ttydata.o
                                                   ../../clib/display.o
@@ -2177,6 +2189,7 @@ ticks                                             ../../clib/clock.o
                                                   ../../clib/rf_zwave.o
                                                   ../../clib/rf_receive.o
 tohex                                             ../../clib/stringfunc.o
+twdrbuffer                                        CUL.o
 tx_init                                           ../../clib/rf_receive.o
                                                   CUL.o
 tx_report                                         ../../clib/rf_receive.o
