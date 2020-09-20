@@ -624,7 +624,7 @@ if (!SDA_LINE) {i2cerror++;}
       changeled = 0;
                      }
   
-  
+  if (PIND & (1<<PD6)) {
   if (newbllevel < bllevel) {                // smooth backlight level change in steps
 	  
 	  bllevel--;
@@ -637,7 +637,7 @@ if (!SDA_LINE) {i2cerror++;}
 	  bllevel++;
 	   writebl(0b01011000);   writebl(0b00011111 & bllevel);
 	  
-	  }
+	  }}
   
   
   if (adcselect < 10) {adcselect++;} else {adcselect = 0;}
